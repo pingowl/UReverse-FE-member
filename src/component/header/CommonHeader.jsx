@@ -6,15 +6,18 @@ export default function CommonHeader () {
     // 경로에 따른 페이지 이름 매핑
     const titleMap = {
         '/mypage': '마이페이지',
-        '/login': '로그인',
-        '/join': '회원가입',
-        '/sell': '판매',
+        '/sell': '판매'
     };
 
-    const title = titleMap[location.pathname] || '페이지';
+    // location.pathname이 포함된 key를 찾는 로직
+    const matchedKey = Object.keys(titleMap).find(key =>
+        location.pathname.includes(key)
+    );
+
+    const title = titleMap[matchedKey] || '페이지';
 
     return (
-        <header className="w-full flex items-center justify-between py-4 border-b border-gray-200 bg-gray-50 px-4">
+        <header className="w-full flex items-center justify-between py-4 px-4">
            {/* 왼쪽: 뒤로가기 버튼 */}
             <button
                 onClick={() => navigate(-1)}

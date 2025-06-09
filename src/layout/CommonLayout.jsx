@@ -1,11 +1,14 @@
 import { Outlet } from "react-router-dom";
 import CommonHeader from "../component/header/CommonHeader";
+import styles from "./Layout.module.css";
 
 export default function CommonLayout(){
     return(
-        <>
+        <div className={styles.container}>
             <CommonHeader></CommonHeader>
-            <Outlet></Outlet>
-        </>
+            <div className={styles.outletArea}>
+                <Outlet></Outlet>
+            </div>
+        </div>
     )
 }
