@@ -1,8 +1,13 @@
 import styles from "./LoginForm.module.css";
 import logo from "../../assets/Logo.png"
 import BlackButton from "../../component/button/BlackButton";
+import LoginInput from '../../component/input/LoginInput';
+import { useState } from 'react';
 
-export default function LoginForm(){
+export default function LoginForm() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
     return (
         <div className={styles.container}>
             <div className={styles.content}>
@@ -12,26 +17,25 @@ export default function LoginForm(){
             {/* 입력 영역 */}
             <div className={styles.inputGroup}>
                 {/* 이메일 */}
-                <div className={styles.inputWrapper}>
-                    <label htmlFor="email" className={styles.floatingLabel}>이메일</label>
-                    <input
+                <LoginInput
                     type="email"
                     id="email"
                     name="email"
-                    className={styles.inputField}
-                    />
-                </div>
+                    label="이메일"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
 
                 {/* 비밀번호 */}
-                <div className={styles.inputWrapper}>
-                    <label htmlFor="password" className={styles.floatingLabel}>비밀번호</label>
-                    <input
+                <LoginInput
                     type="password"
                     id="password"
                     name="password"
-                    className={styles.inputField}
-                    />
-                </div>
+                    label="비밀번호"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+
             </div>
             <div className={styles.buttonArea}>
                 <BlackButton
