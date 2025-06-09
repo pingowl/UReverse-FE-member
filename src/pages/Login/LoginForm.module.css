@@ -1,0 +1,46 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.5rem;
+    text-align: center;
+}
+
+.title {
+    font-size: 1.875rem;
+    font-weight: bold;
+    margin: 1rem 0;
+}
+
+.buttonArea {
+    position: absolute;
+    bottom: 60px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    padding: 0 100px;
+    max-width: 500px;
+    min-width: 100px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* 입력 창 css */
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0 50px;
+    min-width: 150px;
+    margin-top: 1.5rem;
+}

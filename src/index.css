@@ -11,3 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+body, #root {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* 또는 center */
+  background-color: #f9fafb; /* 선택사항 */
+}

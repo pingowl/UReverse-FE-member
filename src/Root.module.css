@@ -1,0 +1,23 @@
+.wrapper {
+    width: 100vw;
+    min-width: 375px;
+    min-height: 100vh;
+    background-color: white;
+  
+    display: flex;
+    justify-content: center;
+}
+  
+.inner {
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+  
+  /* optional: responsive fallback */
+@media (min-width: 1024px) {
+    .inner {
+      max-width: 375px;
+    }
+}

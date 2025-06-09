@@ -1,0 +1,37 @@
+.header {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+}
+  
+.title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #1f2937;
+}
+  
+.iconGroup {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.25rem;
+    color: #4b5563;
+}
+  
+.iconButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    color: inherit;
+    transition: color 0.2s ease;
+}
+  
+.iconButton:hover {
+    color: #3b82f6;
+}
+  
