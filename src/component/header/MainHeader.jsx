@@ -1,4 +1,4 @@
-export default function Header () {
+export default function MainHeader () {
     return (
         <header className="w-full flex items-center justify-between py-4 border-b border-gray-200 bg-gray-50 px-4">
             {/* 왼쪽: 프로젝트명 */}
