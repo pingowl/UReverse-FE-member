@@ -11,8 +11,18 @@
     transform: translateY(-50%);
     font-size: 1rem;
     font-weight: 600;
-    color: #000;
     pointer-events: none;
+    transition: color 0.2s ease;
+}
+
+/* focus 상태일 때 라벨 색상 */
+.labelFocused {
+    color: #000;
+}
+
+/* 비활성 상태일 때 연한 색상 */
+.labelUnfocused {
+    color: #999;
 }
 
 .inputField {
@@ -20,9 +30,19 @@
     height: 3rem;
     padding: 0 1rem;
     padding-left: 5rem; /* 라벨 공간 확보 */
-    border: 1.5px solid #000;
+    border-width: 1.5px;
+    border-style: solid;
     border-radius: 9999px;
     font-size: 1rem;
     outline: none;
     box-sizing: border-box;
+    transition: border-color 0.2s ease;
+}
+
+.focused {
+    border-color: #000;
+}
+
+.unfocused {
+    border-color: #ccc;
 }
