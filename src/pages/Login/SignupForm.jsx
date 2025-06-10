@@ -9,6 +9,7 @@ export default function SignupForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [number, setNumber] = useState("");
+    const [focusedInput, setFocusedInput] = useState(null);
 
     return (
         <div className={styles.container}>
@@ -26,6 +27,9 @@ export default function SignupForm() {
                     label="이름"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
+                    onFocus={() => setFocusedInput("name")}
+                    onBlur={() => setFocusedInput(null)}
+                    isFocused={focusedInput === "name"}
                 />
                 {/* 이메일 */}
                 <LoginInput
@@ -35,6 +39,9 @@ export default function SignupForm() {
                     label="이메일"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    onFocus={() => setFocusedInput("email")}
+                    onBlur={() => setFocusedInput(null)}
+                    isFocused={focusedInput === "email"}
                 />
 
                 {/* 비밀번호 */}
@@ -45,6 +52,9 @@ export default function SignupForm() {
                     label="비밀번호"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    onFocus={() => setFocusedInput("password")}
+                    onBlur={() => setFocusedInput(null)}
+                    isFocused={focusedInput === "password"}
                 />
                 {/* 전화번호 */}
                 <LoginInput
@@ -54,6 +64,9 @@ export default function SignupForm() {
                     label="전화번호"
                     value={number}
                     onChange={(e) => setNumber(e.target.value)}
+                    onFocus={() => setFocusedInput("number")}
+                    onBlur={() => setFocusedInput(null)}
+                    isFocused={focusedInput === "number"}
                 />
 
             </div>

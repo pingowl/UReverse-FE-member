@@ -30,8 +30,7 @@ export default function LoginSelect() {
           width="w-full"
           height="h-12"
           className={styles.grayText}
-        /> 
-       
+        />
       </div>
     </div>
   );

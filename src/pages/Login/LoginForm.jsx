@@ -7,6 +7,7 @@ import { useState } from 'react';
 export default function LoginForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [focusedInput, setFocusedInput] = useState(null);
 
     return (
         <div className={styles.container}>
@@ -24,6 +25,9 @@ export default function LoginForm() {
                     label="이메일"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    onFocus={() => setFocusedInput("email")}
+                    onBlur={() => setFocusedInput(null)}
+                    isFocused={focusedInput === "email"}
                 />
 
                 {/* 비밀번호 */}
@@ -34,6 +38,9 @@ export default function LoginForm() {
                     label="비밀번호"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    onFocus={() => setFocusedInput("password")}
+                    onBlur={() => setFocusedInput(null)}
+                    isFocused={focusedInput === "password"}
                 />
 
             </div>

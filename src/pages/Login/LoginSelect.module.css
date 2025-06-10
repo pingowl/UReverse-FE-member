@@ -10,11 +10,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-  
+
     padding: 0 1.5rem;
     text-align: center;
 }
-  
+
 .title {
     font-size: 1.875rem;
     font-weight: bold;
@@ -27,14 +27,27 @@
     margin-bottom: 1.5rem;
     line-height: 1.625;
 }
-  
+
 .description strong {
     font-weight: 700;
 }
-  
+
+/* 페이지 로딩시 이미지 애니매이션 */
+@keyframes slideDownFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-40px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .image {
     width: 20rem;
     margin-bottom: 1.5rem;
+    animation: slideDownFadeIn 0.8s ease-out; /* 페이지 로딩시 이미지 애니매이션 */
 }
 
 .buttonArea {
@@ -50,8 +63,7 @@
     flex-direction: column;
     gap: 20px;
 }
-  
-  
+
 .grayText {
     color: #6b7280;
 }
