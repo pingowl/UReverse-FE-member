@@ -1,0 +1,30 @@
+.wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* 배경 가운데 정렬 */
+    height: 2443px;           /* 이미지 크기에 맞춰 내부 높이 확보 */
+}
+  
+.background {
+    background-image: url('../assets/SellLandingBg.jpg');
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: 768px 2443px; /* 비율 유지한 축소 크기 */
+    width: 768px;
+    height: 2443px;
+}
+
+.buttonArea {
+    position: absolute;
+    bottom: 60px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    padding: 0 60px;
+    max-width: 500px;
+    min-width: 100px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
