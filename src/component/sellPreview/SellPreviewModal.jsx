@@ -22,6 +22,14 @@ export default function SellPreviewModal({ onClose }) {
         : step < 4
             ? '다음'
             : '판매 시작하기';
+    
+    const handleButtonClick = () => {
+    if (step === 4) {
+        onClose();
+    } else {
+        goNext();
+    }
+};
 
     return (
         <div className={styles.overlay} onClick={onClose}>
@@ -48,7 +56,7 @@ export default function SellPreviewModal({ onClose }) {
                         width="w-full"
                         height="h-full"
                         color="green"
-                        onClick={goNext}
+                        onClick={handleButtonClick}
                         />
                 </div>
             </div>

@@ -30,16 +30,17 @@
 .white:hover {
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
   color: black;
+  background-color: #fafafa;
 }
 
 /* green 스타일 */
 .green {
-  background-color: green;
-  color: white;
+  background-color: #bae54d;
+  color: #777;
 }
 .green:hover {
   /* 사용자 정의: hover 스타일 설정 */
-  background-color: darkgreen;
+  background-color: #bae54d;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-  color: white;
+  color: black;
 }
