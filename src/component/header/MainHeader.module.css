@@ -1,11 +1,17 @@
 .header {
     width: 100%;
     max-width: 100%;
+    height: 3.5rem;
     box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem;
+    padding: 0.5rem;
+}
+
+.image{
+    max-height: 100%;
+    object-fit: contain;
 }
   
 .title {
@@ -24,6 +30,7 @@
   
 .iconButton {
     background: none;
+    height: 1.5rem;
     border: none;
     cursor: pointer;
     padding: 0;
