@@ -1,4 +1,4 @@
-import BlackButton from '../component/button/BlackButton';
+import HoverEventButton from '../component/button/HoverEventButton';
 import styles from './Home.module.css';
 
 export default function Home() {
@@ -7,11 +7,12 @@ export default function Home() {
         <div className={styles.wrapper}>
             <div className={styles.background}>
             <div className={styles.buttonArea}>
-                <BlackButton
+                <HoverEventButton
                     text="판매하고 포인트 받기"
                     link="/sell"
                     width="w-full"
                     height="h-12"
+                    color="black"
                 />
             </div>
             </div>

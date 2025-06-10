@@ -5,8 +5,7 @@ import Step3 from './Step3';
 import Step4 from './Step4';
 import Step0 from './Step0';
 import styles from "./SellPreviewModal.module.css";
-import BlackButton from '../button/BlackButton';
-import WhiteButton from '../button/WhiteButton';
+import HoverEventButton from '../button/HoverEventButton';
 
 export default function SellPreviewModal({ onClose }) {
     // TODO:
@@ -37,16 +36,18 @@ export default function SellPreviewModal({ onClose }) {
 
                 <div className={styles.buttonArea}>
                     {/* <button onClick={goBack}>뒤로</button> */}
-                    {step<4 && step>0 ? <WhiteButton
+                    {step<4 && step>0 ? <HoverEventButton
                         text = "뒤로"
                         width="w-full"
                         height="h-full"
+                        color="white"
                         onClick={goBack}
                         /> : <></>}
-                    <BlackButton
+                    <HoverEventButton
                         text = {buttonText}
                         width="w-full"
                         height="h-full"
+                        color="green"
                         onClick={goNext}
                         />
                 </div>

@@ -1,8 +1,8 @@
 import styles from "./LoginForm.module.css";
 import logo from "../../assets/Logo.png"
-import BlackButton from "../../component/button/BlackButton";
 import LoginInput from '../../component/input/LoginInput';
 import { useState } from 'react';
+import HoverEventButton from '../../component/button/HoverEventButton';
 
 export default function LoginForm() {
     const [email, setEmail] = useState("");
@@ -45,11 +45,12 @@ export default function LoginForm() {
 
             </div>
             <div className={styles.buttonArea}>
-                <BlackButton
+                <HoverEventButton
                     text="로그인"
                     link="/"
                     width="w-full"
                     height="h-12"
+                    color="black"
                 />
             </div>
         </div>
