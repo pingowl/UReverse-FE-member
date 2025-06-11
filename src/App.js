@@ -8,6 +8,7 @@ import CommonLayout from './layout/CommonLayout';
 import LoginSelect from './pages/Login/LoginSelect';
 import LoginForm from './pages/Login/LoginForm';
 import SignupForm from './pages/Login/SignupForm';
+import Sell from './pages/Sell/Sell';
 
 const router = createBrowserRouter([
   {
@@ -33,7 +34,7 @@ const router = createBrowserRouter([
       {
         element: <CommonLayout />,
         children: [
-          // { path: "/login", element: <Login />}
+          { path: "/sell", element: <Sell />}
           // ,{ path: "/mypage", element: <Mypage /> }
         ]
       },

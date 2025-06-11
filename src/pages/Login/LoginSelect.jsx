@@ -1,7 +1,6 @@
-import WhiteButton from "../../component/button/WhiteButton";
 import styles from "./LoginSelect.module.css";
 import hpointImage from '../../assets/HPoint.png';
-import BlackButton from "../../component/button/BlackButton";
+import HoverEventButton from '../../component/button/HoverEventButton';
 
 export default function LoginSelect() {
   return (
@@ -18,17 +17,19 @@ export default function LoginSelect() {
 
       {/* 버튼 영역 */}
       <div className={styles.buttonArea}>
-        <BlackButton
+        <HoverEventButton
           text="로그인"
           link="/login/form"
           width="w-full"
           height="h-12"
+          color="black"
         />
-        <WhiteButton
+        <HoverEventButton
           text="회원가입"
           link="/signup"
           width="w-full"
           height="h-12"
+          color="white"
           className={styles.grayText}
         />
       </div>

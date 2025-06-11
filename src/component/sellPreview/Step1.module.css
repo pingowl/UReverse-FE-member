@@ -1,0 +1,84 @@
+.container {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 16px 20px 0px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 상단 영역 */
+.topRow {
+    position: relative;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.centerIcon {
+    width: 56px;
+    height: 56px;
+}
+
+.pageIndicator {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 4px 12px;
+    background-color: #f0f0f0;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: #333;
+}
+
+/* 대제목 텍스트 */
+.title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    height: 90px;
+}
+
+.highlight {
+    color: #48b02c; /* 예: 테마 색상 - 에메랄드 그린 */
+    font-weight: 700;
+}
+
+/* 상세 설명 */
+.description {
+    height: 40px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 12px 16px;
+    flex-direction: column;
+    gap: 16px; /* 문단 간 거리 */
+    background-color: #dcfce7;
+    border-radius: 20px;
+    line-height: 0.5;
+    margin-bottom: 20px;
+}
+
+/* 예시 이미지 영역 */
+.imageRow {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    height: 150px;
+    width: 100%;
+}
+
+.exampleImage {
+    flex: 1;
+    width: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+}

@@ -1,4 +1,5 @@
 .header {
+    position: relative;
     width: 100%;
     max-width: 100%;         /* ✅ 부모 기준 제한 */
     box-sizing: border-box;  /* ✅ padding 포함 */
@@ -7,28 +8,53 @@
     align-items: center;
     justify-content: space-between;
     padding: 0.5rem;           /* py-4 px-4 대응 */
-  }
+}
   
-  .backButton {
+.backButton {
     font-size: 1.25rem;      /* text-xl */
     color: #4b5563;          /* text-gray-600 */
     background: none;
     border: none;
     cursor: pointer;
     transition: color 0.2s ease;
-  }
+}
   
-  .backButton:hover {
+.backButton:hover {
     color: #3b82f6;          /* hover:text-blue-500 */
-  }
+}
   
-  .title {
+.title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);  /* ✅ 수평 가운데 정렬 */
     font-size: 1.125rem;     /* text-lg */
     font-weight: 600;        /* font-semibold */
     color: #1f2937;          /* text-gray-800 */
-  }
+}
   
-  .spacer {
+.spacer {
     width: 1.5rem;           /* w-6 = 24px */
-  }
+}
   
+.iconGroup {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.25rem;
+    color: #4b5563;
+}
+  
+.iconButton {
+    background: none;
+    height: 1.5rem;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    color: inherit;
+    transition: color 0.2s ease;
+}
+
+.image{
+    max-height: 100%;
+    object-fit: contain;
+}

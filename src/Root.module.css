@@ -13,6 +13,11 @@
     max-width: 500px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     position: relative;
+
+     /* ✅ 아래 추가 */
+    height: 100vh;
+    overflow-y: hidden;
+    overflow-x: hidden; /* 가로 스크롤까지 제거하려면 */
 }
   
   /* optional: responsive fallback */
