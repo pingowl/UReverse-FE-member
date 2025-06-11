@@ -1,0 +1,127 @@
+.pageWrapper {
+    position: relative;
+    min-height: 100vh;
+    padding-bottom: 200px; /* 버튼 높이 + 여유 */
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* 상단 알림창 영역 */
+.alertBar {
+    display: inline-flex;
+    background-color: #b8e34b;
+    padding: 8px 16px;
+    font-weight: 600;
+    font-size: 0.7rem;
+    cursor: pointer;
+    margin-bottom: 20px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    gap: 5px;
+}
+
+.alertIcon {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+}
+  
+/* 프로세스 바 영역 */
+.processBar {
+    display: flex;
+    margin: 0px 20px 20px 20px;
+    gap: 6px;
+}
+
+.doneProcessBar {
+    flex: 1;
+    height: 5px;
+    background-color: #666;
+    border-radius: 4px;
+}
+
+.noneProcessBar {
+    flex: 1;
+    height: 5px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+}
+  
+  
+/* 단계 설명 영역 */
+.stepDescription {
+    margin-bottom: 24px;
+    font-size: 1.3rem;
+    font-weight: 500;
+    line-height: 1.5;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+  
+/* 상품 정보 표시할 컴포넌트 */
+.productListArea {
+    margin: 0px 30px 24px 30px;
+    height: 120px;
+    border-radius: 20px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+
+    transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+.productListArea:hover {
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+  
+/* 이미지 미리보기 영역 (최대 3개, 가로 배치) */
+.imagePreviewContainer {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+  
+.imagePreviewContainer img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.fixedButtonWrapper {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 100;
+}
+
+/* 버튼 영역 (가로 정렬) */
+.buttonGroup {
+    width: calc(100% - 40px);
+    max-width: 450px;
+    padding: 20px 30px;
+    margin: 0px 20px;
+    box-sizing: border-box;
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    background-color: white;
+}
+
+@media (min-width: 1024px) {
+    .inner {
+        max-width: 375px;
+    }
+  
+    .buttonGroup {
+        max-width: 335px;
+        margin: 0px 20px;
+    }
+}
