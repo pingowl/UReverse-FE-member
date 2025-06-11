@@ -12,10 +12,10 @@ export default function MainHeader () {
             {/* 오른쪽: 아이콘 영역 */}
             <div className={styles.iconGroup}>
                 <button className={styles.iconButton} aria-label="알림">
-                    <img src={notificationIcon} alt="alarm" className={styles.image} />
+                    <img src={notificationIcon} alt="alarm" className={styles.icon} />
                 </button>
                 <button className={styles.iconButton} aria-label="마이페이지">
-                    <img src={userIcon} alt="myPage" className={styles.image} />
+                    <img src={userIcon} alt="myPage" className={styles.icon} />
                 </button>
             </div>
         </header>
