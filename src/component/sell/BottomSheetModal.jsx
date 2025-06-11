@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./BottomSheetModal.module.css";
 
-export default function BottomSheetModal({ onClose }) {
+export default function BottomSheetModal({ onClose, children }) {
     const modalRef = useRef(null);
     const startY = useRef(0);
     const dragging = useRef(false);
@@ -80,21 +80,25 @@ export default function BottomSheetModal({ onClose }) {
             <div
                 ref={modalRef}
                 className={`${styles.modal} ${animate ? styles.modalAnimated : ''} ${isVisible ? styles.modalOpen : styles.modalClose}`}
-                style={{ transform: `translateY(${offsetY}px)` }}
+                style={offsetY > 0 ? { transform: `translateY(${offsetY}px)` } : undefined}
             >
                 <div
-                    className={styles.dragHandle}
+                    className={styles.dragHandleArea}
                     onTouchStart={handleTouchStart}
                     onTouchMove={handleTouchMove}
                     onTouchEnd={handleTouchEnd}
+
+                    // 드래그하지 않는 상태일 때는 className으로 애니메이션 적용, 드래그 중일 때만 style로 수동 위치 조절
                     onMouseDown={(e) => {
                         startY.current = e.clientY;
                         dragging.current = true;
                         setAnimate(false);
                     }}
-                />
+                >
+                    <div className={styles.dragHandle}></div>
+                </div>
                 <div style={{ height: "400px" }}>
-                    {/* 모달 컨텐츠 영역 */}
+                    {children}
                 </div>
             </div>
         </div>

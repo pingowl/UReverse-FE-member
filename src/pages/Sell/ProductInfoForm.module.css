@@ -1,9 +1,13 @@
 .pageWrapper {
     position: relative;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     padding-bottom: 200px; /* 버튼 높이 + 여유 */
     overflow-x: hidden;
     width: 100%;
+}
+
+.innerContent{
+    padding: 16px 20px;
 }
 
 /* 상단 알림창 영역 */
@@ -14,7 +18,6 @@
     font-weight: 600;
     font-size: 0.7rem;
     cursor: pointer;
-    margin-bottom: 20px;
     text-align: center;
     align-items: center;
     justify-content: center;
@@ -27,11 +30,11 @@
     height: 15px;
     flex-shrink: 0;
 }
-  
+
 /* 프로세스 바 영역 */
 .processBar {
     display: flex;
-    margin: 0px 20px 20px 20px;
+    margin-bottom: 20px;
     gap: 6px;
 }
 
@@ -48,8 +51,7 @@
     background-color: #e0e0e0;
     border-radius: 4px;
 }
-  
-  
+
 /* 단계 설명 영역 */
 .stepDescription {
     margin-bottom: 24px;
@@ -61,10 +63,10 @@
     justify-content: center;
     display: flex;
 }
-  
+
 /* 상품 정보 표시할 컴포넌트 */
 .productListArea {
-    margin: 0px 30px 24px 30px;
+    margin-bottom: 24px;
     height: 120px;
     border-radius: 20px;
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
@@ -74,14 +76,14 @@
 .productListArea:hover {
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
 }
-  
+
 /* 이미지 미리보기 영역 (최대 3개, 가로 배치) */
 .imagePreviewContainer {
     display: flex;
     gap: 12px;
     margin-bottom: 24px;
 }
-  
+
 .imagePreviewContainer img {
     width: 100px;
     height: 100px;
@@ -104,10 +106,10 @@
 .buttonGroup {
     width: calc(100% - 40px);
     max-width: 450px;
-    padding: 20px 30px;
+    padding: 20px 0px;
     margin: 0px 20px;
     box-sizing: border-box;
-  
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -119,7 +121,7 @@
     .inner {
         max-width: 375px;
     }
-  
+
     .buttonGroup {
         max-width: 335px;
         margin: 0px 20px;
