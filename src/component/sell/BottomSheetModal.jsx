@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 import styles from "./BottomSheetModal.module.css";
 
-export default function BottomSheetModal({ onClose, children }) {
+const BottomSheetModal = forwardRef(({ onClose, children }, ref) => {
     const modalRef = useRef(null);
     const startY = useRef(0);
     const dragging = useRef(false);
@@ -32,6 +32,11 @@ export default function BottomSheetModal({ onClose, children }) {
             onClose();
         }, 300); // 애니메이션 시간과 동일
     };
+
+    // ref 를 통해 외부에서 triggerClose 접근 가능하게
+    useImperativeHandle(ref, () => ({
+        triggerClose
+    }));
 
     const handleTouchStart = (e) => {
         startY.current = e.touches[0].clientY;
@@ -97,10 +102,12 @@ export default function BottomSheetModal({ onClose, children }) {
                 >
                     <div className={styles.dragHandle}></div>
                 </div>
-                <div style={{ height: "400px" }}>
+                <div className={styles.modalContent}>
                     {children}
                 </div>
             </div>
         </div>
     );
-}
+});
+
+export default BottomSheetModal;
