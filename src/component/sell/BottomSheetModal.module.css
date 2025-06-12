@@ -15,7 +15,6 @@
     background-color: white;
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
-    padding: 0px 20px 24px;
     box-sizing: border-box;
     touch-action: none;
     transform: translateY(100%); /* 기본은 아래에 있음 */
@@ -31,7 +30,7 @@
     overflow-y: auto;
     min-height: 0;
     max-height: 60vh;
-  }
+}
 
 .modalAnimated {
     transition: transform 0.3s ease;

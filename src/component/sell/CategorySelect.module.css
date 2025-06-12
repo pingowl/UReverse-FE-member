@@ -1,0 +1,101 @@
+.container {
+    height: 100%;           /* 부모 요소 높이에 맞춤 */
+    padding: 0px 16px 16px;
+    box-sizing: border-box;   /* padding 포함한 높이 계산 */
+    overflow-y: auto;
+    min-height: 60vh;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    position: relative;
+    height: 40px;
+}
+
+.backButton {
+    position: absolute;
+    left: 0;
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.title {
+    text-align: center;
+    width: 100%;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.categoryList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.mainCategorySection {
+    border-top: 1px solid #ddd;
+    padding-top: 8px;
+}
+
+.mainCategory {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    padding: 8px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.subCategory {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+.subCategory:hover {
+    background-color: #f0f0f0;
+}
+
+.mainCategoryName {
+    text-align: left;
+    flex: 1;
+}
+
+.arrowIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 8px;
+}
+
+.arrowDown {
+    height: 12px;
+    transform: rotate(0deg);
+    transition: transform 0.2s ease;
+}
+
+.arrowUp {
+    height: 12px;
+    transform: rotate(180deg);
+    transition: transform 0.2s ease;
+}
+
+.subCategoryWrapper {
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+}
+
+.expanded {
+    max-height: 500px;
+}
+
+.collapsed {
+    max-height: 0;
+}

@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import styles from './BrandSelect.module.css';
 
 export default function BrandSelect({onBack, setBrand, brandList}) {
@@ -7,10 +6,6 @@ export default function BrandSelect({onBack, setBrand, brandList}) {
         setBrand(brand);
         onBack();
     }
-
-    useEffect(() => {
-        console.log(brandList[0]);
-    })
 
     return (
         <div className={styles.container}>

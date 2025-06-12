@@ -1,5 +1,5 @@
 .container {
-    padding: 16px;
+    padding: 0px 16px 16px;
 }
 
 .header {
@@ -15,15 +15,15 @@
     left: 0;
     background: none;
     border: none;
-    font-size: 24px;
+    font-size: 16px;
     cursor: pointer;
 }
 
 .title {
     text-align: center;
     width: 100%;
-    font-size: 18px;
     font-weight: bold;
+    font-size: 16px;
 }
 
 .grid {

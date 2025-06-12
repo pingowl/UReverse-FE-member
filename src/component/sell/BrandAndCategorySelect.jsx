@@ -4,10 +4,10 @@ import styles from './BrandAndCategorySelect.module.css';
 
 export default function BrandAndCategorySelect({brand, category, onBrandClick, onCategoryClick, onClose }) {
     const [highlight, setHighlight] = useState(false);
+
+    // 브랜드 선택 없이 카테고리 클릭 시 이벤트함수
     const handleCategoryClick = () => {
-        console.log("눌린다");
         if (!brand) {
-            console.log("브랜드 없다");
             setHighlight(true);
             setTimeout(() => setHighlight(false), 1000); // 0.2초 후 원상복귀
             return;
@@ -24,7 +24,12 @@ export default function BrandAndCategorySelect({brand, category, onBrandClick, o
                     브랜드 <span className={styles.emphasis}>*</span> 
                 </div>
                 <div 
-                className={`${styles.selectBox} ${styles.brandBox}  ${highlight ? styles.highlight : ''}`} 
+                className={`
+                    ${styles.selectBox} 
+                    ${styles.brandBox}  
+                    ${highlight ? styles.highlight : ''}
+                    ${(brand) ? styles.selected : ''}
+                `} 
                 onClick={onBrandClick}>
                     {brand && brand.name ? brand.name : `브랜드 선택 >` } 
                 </div>
@@ -35,9 +40,13 @@ export default function BrandAndCategorySelect({brand, category, onBrandClick, o
                     카테고리 <span className={styles.emphasis}>*</span>
                 </div>
                 <div 
-                className={`${styles.selectBox} ${!brand ? styles.disabled : ''}`} 
+                className={`
+                    ${styles.selectBox} 
+                    ${!brand ? styles.disabled : ''}
+                    ${(brand && category) ? styles.selected : ''}
+                `} 
                 onClick={() => handleCategoryClick()}>
-                    {category && category.name ? category.name : '카테고리 선택 >'}
+                    {category && category.mainCategoryName ? `${category.mainCategoryName}/${category.subCategoryName}` : '카테고리 선택 >'}
                 </div>
             </div>
 
@@ -46,7 +55,7 @@ export default function BrandAndCategorySelect({brand, category, onBrandClick, o
                 text="선택 완료"
                 width="w-full"
                 height="h-12"
-                color="black"
+                color={brand && category ? "black" : "blocked"}
                 onClick={onClose}
                 />
             </div>
