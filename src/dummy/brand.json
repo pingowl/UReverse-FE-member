@@ -1,7 +1,7 @@
 [
-    { "brand_id": 1, "name": "나이키", "name_en": "Nike", "brandLogo": "/assets/dummy/nike.png" },
-    { "brand_id": 2, "name": "아디다스", "name_en": "Adidas", "brandLogo": "/assets/dummy/adidas.png" },
-    { "brand_id": 3, "name": "퓨마", "name_en": "Puma", "brandLogo": "/assets/dummy/puma.png" },
-    { "brand_id": 4, "name": "뉴발란스", "name_en": "New Balance", "brandLogo": "/assets/dummy/newBalance.png" },
-    { "brand_id": 5, "name": "휠라", "name_en": "Fila", "brandLogo": "/assets/dummy/fila.png" }
+    { "brand_id": 1, "name": "나이키", "nameEn": "Nike", "brandLogo": "/assets/dummy/nike.png" },
+    { "brand_id": 2, "name": "아디다스", "nameEn": "Adidas", "brandLogo": "/assets/dummy/adidas.png" },
+    { "brand_id": 3, "name": "퓨마", "nameEn": "Puma", "brandLogo": "/assets/dummy/puma.png" },
+    { "brand_id": 4, "name": "뉴발란스", "nameEn": "New Balance", "brandLogo": "/assets/dummy/newBalance.png" },
+    { "brand_id": 5, "name": "휠라", "nameEn": "Fila", "brandLogo": "/assets/dummy/fila.png" }
 ]
