@@ -9,7 +9,7 @@ export default function Home() {
             <div className={styles.buttonArea}>
                 <HoverEventButton
                     text="판매하고 포인트 받기"
-                    link="/sell"
+                    link="/sell/product"
                     width="w-full"
                     height="h-12"
                     color="black"

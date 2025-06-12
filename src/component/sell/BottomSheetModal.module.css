@@ -1,0 +1,65 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    font-family: sans-serif;
+}
+
+.modal {
+    width: 100%;
+    max-width: 500px;
+    background-color: white;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    box-sizing: border-box;
+    touch-action: none;
+    transform: translateY(100%); /* 기본은 아래에 있음 */
+}
+@media (min-width: 1024px) {
+    .modal {
+        max-width: 375px;
+    }
+}
+
+.modalContent {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+    max-height: 60vh;
+}
+
+.modalAnimated {
+    transition: transform 0.3s ease;
+}
+
+/* 열릴 때 위로 슬라이드 */
+.modalOpen {
+    transform: translateY(0%);
+}
+
+/* 닫힐 때 아래로 */
+.modalClose {
+    transform: translateY(100%);
+}
+
+.dragHandleArea {
+    width: 100%;
+    height: 32px;
+    cursor: grab;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.dragHandle {
+    width: 48px;
+    height: 4px;
+    background-color: #ccc;
+    border-radius: 2px;
+    margin-top: 8px;
+}

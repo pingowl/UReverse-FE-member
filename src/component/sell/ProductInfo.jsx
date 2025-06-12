@@ -1,0 +1,115 @@
+import styles from './ProductInfo.module.css';
+import AddIcon from '../../assets/icon-add.png';
+import { useEffect, useRef, useState } from 'react';
+import BottomSheetModal from './BottomSheetModal';
+import BrandAndCategorySelect from './BrandAndCategorySelect';
+import BrandSelect from './BrandSelect';
+import CategorySelect from './CategorySelect';
+
+import brandData from "../../dummy/brand.json";
+import categoryData from "../../dummy/category.json";
+
+export default function ProductInfo({ brand, setBrand, category, setCategory }){
+    const isEmpty = !brand || Object.keys(brand).length === 0;
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalContent, setModalContent] = useState('select'); // 'select', 'brand', 'category' 로 모달 컴포넌트 선택됨
+    const [brandList, setBrandList] = useState([]);
+    const [categoryList, setCategoryList] = useState([]);
+    const modalRef = useRef(null); // 모달창 열고 닫기 애니메이션을 위한 ref
+
+    // brandSelect, categorySelect 의 선택 임시 저장용
+    const [tempBrand, setTempBrand] = useState(null);
+    const [tempCategory, setTempCategory] = useState(null);
+
+    const handleBrandClick = () => setModalContent('brand');
+    const handleCategoryClick = () => setModalContent('category');
+    const handleOpen = () => {
+        setModalContent('select');
+        setIsModalOpen(true);
+    };
+    const handleClose = () => setIsModalOpen(false);
+
+    // ✅ 모달 외부에서 닫기 trigger 예시
+    const forceCloseModal = () => {
+        if (modalRef.current) {
+            modalRef.current.triggerClose(); // 애니메이션 포함 닫힘
+        }
+    };
+
+    // 모달 내 보여질 컴포넌트 선택
+    const renderModalContent = () => {
+        switch (modalContent) {
+            case 'brand':
+                return <BrandSelect 
+                    onBack={() => setModalContent('select')} 
+                    setBrand={setTempBrand} 
+                    brandList={brandList} />;
+            case 'category':
+                return <CategorySelect 
+                    onBack={() => setModalContent('select')} 
+                    setCategory={setTempCategory} 
+                    categoryList={categoryList} />;
+            case 'select':
+            default:
+                return (
+                    <BrandAndCategorySelect
+                        brand={tempBrand || brand}
+                        category={tempCategory || category}
+                        onBrandClick={handleBrandClick}
+                        onCategoryClick={handleCategoryClick}
+                        onClose={handleConfirmSelection}
+                    />
+                );
+        }
+    };
+
+    // 선택 완료 버튼 클릭시 기존 brand, category 반영
+    const handleConfirmSelection = () => {
+        if (tempBrand) setBrand(tempBrand);
+        if (tempCategory) setCategory(tempCategory);
+        forceCloseModal();
+    };
+
+    // 브랜드 목록 가져오는 api 통신
+    useEffect(() => {
+        setBrandList([
+            Array.from({ length: 25 }, (_, i) => {
+                const base = brandData[i % brandData.length];
+                return {
+                    ...base,
+                    brand_id: i + 1
+                };
+            })
+        ])
+    }, [])
+
+    useEffect(() => {
+        if(tempBrand){
+            setCategoryList(categoryData);
+        } else {
+            setCategoryList([]);
+        }
+    }, [tempBrand])
+
+    return(
+        <div className={styles.container}>
+            {isEmpty ? (
+                <div className={styles.emptyBox} onClick={handleOpen}>
+                    <img src={AddIcon} alt="상품 없음" className={styles.addIcon} />
+                </div>
+            ) : (
+                <div>
+                {/* product 내용이 있을 때의 UI */}
+                {brand && <div>{brand.name}</div>}
+                {category && <div>{category.mainCategoryName}</div>}
+                {category && <div>{category.subCategoryName}</div>}
+                </div>
+            )}
+            {isModalOpen && (
+                <BottomSheetModal ref={modalRef} onClose={handleClose}>
+                    {renderModalContent()}
+                </BottomSheetModal>
+            )}
+        </div>
+    )
+}

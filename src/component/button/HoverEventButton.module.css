@@ -16,7 +16,7 @@
   background-color: black;
   color: white;
 }
-.button:hover {
+.black:hover {
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
   background-color: white;
   color: black
@@ -43,4 +43,11 @@
   background-color: #bae54d;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
   color: black;
+}
+
+/* blocked 스타일 */
+.blocked {
+  background-color: #ccc;
+  color: white;
+  cursor: auto;
 }

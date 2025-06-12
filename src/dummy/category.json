@@ -1,0 +1,43 @@
+[
+  {
+    "mainCategoryName": "아우터",
+    "subCategoryName": [
+      { "name": "점퍼", "categoryId": 1 },
+      { "name": "코트", "categoryId": 2 },
+      { "name": "패딩", "categoryId": 3 }
+    ]
+  },
+  {
+    "mainCategoryName": "상의",
+    "subCategoryName": [
+      { "name": "반팔 티셔츠", "categoryId": 4 },
+      { "name": "긴팔 티셔츠", "categoryId": 5 },
+      { "name": "니트/스웨터", "categoryId": 6 }
+    ]
+  },
+  {
+    "mainCategoryName": "하의",
+    "subCategoryName": [
+      { "name": "청바지", "categoryId": 7 },
+      { "name": "슬랙스", "categoryId": 8 },
+      { "name": "반바지", "categoryId": 9 }
+    ]
+  },
+  {
+    "mainCategoryName": "신발",
+    "subCategoryName": [
+      { "name": "운동화", "categoryId": 10 },
+      { "name": "샌들", "categoryId": 11 },
+      { "name": "부츠", "categoryId": 12 }
+    ]
+  },
+  {
+    "mainCategoryName": "가방",
+    "subCategoryName": [
+      { "name": "백팩", "categoryId": 13 },
+      { "name": "토트백", "categoryId": 14 },
+      { "name": "크로스백", "categoryId": 15 }
+    ]
+  }
+]
+  

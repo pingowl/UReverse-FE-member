@@ -1,0 +1,75 @@
+.container {
+    margin-bottom: 120px;
+    padding: 0px 16px;
+}
+
+.title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 24px;
+}
+
+.block {
+    margin-bottom: 24px;
+}
+
+.label {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.emphasis{
+    color: #f04711;
+}
+
+.selectBox {
+    text-align: center; 
+
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.selected {
+    background-color: #ccc;
+}
+
+/* 브랜드 선택 박스 hover 강조 */
+.brandBox:hover {
+    background-color: #f0f0f0;
+}
+
+.selectBox:hover{
+    background-color: #f0f0f0;
+}
+
+/* highlight 클래스: 강제 hover 효과 유사 */
+.highlight {
+    background-color: #f0f0f0;
+    transition: background-color 0.2s ease;
+}
+
+/* 카테고리 선택 비활성화 시 */
+.disabled {
+    cursor: auto;
+    opacity: 0.5;
+}
+
+.buttonArea {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    padding: 0 20px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
