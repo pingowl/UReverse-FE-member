@@ -1,7 +1,7 @@
 import styles from './ProductInfo.module.css';
 import AddIcon from '../../assets/icon-add.png';
 import { useEffect, useRef, useState } from 'react';
-import BottomSheetModal from './BottomSheetModal';
+import BottomSheetModal from '../modal/BottomSheetModal';
 import BrandAndCategorySelect from './BrandAndCategorySelect';
 import BrandSelect from './BrandSelect';
 import CategorySelect from './CategorySelect';

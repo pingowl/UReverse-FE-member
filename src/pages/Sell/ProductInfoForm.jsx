@@ -4,19 +4,15 @@ import BlackWarningIcon from "../../assets/icon-warning-black.png";
 import styles from "./ProductInfoForm.module.css";
 import HoverEventButton from "../../component/button/HoverEventButton";
 import ProductInfo from "../../component/sell/ProductInfo";
-import BottomSheetModal from '../../component/sell/BottomSheetModal';
-import PictureNotice from '../../component/sell/PictureNotice';
+import PictureNotice from '../../component/sellNotice/PictureNotice';
 
 export default function ProductInfoForm(){
     const [isModalOpen, setIsModalOpen] = useState(true);
     const [brand, setBrand] = useState('');
     const [category, setCategory] = useState([]);
 
-    // 사진 등록 안내문용 바닥 모달창 오픈변수
-    const [isBottomModalOpen, setIsBottomModalOpen] = useState(false);
-    const [modalContent, setModalContent] = useState('pictureNotice'); // 'pictureNotice', 'pointNotice' 로 모달 컴포넌트 선택됨
-    const modalRef = useRef(null); // 모달창 열고 닫기 애니메이션을 위한 ref
-    const handleCloseBottomModal = () => setIsBottomModalOpen(false);
+    // 사진 등록 안내 모달 오픈변수
+    const [isPictureNoticeModalOpen, setIsPictureNoticeModalOpen] = useState(false);
 
     // 사진 등록 트리거
     const fileInputRef = useRef(null);
@@ -27,33 +23,14 @@ export default function ProductInfoForm(){
         }
     };
 
-    const handleOpenPictureBottomModal = () => {
-        setModalContent('pictureNotice');
-        setIsBottomModalOpen(true);
-    }
-
-    // ✅ 모달 외부에서 닫기 trigger 예시
-    const forceCloseModal = () => {
-        if (modalRef.current) {
-            modalRef.current.triggerClose(); // 애니메이션 포함 닫힘
-        }
-    };
-
-    // 선택 완료 버튼 클릭시 기존 brand, category 반영
     const handleConfirmSelection = () => {
-        forceCloseModal(); // 모달 닫기
-        handleOpenImagePicker(); // 사진 등록으로 이어짐
+        setIsPictureNoticeModalOpen(false); // 모달 닫기
+        handleOpenImagePicker();     // 사진 등록으로 이어짐
     };
 
-    // 모달 내 보여질 컴포넌트 선택
-    const renderBottomModalContent = () => {
-        switch (modalContent) {
-            case 'pictureNotice':
-                return <PictureNotice onClose={handleConfirmSelection}/>;
-            default:
-                return <></>;
-        }
-    };
+    const handleOpenPictureNoticeModal = () => {
+        setIsPictureNoticeModalOpen(true);
+    }
 
     return (
         <div className={styles.pageWrapper}>
@@ -98,7 +75,7 @@ export default function ProductInfoForm(){
                         width="w-full"
                         height="h-12"
                         color="black"
-                        onClick={handleOpenPictureBottomModal}
+                        onClick={handleOpenPictureNoticeModal}
                     />
                     <HoverEventButton
                         text="25,000p 보상받기"
@@ -110,11 +87,7 @@ export default function ProductInfoForm(){
             </div>
 
             {isModalOpen && <SellPreviewModal onClose={() => setIsModalOpen(false)} />}
-            {isBottomModalOpen && (
-                <BottomSheetModal ref={modalRef} onClose={handleCloseBottomModal}>
-                    {renderBottomModalContent()}
-                </BottomSheetModal>
-            )}
+            {isPictureNoticeModalOpen && (<PictureNotice onClose={handleConfirmSelection} />)}
 
             {/* 파일 업로드 영역 */}
             <input
