@@ -4,8 +4,12 @@
     min-height: 100vh;
 }
 
+.headerSpacer {
+    height: 3.5rem;
+    flex-shrink: 0;
+}
+
 .outletArea {
     height: calc(100vh);
-    padding-top: 3.5rem;
     overflow: auto;
 }

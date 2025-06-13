@@ -40,7 +40,10 @@ export default function UserInput({
     
         post.embed(postRef.current);
         //postLayer로 부드럽게 스크롤 이동
-        postRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        window.scrollTo({
+            top: postRef.current.getBoundingClientRect().top + window.scrollY - 56, // 3.5rem ≒ 56px 보정
+            behavior: 'smooth',
+        });
       }, [isPostOpen]);
     
     return (

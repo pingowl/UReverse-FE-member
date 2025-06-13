@@ -6,6 +6,7 @@ export default function CommonLayout(){
     return(
         <div className={styles.container}>
             <CommonHeader></CommonHeader>
+            <div className={styles.headerSpacer}></div>
             <div className={styles.outletArea}>
                 <Outlet></Outlet>
             </div>
