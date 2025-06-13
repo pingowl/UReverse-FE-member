@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import styles from './HoverEventButton.module.css';
+import { useState } from 'react';
 
 /**
  * 공통 버튼 컴포넌트
@@ -9,6 +10,7 @@ import styles from './HoverEventButton.module.css';
  * @param {string} link - 클릭 시 이동할 경로 (React Router 경로)
  * @param {string} color - 버튼 색상 (black, white, green, blocked)
  * @param {string} className - 선택적으로 외부에서 추가할 커스텀 클래스명
+ * @param {boolean} disabled - 비활성화 버튼이면 true
  *
  * @returns {JSX.Element} 버튼 요소 반환
  */
@@ -18,6 +20,7 @@ export default function HoverEventButton({
   link,
   color = 'black',
   className = '', // 선택: 외부에서 스타일 추가하고 싶을 경우
+  disabled
 }) {
   const navigate = useNavigate();
 
@@ -29,10 +32,12 @@ export default function HoverEventButton({
     }
   };
 
+  const finalColor = disabled ? 'blocked' : color;
+
   return (
     <button
-      onClick={color === 'blocked' ? undefined : handleClick}
-      className={`${styles.button} ${styles[color]} ${className}`}
+      onClick={color === 'blocked' || disabled === true ? undefined : handleClick}
+      className={`${styles.button} ${styles[finalColor]} ${className}`}
     >
       {text}
     </button>

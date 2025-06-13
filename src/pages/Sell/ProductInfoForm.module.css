@@ -79,8 +79,6 @@
 
 /* 이미지 미리보기 영역 (최대 3개, 가로 배치) */
 .imagePreviewContainer {
-    display: flex;
-    gap: 12px;
     margin-bottom: 24px;
 }
 
