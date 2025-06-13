@@ -3,13 +3,13 @@ import SellPreviewModal from "../../component/sellPreview/SellPreviewModal";
 import BlackWarningIcon from "../../assets/icon-warning-black.png";
 import styles from "./ProductInfoForm.module.css";
 import HoverEventButton from "../../component/button/HoverEventButton";
-import ProductInfo from "../../component/sell/ProductInfo";
 import PictureNotice from '../../component/sellNotice/PictureNotice';
-import ProductPicture from "../../component/sell/ProductPicture";
 import SellConfirmNotice from "../../component/sellNotice/SellConfirmNotice";
 import { useRecoilState } from "recoil";
 import { sellFormState } from "../../atoms/sellFormState";
 import { useNavigate } from "react-router-dom";
+import ProductInfo from "../../component/sell/product/ProductInfo";
+import ProductPicture from "../../component/sell/product/ProductPicture";
 
 export default function ProductInfoForm(){
     const navigate = useNavigate();
