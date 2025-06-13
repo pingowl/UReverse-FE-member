@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import HoverEventButton from '../button/HoverEventButton';
+import HoverEventButton from '../../button/HoverEventButton';
 import styles from './BrandAndCategorySelect.module.css';
 
 export default function BrandAndCategorySelect({brand, category, onBrandClick, onCategoryClick, onClose }) {

@@ -1,0 +1,32 @@
+.formWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.userInfoInputArea,
+.addressInputArea {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.label {
+    font-weight: 600;
+    margin-bottom: 4px;
+    font-size: 0.9rem;
+}
+
+.addressZipRow {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.postLayer {
+    margin: 12px 0;
+    border: 1px solid #ccc;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    transition: height 0.3s ease;
+}

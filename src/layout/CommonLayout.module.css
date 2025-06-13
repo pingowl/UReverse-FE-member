@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.headerSpacer {
+    height: 3.5rem;
+    flex-shrink: 0;
+}
+
+.outletArea {
+    height: calc(100vh);
+    overflow: auto;
+}

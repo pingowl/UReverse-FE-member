@@ -1,0 +1,25 @@
+.input {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.75rem;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  height: 3rem;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #FFF; /* 예: 초록색 테두리 */
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2); /* 부드러운 포커스 효과 */
+}
+
+.input::placeholder {
+  color: #aaa;
+}
+
+.input:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}

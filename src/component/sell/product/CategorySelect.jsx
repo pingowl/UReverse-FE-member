@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./CategorySelect.module.css";
-import arrowIcon from "../../assets/icon-arrow-down.png";
+import arrowIcon from "../../../assets/icon-arrow-down.png";
 
 export default function CategorySelect({onBack, setCategory, categoryList}) {
     const [expandedMainCategory, setExpandedMainCategory] = useState(null);

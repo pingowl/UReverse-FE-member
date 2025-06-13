@@ -1,13 +1,13 @@
 import styles from './ProductInfo.module.css';
-import AddIcon from '../../assets/icon-add.png';
+import AddIcon from '../../../assets/icon-add.png';
 import { useEffect, useRef, useState } from 'react';
-import BottomSheetModal from '../modal/BottomSheetModal';
+import BottomSheetModal from '../../modal/BottomSheetModal';
 import BrandAndCategorySelect from './BrandAndCategorySelect';
 import BrandSelect from './BrandSelect';
 import CategorySelect from './CategorySelect';
 
-import brandData from "../../dummy/brand.json";
-import categoryData from "../../dummy/category.json";
+import brandData from "../../../dummy/brand.json";
+import categoryData from "../../../dummy/category.json";
 
 export default function ProductInfo({ brand, setBrand, category, setCategory }){
     const isEmpty = !brand || Object.keys(brand).length === 0;

@@ -1,0 +1,83 @@
+.pageWrapper {
+    position: relative;
+    /* min-height: 100vh; */
+    padding-bottom: 100px; /* 버튼 높이 + 여유 */
+    overflow-x: hidden;
+    width: 100%;
+}
+
+.innerContent{
+    padding: 16px 20px;
+}
+
+.processBar {
+    display: flex;
+    margin-bottom: 20px;
+    gap: 6px;
+}
+
+.doneProcessBar {
+    flex: 1;
+    height: 5px;
+    background-color: #666;
+    border-radius: 4px;
+}
+
+.noneProcessBar {
+    flex: 1;
+    height: 5px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+}
+
+.stepDescription {
+    margin-bottom: 24px;
+    font-size: 1.3rem;
+    font-weight: 500;
+    line-height: 1.5;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.inputArea {
+    margin-bottom: 24px;
+    width: 100%;
+}
+
+.fixedButtonWrapper {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 100;
+}
+
+/* 버튼 영역 (가로 정렬) */
+.buttonGroup {
+    width: calc(100% - 40px);
+    max-width: 450px;
+    padding: 20px 0px;
+    margin: 0px 20px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    background-color: white;
+}
+
+@media (min-width: 1024px) {
+    .inner {
+        max-width: 375px;
+    }
+
+    .buttonGroup {
+        max-width: 335px;
+        margin: 0px 20px;
+    }
+}
