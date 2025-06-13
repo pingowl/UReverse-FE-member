@@ -1,14 +1,24 @@
 .header {
-    position: relative;
+    position: fixed;
+
     width: 100%;
-    max-width: 100%;
+    max-width: 500px;
     box-sizing: border-box;
     height: 3.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 20px 16px;
+    background-color: white;
+    z-index: 100;
 }
+
+/* media 쿼리 fallback (PC 해상도일 때 폭 줄이기) */
+@media (min-width: 1024px) {
+    .header {
+      max-width: 375px;
+    }
+  }
 
 .backButton {
     font-size: 1.25rem;

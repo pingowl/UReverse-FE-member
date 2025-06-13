@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import CommonHeader from "../component/header/CommonHeader";
-import styles from "./Layout.module.css";
+import styles from "./CommonLayout.module.css";
 
 export default function CommonLayout(){
     return(

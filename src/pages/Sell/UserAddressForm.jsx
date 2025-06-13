@@ -15,7 +15,7 @@ export default function UserAddressForm(){
     const [addressDetail, setAddressDetail] = useState('');
     const [zipCode, setZipCode] = useState('');
 
-    // 다음 버튼 클릭시 atom 에 저장장
+    // 다음 버튼 클릭시 atom 에 저장
     const handleClickNextBtn = () => {
         setFormData(prev => ({
             ...prev,
@@ -27,22 +27,8 @@ export default function UserAddressForm(){
                 zipCode,
             }
           }));
-        //   navigate('/sell/address');
+          navigate('/sell/receipt');
     }
-
-    const updateAddressInfo = () => {
-        setFormData(prev => ({
-          ...prev,
-          address: {
-            name,
-            phone,
-            address,
-            addressDetail,
-            zipCode,
-          }
-        }));
-        navigate('/sell/receipt');
-      };
 
     return (
         <div className={styles.pageWrapper}>

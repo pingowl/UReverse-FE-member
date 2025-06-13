@@ -40,13 +40,9 @@ export default function UserInput({
     
         post.embed(postRef.current);
         //postLayer로 부드럽게 스크롤 이동
-        setTimeout(() => {
-            postRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            window.scrollTo({ top: window.scrollY - 80, behavior: 'smooth' }); // 보정값 조절 가능
-        }, 0);
+        postRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, [isPostOpen]);
     
-        
     return (
         <div className={styles.formWrapper}>
             {/* 사용자 기본 정보 */}

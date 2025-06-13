@@ -11,6 +11,7 @@ import SignupForm from './pages/Login/SignupForm';
 import ProductInfoForm from './pages/Sell/ProductInfoForm';
 import UserAddressForm from './pages/Sell/UserAddressForm';
 import { RecoilRoot } from 'recoil';
+import ProductReceipt from './pages/Sell/ProductReceipt';
 
 const router = createBrowserRouter([
   {
@@ -38,8 +39,8 @@ const router = createBrowserRouter([
         element: <CommonLayout />,
         children: [
           { path: "product", element: <ProductInfoForm />},
-          { path: "address", element: <UserAddressForm />}
-          // ,{ path: "/mypage", element: <Mypage /> }
+          { path: "address", element: <UserAddressForm />},
+          { path: "receipt", element: <ProductReceipt />}
         ]
       },
     ]
