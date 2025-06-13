@@ -6,12 +6,9 @@ import Step4 from './Step4';
 import Step0 from './Step0';
 import styles from "./SellPreviewModal.module.css";
 import HoverEventButton from '../button/HoverEventButton';
+import MiddleModal from '../modal/MiddleModal';
 
 export default function SellPreviewModal({ onClose }) {
-    // TODO:
-    // 1. 모달 바깥 클릭 시 모달 닫기
-    // 2. 모달 페이지 끝 도달 시 닫기 버튼 클릭되기
-
     const [step, setStep] = useState(0);
 
     const goNext = () => setStep((prev) => Math.min(prev + 1, 4));
@@ -24,42 +21,44 @@ export default function SellPreviewModal({ onClose }) {
             : '판매 시작하기';
     
     const handleButtonClick = () => {
-    if (step === 4) {
-        onClose();
-    } else {
-        goNext();
-    }
-};
+        if (step === 4) onClose(); 
+        else goNext();
+    };
+
+    const renderStepComponent = () => {
+        switch (step) {
+            case 0: return <Step0 />;
+            case 1: return <Step1 />;
+            case 2: return <Step2 />;
+            case 3: return <Step3 />;
+            case 4: return <Step4 />;
+            default: return null;
+        }
+    };
 
     return (
-        <div className={styles.overlay} onClick={onClose}>
-            <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-                <div className={styles.contentsArea}>
-                    {step === 0 && <Step0 />}
-                    {step === 1 && <Step1 />}
-                    {step === 2 && <Step2 />}
-                    {step === 3 && <Step3 />}
-                    {step === 4 && <Step4 />}
-                </div>
-
-                <div className={styles.buttonArea}>
-                    {/* <button onClick={goBack}>뒤로</button> */}
-                    {step<4 && step>0 ? <HoverEventButton
-                        text = "뒤로"
-                        width="w-full"
-                        height="h-full"
-                        color="white"
-                        onClick={goBack}
-                        /> : <></>}
-                    <HoverEventButton
-                        text = {buttonText}
-                        width="w-full"
-                        height="h-full"
-                        color="green"
-                        onClick={handleButtonClick}
-                        />
-                </div>
+        <MiddleModal onClose={onClose}>
+            <div className={styles.contentsArea}>
+                {renderStepComponent()}
             </div>
-        </div>
+
+            <div className={styles.buttonArea}>
+                {/* <button onClick={goBack}>뒤로</button> */}
+                {step<4 && step>0 ? <HoverEventButton
+                    text = "뒤로"
+                    width="w-full"
+                    height="h-full"
+                    color="white"
+                    onClick={goBack}
+                    /> : <></>}
+                <HoverEventButton
+                    text = {buttonText}
+                    width="w-full"
+                    height="h-full"
+                    color="green"
+                    onClick={handleButtonClick}
+                    />
+            </div>
+        </MiddleModal>
     );
 }

@@ -1,7 +1,7 @@
 import styles from './ProductInfo.module.css';
 import AddIcon from '../../assets/icon-add.png';
 import { useEffect, useRef, useState } from 'react';
-import BottomSheetModal from './BottomSheetModal';
+import BottomSheetModal from '../modal/BottomSheetModal';
 import BrandAndCategorySelect from './BrandAndCategorySelect';
 import BrandSelect from './BrandSelect';
 import CategorySelect from './CategorySelect';
@@ -15,6 +15,7 @@ export default function ProductInfo({ brand, setBrand, category, setCategory }){
     const [modalContent, setModalContent] = useState('select'); // 'select', 'brand', 'category' 로 모달 컴포넌트 선택됨
     const [brandList, setBrandList] = useState([]);
     const [categoryList, setCategoryList] = useState([]);
+    const [point, setPoint] = useState('25,000');
     const modalRef = useRef(null); // 모달창 열고 닫기 애니메이션을 위한 ref
 
     // brandSelect, categorySelect 의 선택 임시 저장용
@@ -26,6 +27,10 @@ export default function ProductInfo({ brand, setBrand, category, setCategory }){
     const handleOpen = () => {
         setModalContent('select');
         setIsModalOpen(true);
+        setTempBrand(null);
+        setTempCategory(null);
+        setBrand(null);
+        setCategory(null);
     };
     const handleClose = () => setIsModalOpen(false);
 
@@ -98,11 +103,14 @@ export default function ProductInfo({ brand, setBrand, category, setCategory }){
                     <img src={AddIcon} alt="상품 없음" className={styles.addIcon} />
                 </div>
             ) : (
-                <div>
-                {/* product 내용이 있을 때의 UI */}
-                {brand && <div>{brand.name}</div>}
-                {category && <div>{category.mainCategoryName}</div>}
-                {category && <div>{category.subCategoryName}</div>}
+                <div className={styles.productBox} onClick={handleOpen}>
+                    <div className={styles.productInfo}>
+                            <div className={styles.brandName}>{brand.name} {brand.nameEn}</div>
+                        <div className={styles.categoryName}>{category.mainCategoryName} / {category.subCategoryName}</div>
+                    </div>
+                    <div className={styles.pointInfo}>
+                        <span className={styles.pointInfoText}>예상 H.Point : </span><span className={styles.pointScoreText}>{point}P</span>
+                    </div>
                 </div>
             )}
             {isModalOpen && (

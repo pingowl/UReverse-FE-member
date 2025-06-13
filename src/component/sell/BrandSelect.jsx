@@ -31,7 +31,7 @@ export default function BrandSelect({onBack, setBrand, brandList}) {
                             className={styles.brandLogo}/>
                         <div className={styles.brandInfo}>
                             <div className={styles.brandNameKr}>{brand.name}</div>
-                            <div className={styles.brandNameEn}>{brand.name_en}</div>
+                            <div className={styles.brandNameEn}>{brand.nameEn}</div>
                         </div>
                     </div>
                 ))}
