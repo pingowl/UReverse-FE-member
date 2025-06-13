@@ -9,6 +9,8 @@ import LoginSelect from './pages/Login/LoginSelect';
 import LoginForm from './pages/Login/LoginForm';
 import SignupForm from './pages/Login/SignupForm';
 import ProductInfoForm from './pages/Sell/ProductInfoForm';
+import UserAddressForm from './pages/Sell/UserAddressForm';
+import { RecoilRoot } from 'recoil';
 
 const router = createBrowserRouter([
   {
@@ -35,7 +37,8 @@ const router = createBrowserRouter([
         path: "/sell",
         element: <CommonLayout />,
         children: [
-          { path: "product", element: <ProductInfoForm />}
+          { path: "product", element: <ProductInfoForm />},
+          { path: "address", element: <UserAddressForm />}
           // ,{ path: "/mypage", element: <Mypage /> }
         ]
       },
@@ -45,7 +48,9 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <RouterProvider router={router} />
+    <RecoilRoot>
+      <RouterProvider router={router} />
+    </RecoilRoot>
   );
 }
 

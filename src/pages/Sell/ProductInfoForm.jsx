@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import SellPreviewModal from "../../component/sellPreview/SellPreviewModal";
 import BlackWarningIcon from "../../assets/icon-warning-black.png";
 import styles from "./ProductInfoForm.module.css";
@@ -7,8 +7,14 @@ import ProductInfo from "../../component/sell/ProductInfo";
 import PictureNotice from '../../component/sellNotice/PictureNotice';
 import ProductPicture from "../../component/sell/ProductPicture";
 import SellConfirmNotice from "../../component/sellNotice/SellConfirmNotice";
+import { useRecoilState } from "recoil";
+import { sellFormState } from "../../atoms/sellFormState";
+import { useNavigate } from "react-router-dom";
 
 export default function ProductInfoForm(){
+    const navigate = useNavigate();
+    const [formData, setFormData] = useRecoilState(sellFormState); // 전역적으로 입력한 판매 데이터 관리
+
     const [isModalOpen, setIsModalOpen] = useState(true);
     const [brand, setBrand] = useState('');
     const [category, setCategory] = useState([]);
@@ -36,9 +42,18 @@ export default function ProductInfoForm(){
         handleOpenImagePicker();     // 사진 등록으로 이어짐
     };
 
+    // 상품 등록완료 모달 닫기. 주소입력으로 이동
     const handleConfirmNoticeSelection = () => {
         setIsSellConfirmModalOpen(false);
-        // 두번째 판매 화면에 brand, category, pictureList 전달하며 이동
+        setFormData(prev => ({
+            ...prev,
+            product: {
+              brand,
+              category,
+              images: pictureList,
+            }
+          }));
+          navigate('/sell/address');
     }
 
     const handleOpenPictureNoticeModal = () => {
