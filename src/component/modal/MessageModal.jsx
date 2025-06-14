@@ -1,22 +1,28 @@
 import React from 'react';
-import styles from './ConfirmModal.module.css';
+import styles from './MessageModal.module.css';
 import HoverEventButton from '../button/HoverEventButton';
 
-export default function ConfirmModal({
-  visible, onClose, onConfirm,
-  password, setPassword,
-  isErrorOnly = false,
-  message
+export default function MessageModal({
+  visible,
+  title = '알림',
+  message,
+  onClose,
+  onConfirm,
+  showPasswordInput = false,
+  password = '',
+  setPassword = () => {},
+  confirmText = '확인',
+  cancelText = '닫기',
 }) {
   if (!visible) return null;
 
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
-        <h2>{isErrorOnly ? '오류' : '회원 탈퇴'}</h2>
-        <p>{message || '정말로 탈퇴하시겠습니까?'}</p>
+        <h2 className={styles.title}>{title}</h2>
+        <p className={styles.message}>{message}</p>
 
-        {!isErrorOnly && (
+        {showPasswordInput && (
           <input
             type="password"
             placeholder="비밀번호 입력"
@@ -28,14 +34,14 @@ export default function ConfirmModal({
 
         <div className={styles.buttonGroup}>
           <HoverEventButton
-            text="닫기"
+            text={cancelText}
             onClick={onClose}
             color="#eee"
             width="w-24"
           />
-          {!isErrorOnly && (
+          {onConfirm && (
             <HoverEventButton
-              text="탈퇴하기"
+              text={confirmText}
               onClick={onConfirm}
               color="black"
               width="w-24"

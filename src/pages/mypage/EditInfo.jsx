@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { userState } from '../../atoms/userState';
 import CommonInput from '../../component/input/CommonInput';
 import HoverEventButton from '../../component/button/HoverEventButton';
-import ConfirmModal from '../../component/modal/ConfirmModal';
+import ConfirmModal from '../../component/modal/MessageModal';
 import styles from './EditInfo.module.css';
 import {
     updateMemberInfo,
@@ -27,8 +27,9 @@ export default function EditInfo() {
 
     const [showModal, setShowModal] = useState(false);
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
     const [showErrorModal, setShowErrorModal] = useState(false);
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
+    const [modalMessage, setModalMessage] = useState('');
 
     useEffect(() => {
         setEmailChanged(email !== user.email);
@@ -37,7 +38,8 @@ export default function EditInfo() {
     const handleUpdate = async () => {
         try {
             if (emailChanged && !password) {
-                alert('이메일을 변경하려면 비밀번호를 입력하세요.');
+                setModalMessage('이메일을 변경하려면 비밀번호를 입력하세요.');
+                setShowErrorModal(true);
                 return;
             }
 
@@ -70,10 +72,11 @@ export default function EditInfo() {
                 productStatus,
             });
 
-            alert('회원 정보가 수정되었습니다.');
-            navigate('/mypage');
+            setModalMessage('회원 정보가 수정되었습니다.');
+            setShowSuccessModal(true);
         } catch (err) {
-            alert('회원 정보 수정에 실패했습니다.');
+            setModalMessage('회원 정보 수정에 실패했습니다.');
+            setShowErrorModal(true);
             console.error(err);
         }
     };
@@ -84,12 +87,13 @@ export default function EditInfo() {
             localStorage.removeItem('accessToken');
             navigate('/login');
         } catch (err) {
-            alert('로그아웃 실패');
+            setModalMessage('로그아웃 실패');
+            setShowErrorModal(true);
         }
     };
 
     const handleDelete = () => {
-        setConfirmPassword(''); 
+        setConfirmPassword('');
         setShowModal(true);
     };
 
@@ -101,7 +105,7 @@ export default function EditInfo() {
             navigate('/signup');
         } catch (err) {
             setShowModal(false);
-            setErrorMessage('비밀번호가 올바르지 않거나 권한이 없습니다.');
+            setModalMessage('비밀번호가 올바르지 않거나 권한이 없습니다.');
             setShowErrorModal(true);
         }
     };
@@ -170,22 +174,43 @@ export default function EditInfo() {
                 />
             </div>
 
+            {/* 탈퇴 확인 모달 */}
             <ConfirmModal
                 visible={showModal}
+                message={"정말 탈퇴하시겠습니까?"}
                 onClose={() => setShowModal(false)}
                 onConfirm={handleConfirmDelete}
                 password={confirmPassword}
                 setPassword={setConfirmPassword}
+                showPasswordInput={true}
             />
 
+            {/* 실패 알림 모달 */}
             <ConfirmModal
                 visible={showErrorModal}
                 onClose={() => setShowErrorModal(false)}
                 onConfirm={() => setShowErrorModal(false)}
                 password=""
-                setPassword={() => { }}
+                setPassword={() => {}}
                 isErrorOnly={true}
-                message={errorMessage}
+                message={modalMessage}
+            />
+
+            {/* 성공 알림 모달 */}
+            <ConfirmModal
+                visible={showSuccessModal}
+                onClose={() => {
+                    setShowSuccessModal(false);
+                    navigate('/mypage');
+                }}
+                onConfirm={() => {
+                    setShowSuccessModal(false);
+                    navigate('/mypage');
+                }}
+                password=""
+                setPassword={() => {}}
+                isErrorOnly={true}
+                message={modalMessage}
             />
         </div>
     );
