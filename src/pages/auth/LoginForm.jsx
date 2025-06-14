@@ -3,11 +3,37 @@ import logo from "../../assets/Logo.png"
 import LoginInput from '../../component/input/LoginInput';
 import { useState } from 'react';
 import HoverEventButton from '../../component/button/HoverEventButton';
+import { login } from '../../api/auth';
+import { getMyInfo } from '../../api/member';
+import { useSetRecoilState } from 'recoil';
+import { userState } from '../../atoms/userState';
+import { useNavigate } from 'react-router-dom';
 
 export default function LoginForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [focusedInput, setFocusedInput] = useState(null);
+
+    const setUser = useSetRecoilState(userState);
+    const navigate = useNavigate();
+
+    const handleLogin = async () => {
+        try {
+            const { accessToken } = await login(email, password);
+            localStorage.setItem('accessToken', accessToken);
+
+            const userInfo = await getMyInfo();
+            setUser({
+                ...userInfo,
+                isLoggedIn: true,
+            });
+
+            navigate('/mypage');
+        } catch (error) {
+            alert('이메일 또는 비밀번호가 올바르지 않습니다.');
+            console.error('로그인 실패:', error);
+        }
+    };
 
     return (
         <div className={styles.container}>
@@ -47,7 +73,7 @@ export default function LoginForm() {
             <div className={styles.buttonArea}>
                 <HoverEventButton
                     text="로그인"
-                    link="/"
+                    onClick={handleLogin}
                     width="w-full"
                     height="h-12"
                     color="black"
