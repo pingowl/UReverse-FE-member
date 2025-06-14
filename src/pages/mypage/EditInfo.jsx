@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useNavigate } from 'react-router-dom';
 import { userState } from '../../atoms/userState';
 import CommonInput from '../../component/input/CommonInput';
 import HoverEventButton from '../../component/button/HoverEventButton';
-import styles from './EditInfo.module.css';
-import { updateMemberInfo, logout, deleteMember } from '../../api/member';
-import { getMyInfo } from '../../api/member';
-import { useSetRecoilState } from 'recoil';
 import ConfirmModal from '../../component/modal/ConfirmModal';
+import styles from './EditInfo.module.css';
+import {
+    updateMemberInfo,
+    logout,
+    deleteMember,
+    getMyInfo,
+} from '../../api/member';
 
 export default function EditInfo() {
     const user = useRecoilValue(userState);
-    const navigate = useNavigate();
     const setUser = useSetRecoilState(userState);
+    const navigate = useNavigate();
 
     const [email, setEmail] = useState(user.email || '');
     const [name, setName] = useState(user.name || '');
@@ -21,8 +24,11 @@ export default function EditInfo() {
     const [password, setPassword] = useState('');
     const [emailChanged, setEmailChanged] = useState(false);
     const [showPasswordCheck, setShowPasswordCheck] = useState(false);
+
     const [showModal, setShowModal] = useState(false);
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const [showErrorModal, setShowErrorModal] = useState(false);
 
     useEffect(() => {
         setEmailChanged(email !== user.email);
@@ -72,7 +78,6 @@ export default function EditInfo() {
         }
     };
 
-
     const handleLogout = async () => {
         try {
             await logout();
@@ -84,6 +89,7 @@ export default function EditInfo() {
     };
 
     const handleDelete = () => {
+        setConfirmPassword(''); 
         setShowModal(true);
     };
 
@@ -94,9 +100,9 @@ export default function EditInfo() {
             setShowModal(false);
             navigate('/signup');
         } catch (err) {
-            setShowModal(false); // 비번 틀릴 때 모달 닫기
-            alert('회원 탈퇴 실패: 비밀번호가 올바르지 않거나 권한이 없습니다.');
-            console.error(err);
+            setShowModal(false);
+            setErrorMessage('비밀번호가 올바르지 않거나 권한이 없습니다.');
+            setShowErrorModal(true);
         }
     };
 
@@ -147,25 +153,40 @@ export default function EditInfo() {
                 </div>
 
                 <div className={styles.updateButton}>
-                    <HoverEventButton
-                        text="수정"
-                        onClick={handleUpdate}
-                        color="black"
-                    />
+                    <HoverEventButton text="수정" onClick={handleUpdate} color="black" />
                 </div>
             </div>
 
             <div className={styles.actionButtons}>
-                <HoverEventButton text="로그아웃" onClick={handleLogout} color="#B7F56F" />
-                <HoverEventButton text="회원탈퇴" onClick={handleDelete} color="#eeeeee" />
-                <ConfirmModal
-                    visible={showModal}
-                    onClose={() => setShowModal(false)}
-                    onConfirm={handleConfirmDelete}
-                    password={confirmPassword}
-                    setPassword={setConfirmPassword}
+                <HoverEventButton
+                    text="로그아웃"
+                    onClick={handleLogout}
+                    color="#B7F56F"
+                />
+                <HoverEventButton
+                    text="회원탈퇴"
+                    onClick={handleDelete}
+                    color="#eeeeee"
                 />
             </div>
+
+            <ConfirmModal
+                visible={showModal}
+                onClose={() => setShowModal(false)}
+                onConfirm={handleConfirmDelete}
+                password={confirmPassword}
+                setPassword={setConfirmPassword}
+            />
+
+            <ConfirmModal
+                visible={showErrorModal}
+                onClose={() => setShowErrorModal(false)}
+                onConfirm={() => setShowErrorModal(false)}
+                password=""
+                setPassword={() => { }}
+                isErrorOnly={true}
+                message={errorMessage}
+            />
         </div>
     );
 }
