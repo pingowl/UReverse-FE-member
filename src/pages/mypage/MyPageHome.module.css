@@ -18,9 +18,9 @@
 
 .statCard {
     flex: 1;
-    padding: 16px;
+    padding: 16px 20px;
     background-color: white;
-    border-radius: 12px;
+    border-radius: 0.75rem;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
@@ -32,12 +32,12 @@
 }
 
 .menuSection button {
-    padding: 12px;
+    padding: 12px 20px;
     font-size: 16px;
     background-color: black;
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 0.75rem;
     cursor: pointer;
 }
 
@@ -48,21 +48,21 @@
 
 .sellButton {
     width: 100%;
-    padding: 14px;
+    padding: 14px 20px;
     background-color: black;
     color: white;
-    padding: 12px 24px;
+    padding: 12px 20px;
     font-size: 16px;
     font-weight: bold;
     border: none;
-    border-radius: 12px;
+    border-radius: 0.75rem;
     cursor: pointer;
 }
 
 .statusBox {
     background-color: white;
-    padding: 16px;
-    border-radius: 16px;
+    padding: 16px 20px;
+    border-radius: 0.75rem;
     margin-bottom: 24px;
     text-align: center;
 }
@@ -113,12 +113,12 @@
     flex-direction: column;
     gap: 12px;
     margin-top: 20px;
-    padding: 12px;
+    padding: 12px 20px;
     width: 100%;
     font-size: 16px;
     background-color: white;
     color: #333;
-    border-radius: 12px;
+    border-radius: 0.75rem;
     border: none;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     font-weight: bold;
@@ -126,10 +126,10 @@
 
 .menuButton {
     width: 100%;
-    padding: 14px;
+    padding: 14px 20px;
     background-color: white;
     border: none;
-    border-radius: 12px;
+    border-radius: 0.75rem;
     font-size: 16px;
     font-weight: 600;
     color: #444;
