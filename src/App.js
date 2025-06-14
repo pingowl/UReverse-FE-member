@@ -12,6 +12,7 @@ import ProductInfoForm from './pages/Sell/ProductInfoForm';
 import UserAddressForm from './pages/Sell/UserAddressForm';
 import { RecoilRoot } from 'recoil';
 import ProductReceipt from './pages/Sell/ProductReceipt';
+import MyPageHome from './pages/mypage/MyPageHome';
 
 const router = createBrowserRouter([
   {
@@ -22,8 +23,8 @@ const router = createBrowserRouter([
       {
         element: <MainLayout />,
         children: [
-          { index: true, element: <Home />}
-          // ,{ path: "/mypage", element: <Mypage /> }
+          { index: true, element: <Home />},
+          { path: "/mypage", element: <MyPageHome /> }
         ]
       },
       {
