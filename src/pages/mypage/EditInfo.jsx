@@ -8,6 +8,7 @@ import styles from './EditInfo.module.css';
 import { updateMemberInfo, logout, deleteMember } from '../../api/member';
 import { getMyInfo } from '../../api/member';
 import { useSetRecoilState } from 'recoil';
+import ConfirmModal from '../../component/modal/ConfirmModal';
 
 export default function EditInfo() {
     const user = useRecoilValue(userState);
@@ -20,6 +21,8 @@ export default function EditInfo() {
     const [password, setPassword] = useState('');
     const [emailChanged, setEmailChanged] = useState(false);
     const [showPasswordCheck, setShowPasswordCheck] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const [confirmPassword, setConfirmPassword] = useState('');
 
     useEffect(() => {
         setEmailChanged(email !== user.email);
@@ -80,17 +83,18 @@ export default function EditInfo() {
         }
     };
 
-    const handleDelete = async () => {
-        const password = prompt('비밀번호를 입력하세요 (탈퇴 확인)');
-        if (!password) return;
+    const handleDelete = () => {
+        setShowModal(true);
+    };
 
-        if (!window.confirm('정말로 회원을 탈퇴하시겠습니까?')) return;
-
+    const handleConfirmDelete = async () => {
         try {
-            await deleteMember(password);
+            await deleteMember(confirmPassword);
             localStorage.removeItem('accessToken');
+            setShowModal(false);
             navigate('/signup');
         } catch (err) {
+            setShowModal(false); // 비번 틀릴 때 모달 닫기
             alert('회원 탈퇴 실패: 비밀번호가 올바르지 않거나 권한이 없습니다.');
             console.error(err);
         }
@@ -154,6 +158,13 @@ export default function EditInfo() {
             <div className={styles.actionButtons}>
                 <HoverEventButton text="로그아웃" onClick={handleLogout} color="#B7F56F" />
                 <HoverEventButton text="회원탈퇴" onClick={handleDelete} color="#eeeeee" />
+                <ConfirmModal
+                    visible={showModal}
+                    onClose={() => setShowModal(false)}
+                    onConfirm={handleConfirmDelete}
+                    password={confirmPassword}
+                    setPassword={setConfirmPassword}
+                />
             </div>
         </div>
     );
