@@ -15,6 +15,7 @@ import ProductReceipt from './pages/Sell/ProductReceipt';
 import { authState } from './atoms/authState';
 import { useEffect } from 'react';
 import { setAuthStore } from './api/axiosInstance';
+import MyPageHome from './pages/mypage/MyPageHome';
 
 const router = createBrowserRouter([
   {
@@ -25,8 +26,8 @@ const router = createBrowserRouter([
       {
         element: <MainLayout />,
         children: [
-          { index: true, element: <Home />}
-          // ,{ path: "/mypage", element: <Mypage /> }
+          { index: true, element: <Home />},
+          { path: "/mypage", element: <MyPageHome /> }
         ]
       },
       {

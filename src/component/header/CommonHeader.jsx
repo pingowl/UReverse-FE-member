@@ -38,7 +38,7 @@ export default function NoAlarmHeader () {
                 <button className={styles.iconButton} aria-label="알림">
                     <img src={notificationIcon} alt="alarm" className={styles.image} />
                 </button>
-                <button className={styles.iconButton} aria-label="마이페이지">
+                <button className={styles.iconButton} aria-label="마이페이지" onClick={() => navigate('/mypage')}>
                     <img src={userIcon} alt="myPage" className={styles.image} />
                 </button>
             </div>
