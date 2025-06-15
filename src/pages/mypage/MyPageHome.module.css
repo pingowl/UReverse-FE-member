@@ -1,0 +1,138 @@
+.wrapper {
+    padding: 20px;
+    background-color: #f8f8f8;
+    min-height: 100vh;
+}
+
+.greeting {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 24px;
+}
+
+.cardContainer {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.statCard {
+    flex: 1;
+    padding: 16px 20px;
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.menuSection {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.menuSection button {
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 0.75rem;
+    cursor: pointer;
+}
+
+.sellButtonArea {
+    margin: 16px 0;
+    text-align: center;
+}
+
+.sellButton {
+    width: 100%;
+    padding: 14px 20px;
+    background-color: black;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 0.75rem;
+    cursor: pointer;
+}
+
+.statusBox {
+    background-color: white;
+    padding: 16px 20px;
+    border-radius: 0.75rem;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.statusTitle {
+    font-weight: bold;
+    margin-bottom: 12px;
+    font-size: 15px;
+    color: #555;
+}
+
+.statusRow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 8px;
+}
+
+.statusItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 50px;
+}
+
+.statusCount {
+    font-size: 18px;
+    font-weight: bold;
+    color: #666;
+}
+
+.statusLabel {
+    font-size: clamp(10px, 2.5vw, 12px);
+    /* 화면에 따라 작아지게 */
+    color: #888;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.statusArrow {
+    font-size: 16px;
+    color: #aaa;
+}
+
+.menuSection button {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+    padding: 12px 20px;
+    width: 100%;
+    font-size: 16px;
+    background-color: white;
+    color: #333;
+    border-radius: 0.75rem;
+    border: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+}
+
+.menuButton {
+    width: 100%;
+    padding: 14px 20px;
+    background-color: white;
+    border: none;
+    border-radius: 0.75rem;
+    font-size: 16px;
+    font-weight: 600;
+    color: #444;
+    text-align: left;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
