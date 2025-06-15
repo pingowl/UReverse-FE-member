@@ -1,9 +1,10 @@
 import axios from 'axios';
-import { createBrowserHistory } from 'history';
 
-// history.push용
-const history = createBrowserHistory();
+let navigateToLogin;
 
+export const setNavigateHandler = (navigateFn) => {
+    navigateToLogin = navigateFn;
+};
 // accessToken 저장용 임시 변수
 let store;
 // 전역에서 setRecoilState 접근을 위한 init 함수
@@ -55,9 +56,13 @@ api.interceptors.response.use(
             } catch (refreshError) {
                 // refreshToken 만료 시 로그인으로 보내기
                 store?.resetAuth();
-                history.push('/login');
+                if (navigateToLogin) navigateToLogin('/login');
                 return Promise.reject(refreshError);
             }
+        } else if (err.response?.status === 403) { // 아예 잘못된, 또는 권한이 없는, 토큰이 없는 경우
+            store?.resetAuth();
+            if (navigateToLogin) navigateToLogin('/login');
+            return Promise.reject(err);
         }
         return Promise.reject(err);
     }
