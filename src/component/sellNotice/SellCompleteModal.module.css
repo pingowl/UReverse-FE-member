@@ -3,7 +3,7 @@
 }
 
 .buttonArea{
-    display: flex;
+    display: row;
     justify-content: center;
     height: 40px;
     padding: 20px 20px;

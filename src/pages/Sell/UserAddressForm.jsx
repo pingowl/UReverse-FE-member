@@ -26,8 +26,8 @@ export default function UserAddressForm(){
                 addressDetail,
                 zipCode,
             }
-          }));
-          navigate('/sell/receipt');
+        }));
+        navigate('/sell/receipt');
     }
 
     return (
