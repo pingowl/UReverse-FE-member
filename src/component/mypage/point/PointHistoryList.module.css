@@ -1,0 +1,19 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.divider {
+  border: none;
+  height: 1px;
+  background-color: #eee;
+  margin: 12px 0;
+}
+
+.empty {
+  color: #999;
+  text-align: center;
+  padding: 20px;
+  font-size: 15px;
+}
