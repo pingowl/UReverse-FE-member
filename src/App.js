@@ -10,10 +10,14 @@ import LoginForm from './pages/auth/LoginForm';
 import SignupForm from './pages/auth/SignupForm';
 import ProductInfoForm from './pages/Sell/ProductInfoForm';
 import UserAddressForm from './pages/Sell/UserAddressForm';
-import { RecoilRoot } from 'recoil';
+import { useRecoilState } from 'recoil';
 import ProductReceipt from './pages/Sell/ProductReceipt';
+import { authState } from './atoms/authState';
+import { useEffect } from 'react';
+import { setAuthStore } from './api/axiosInstance';
 import MyPageHome from './pages/mypage/MyPageHome';
 import SellComplete from './pages/Sell/SellComplete';
+import EditInfo from './pages/mypage/EditInfo';
 
 const router = createBrowserRouter([
   {
@@ -25,7 +29,8 @@ const router = createBrowserRouter([
         element: <MainLayout />,
         children: [
           { index: true, element: <Home />},
-          { path: "/mypage", element: <MyPageHome /> }
+          { path: "/mypage", element: <MyPageHome /> },
+          { path: "/mypage/edit", element: <EditInfo /> } 
         ]
       },
       {
@@ -51,10 +56,19 @@ const router = createBrowserRouter([
 ])
 
 function App() {
+  const [auth, setAuth] = useRecoilState(authState);
+
+  useEffect(() => {
+    // Axios 인스턴스가 사용할 인증 상태 관리 함수 등록
+    setAuthStore({
+      getAccessToken: () => auth.accessToken,
+      setAuth: ({ accessToken, role }) => setAuth({ accessToken, role }),
+      resetAuth: () => setAuth({ accessToken: null, role: null }),
+    });
+  }, [auth]);
+
   return (
-    <RecoilRoot>
       <RouterProvider router={router} />
-    </RecoilRoot>
   );
 }
 
