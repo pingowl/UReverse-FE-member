@@ -23,13 +23,6 @@
     border-radius: 4px;
 }
 
-.noneProcessBar {
-    flex: 1;
-    height: 5px;
-    background-color: #e0e0e0;
-    border-radius: 4px;
-}
-
 .stepDescription {
     margin-bottom: 24px;
     font-size: 1.3rem;
@@ -39,4 +32,129 @@
     align-items: center;
     justify-content: center;
     display: flex;
+}
+
+.receiptArea {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.section {
+    background-color: #f7f7f7;
+    padding: 16px;
+    border-radius: 0.75rem;
+}
+
+.sectionTitle {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.infoItem {
+    display: flex;
+    margin-bottom: 8px;
+}
+
+.infoItemTitle{
+    display: flex;
+    width: 30%;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.infoItemContent{
+    width: 70%;
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+.brandInfo {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 6px;
+    gap: 5px;
+    align-items: flex-end;
+}
+
+.brandKo {
+    font-weight: bold;
+    font-size: 1.0rem;
+}
+
+.brandEn {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.pointBox {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+    margin-top: 8px;
+}
+
+.checkboxItem {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+    margin-top: 12px;
+    align-items: flex-start;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+.checkbox {
+    margin-top: 7px;
+}
+
+.subTitle {
+    font-size: 0.95rem;
+    color: #555;
+    margin-top: 4px;
+}
+
+.viewMore {
+    font-size: 0.8rem;
+    color: #00aaff;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+.fixedButtonWrapper {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 100;
+}
+
+/* 버튼 영역 (가로 정렬) */
+.buttonGroup {
+    width: calc(100% - 40px);
+    max-width: 450px;
+    padding: 20px 0px;
+    margin: 0px 20px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    background-color: white;
+}
+
+@media (min-width: 1024px) {
+    .inner {
+        max-width: 375px;
+    }
+
+    .buttonGroup {
+        max-width: 335px;
+        margin: 0px 20px;
+    }
 }

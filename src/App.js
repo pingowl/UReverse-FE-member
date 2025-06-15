@@ -16,6 +16,7 @@ import { authState } from './atoms/authState';
 import { useEffect } from 'react';
 import { setAuthStore } from './api/axiosInstance';
 import MyPageHome from './pages/mypage/MyPageHome';
+import SellComplete from './pages/Sell/SellComplete';
 import EditInfo from './pages/mypage/EditInfo';
 
 const router = createBrowserRouter([
@@ -46,7 +47,8 @@ const router = createBrowserRouter([
         children: [
           { path: "product", element: <ProductInfoForm />},
           { path: "address", element: <UserAddressForm />},
-          { path: "receipt", element: <ProductReceipt />}
+          { path: "receipt", element: <ProductReceipt /> },
+          { path: "complete", element: <SellComplete />}
         ]
       },
     ]

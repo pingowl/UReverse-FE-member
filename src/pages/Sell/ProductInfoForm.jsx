@@ -48,12 +48,12 @@ export default function ProductInfoForm(){
         setFormData(prev => ({
             ...prev,
             product: {
-              brand,
-              category,
-              images: pictureList,
+                brand,
+                category,
+                images: pictureList,
             }
-          }));
-          navigate('/sell/address');
+            }));
+            navigate('/sell/address');
     }
 
     const handleOpenPictureNoticeModal = () => {

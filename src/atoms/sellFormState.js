@@ -11,6 +11,7 @@ export const sellFormState = atom({
       brand: '',
       category: [],
       images: [], // preview + file
+      point: ''
     },
     address: {
       name: '',
