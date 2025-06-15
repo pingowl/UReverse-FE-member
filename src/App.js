@@ -10,15 +10,17 @@ import LoginForm from './pages/auth/LoginForm';
 import SignupForm from './pages/auth/SignupForm';
 import ProductInfoForm from './pages/Sell/ProductInfoForm';
 import UserAddressForm from './pages/Sell/UserAddressForm';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import ProductReceipt from './pages/Sell/ProductReceipt';
 import { authState } from './atoms/authState';
+import { userState } from './atoms/userState';
 import { useEffect } from 'react';
 import { setAuthStore } from './api/axiosInstance';
 import MyPageHome from './pages/mypage/MyPageHome';
 import SellComplete from './pages/Sell/SellComplete';
 import EditInfo from './pages/mypage/EditInfo';
 import PointHistoryPage from './pages/mypage/PointHistoryPage';
+import { getMyInfo } from './api/member';
 
 const router = createBrowserRouter([
   {
@@ -29,7 +31,7 @@ const router = createBrowserRouter([
       {
         element: <MainLayout />,
         children: [
-          { index: true, element: <Home />},
+          { index: true, element: <Home /> },
           { path: "/mypage", element: <MyPageHome /> },
           { path: "/mypage/edit", element: <EditInfo /> },
           { path: "/mypage/points", element: <PointHistoryPage /> }
@@ -38,9 +40,9 @@ const router = createBrowserRouter([
       {
         element: <NoAlarmLayout />,
         children: [
-          { path: "/login", element: <LoginSelect />},
-          { path: "/login/form", element: <LoginForm />}
-          ,{ path: "/signup", element: <SignupForm /> }
+          { path: "/login", element: <LoginSelect /> },
+          { path: "/login/form", element: <LoginForm /> }
+          , { path: "/signup", element: <SignupForm /> }
         ]
       },
       {
@@ -59,6 +61,7 @@ const router = createBrowserRouter([
 
 function App() {
   const [auth, setAuth] = useRecoilState(authState);
+  const setUser = useSetRecoilState(userState);
 
   useEffect(() => {
     // Axios 인스턴스가 사용할 인증 상태 관리 함수 등록
@@ -69,8 +72,24 @@ function App() {
     });
   }, [auth]);
 
+  useEffect(() => {
+    const initUser = async () => {
+      if (auth.accessToken) {
+        console.time('[getMyInfo]');
+        try {
+          const userInfo = await getMyInfo();
+          console.timeEnd('[getMyInfo]');
+          setUser({ ...userInfo, isLoggedIn: true });
+        } catch (e) {
+          console.error('유저 정보 로딩 실패');
+        }
+      }
+    };
+    initUser();
+  }, [auth.accessToken]);
+
   return (
-      <RouterProvider router={router} />
+    <RouterProvider router={router} />
   );
 }
 
