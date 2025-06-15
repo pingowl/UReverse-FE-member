@@ -10,8 +10,11 @@ import LoginForm from './pages/auth/LoginForm';
 import SignupForm from './pages/auth/SignupForm';
 import ProductInfoForm from './pages/Sell/ProductInfoForm';
 import UserAddressForm from './pages/Sell/UserAddressForm';
-import { RecoilRoot } from 'recoil';
+import { useRecoilState } from 'recoil';
 import ProductReceipt from './pages/Sell/ProductReceipt';
+import { authState } from './atoms/authState';
+import { useEffect } from 'react';
+import { setAuthStore } from './api/axiosInstance';
 
 const router = createBrowserRouter([
   {
@@ -48,10 +51,19 @@ const router = createBrowserRouter([
 ])
 
 function App() {
+  const [auth, setAuth] = useRecoilState(authState);
+
+  useEffect(() => {
+    // Axios 인스턴스가 사용할 인증 상태 관리 함수 등록
+    setAuthStore({
+      getAccessToken: () => auth.accessToken,
+      setAuth: ({ accessToken, role }) => setAuth({ accessToken, role }),
+      resetAuth: () => setAuth({ accessToken: null, role: null }),
+    });
+  }, [auth]);
+
   return (
-    <RecoilRoot>
       <RouterProvider router={router} />
-    </RecoilRoot>
   );
 }
 

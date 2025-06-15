@@ -8,6 +8,7 @@ import { getMyInfo } from '../../api/member';
 import { useSetRecoilState } from 'recoil';
 import { userState } from '../../atoms/userState';
 import { useNavigate } from 'react-router-dom';
+import { getAuthStore, setAuthStore } from '../../api/axiosInstance';
 
 export default function LoginForm() {
     const [email, setEmail] = useState("");
@@ -19,16 +20,21 @@ export default function LoginForm() {
 
     const handleLogin = async () => {
         try {
-            const { accessToken } = await login(email, password);
-            localStorage.setItem('accessToken', accessToken);
+            const { accessToken, role } = await login(email, password);
 
-            const userInfo = await getMyInfo();
-            setUser({
-                ...userInfo,
-                isLoggedIn: true,
-            });
+            // App.js 에서 등록한 setAuth 호출
+            getAuthStore().setAuth({ accessToken, role });
+            // const { accessToken } = await login(email, password);
+            // localStorage.setItem('accessToken', accessToken);
 
-            navigate('/mypage');
+            // 사용자 정보 다시 요청은 홈 페이지 이동 후 처리
+            // const userInfo = await getMyInfo();
+            // setUser({
+            //     ...userInfo,
+            //     isLoggedIn: true,
+            // });
+
+            navigate('/');
         } catch (error) {
             alert('이메일 또는 비밀번호가 올바르지 않습니다.');
             console.error('로그인 실패:', error);
