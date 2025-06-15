@@ -19,14 +19,14 @@ export default function BrandSelect({onBack, setBrand, brandList}) {
 
             {/* 브랜드 리스트 영역 */}
             <div className={styles.grid}>
-                {brandList[0].map((brand) => (
+                {brandList.map((brand) => (
                     <div
                         key={brand.brand_id}
                         className={styles.brandBox}
                         onClick={() => handleBrandClick(brand)}
                     >
                         <img 
-                            src={brand.brandLogo}
+                            src={brand.logo}
                             alt=""
                             className={styles.brandLogo}/>
                         <div className={styles.brandInfo}>

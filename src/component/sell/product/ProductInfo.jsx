@@ -8,6 +8,7 @@ import CategorySelect from './CategorySelect';
 
 import brandData from "../../../dummy/brand.json";
 import categoryData from "../../../dummy/category.json";
+import { getBrandList } from '../../../api/brand';
 
 export default function ProductInfo({ brand, setBrand, category, setCategory }){
     const isEmpty = !brand || Object.keys(brand).length === 0;
@@ -77,15 +78,7 @@ export default function ProductInfo({ brand, setBrand, category, setCategory }){
 
     // 브랜드 목록 가져오는 api 통신
     useEffect(() => {
-        setBrandList([
-            Array.from({ length: 25 }, (_, i) => {
-                const base = brandData[i % brandData.length];
-                return {
-                    ...base,
-                    brand_id: i + 1
-                };
-            })
-        ])
+        getBrandListHandler();
     }, [])
 
     useEffect(() => {
@@ -95,6 +88,20 @@ export default function ProductInfo({ brand, setBrand, category, setCategory }){
             setCategoryList([]);
         }
     }, [tempBrand])
+
+    /**
+     * api 통신
+     * 1. 브랜드 목록 가져오기
+     * 2. 브랜드 목록에 포함된 카테고리 목록 가져오기
+     */
+    const getBrandListHandler = async () => {
+        try {
+            const data = await getBrandList();
+            setBrandList(data);
+        } catch (err) {
+            alert('중대한 이슈!');
+        }
+    }
 
     return(
         <div className={styles.container}>
