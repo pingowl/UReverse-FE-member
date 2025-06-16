@@ -19,6 +19,7 @@ import MyPageHome from './pages/mypage/MyPageHome';
 import SellComplete from './pages/Sell/SellComplete';
 import EditInfo from './pages/mypage/EditInfo';
 import PointHistoryPage from './pages/mypage/PointHistoryPage';
+import SalesHistoryPage from './pages/mypage/SalesHistoryPage'
 
 const router = createBrowserRouter([
   {
@@ -32,7 +33,8 @@ const router = createBrowserRouter([
           { index: true, element: <Home /> },
           { path: "/mypage", element: <MyPageHome /> },
           { path: "/mypage/edit", element: <EditInfo /> },
-          { path: "/mypage/points", element: <PointHistoryPage /> }
+          { path: "/mypage/points", element: <PointHistoryPage /> },
+          { path: "/mypage/sales", element: <SalesHistoryPage /> }
         ]
       },
       {
