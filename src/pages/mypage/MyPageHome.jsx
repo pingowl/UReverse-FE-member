@@ -1,10 +1,13 @@
 import React, { useEffect } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { authState } from '../../atoms/authState';
 import { userState } from '../../atoms/userState';
 import { useNavigate } from 'react-router-dom';
 import styles from './MyPageHome.module.css';
 
 export default function MyPageHome() {
+    const auth = useRecoilValue(authState);
+    const setUser = useSetRecoilState(userState);
     const user = useRecoilValue(userState);
     const navigate = useNavigate();
 
@@ -18,10 +21,10 @@ export default function MyPageHome() {
     ];
 
     useEffect(() => {
-        if (!user.isLoggedIn) {
+        if (!auth.accessToken) {
             navigate('/login/form');
         }
-    }, [user, navigate]);
+    }, [auth.accessToken, navigate, setUser]);
 
     return (
         <div className={styles.wrapper}>

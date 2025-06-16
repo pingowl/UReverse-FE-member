@@ -18,6 +18,7 @@ import { setAuthStore } from './api/axiosInstance';
 import MyPageHome from './pages/mypage/MyPageHome';
 import SellComplete from './pages/Sell/SellComplete';
 import EditInfo from './pages/mypage/EditInfo';
+import PointHistoryPage from './pages/mypage/PointHistoryPage';
 
 const router = createBrowserRouter([
   {
@@ -28,17 +29,18 @@ const router = createBrowserRouter([
       {
         element: <MainLayout />,
         children: [
-          { index: true, element: <Home />},
+          { index: true, element: <Home /> },
           { path: "/mypage", element: <MyPageHome /> },
-          { path: "/mypage/edit", element: <EditInfo /> } 
+          { path: "/mypage/edit", element: <EditInfo /> },
+          { path: "/mypage/points", element: <PointHistoryPage /> }
         ]
       },
       {
         element: <NoAlarmLayout />,
         children: [
-          { path: "/login", element: <LoginSelect />},
-          { path: "/login/form", element: <LoginForm />}
-          ,{ path: "/signup", element: <SignupForm /> }
+          { path: "/login", element: <LoginSelect /> },
+          { path: "/login/form", element: <LoginForm /> }
+          , { path: "/signup", element: <SignupForm /> }
         ]
       },
       {
@@ -68,7 +70,7 @@ function App() {
   }, [auth]);
 
   return (
-      <RouterProvider router={router} />
+    <RouterProvider router={router} />
   );
 }
 
