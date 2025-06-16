@@ -27,14 +27,7 @@
 .total {
     font-size: 24px;
     font-weight: bold;
-    color: #84c43d;
-}
-
-.historyCard {
-    background-color: #fff;
-    padding: 16px 20px;
-    border-radius: 0.75rem;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    color: #C475A3;
 }
 
 .loadingWrapper {
@@ -48,4 +41,9 @@
   font-size: 16px;
   font-weight: 500;
   color: #888;
+}
+
+.observer {
+  height: 1px;
+  margin-bottom: 80px;
 }
