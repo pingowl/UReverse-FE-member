@@ -1,5 +1,3 @@
-// src/api/login.js
-
 import api from './axiosInstance';
 
 /**
