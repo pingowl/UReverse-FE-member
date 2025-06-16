@@ -1,10 +1,14 @@
 import React, { useEffect } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { authState } from '../../atoms/authState';
 import { userState } from '../../atoms/userState';
 import { useNavigate } from 'react-router-dom';
 import styles from './MyPageHome.module.css';
+import { getMyInfo } from '../../api/member';
 
 export default function MyPageHome() {
+    const auth = useRecoilValue(authState);
+    const setUser = useSetRecoilState(userState);
     const user = useRecoilValue(userState);
     const navigate = useNavigate();
 
@@ -18,10 +22,28 @@ export default function MyPageHome() {
     ];
 
     useEffect(() => {
-        if (!user.isLoggedIn) {
-            navigate('/login/form');
-        }
-    }, [user, navigate]);
+        const fetchUserInfo = async () => {
+            if (!auth.accessToken) {
+                navigate('/login/form');
+                return;
+            }
+
+            try {
+                const data = await getMyInfo();
+                setUser({
+                    ...data,
+                    accessToken: auth.accessToken,
+                    isLoggedIn: true,
+                });
+            } catch (e) {
+                console.error('유저 정보 조회 실패:', e);
+                setUser({ isLoggedIn: false });
+                navigate('/login/form');
+            }
+        };
+
+        fetchUserInfo();
+    }, [auth.accessToken, navigate, setUser]);
 
     return (
         <div className={styles.wrapper}>
@@ -59,7 +81,7 @@ export default function MyPageHome() {
                 <button className={styles.menuButton} onClick={() => navigate('/mypage/sales')}>
                     판매 내역
                 </button>
-                <button className={styles.menuButton} onClick={() => navigate('/mypage/complete')}>
+                <button className={styles.menuButton} onClick={() => navigate('/mypage/sales/complete')}>
                     판매 완료 내역
                 </button>
                 <button className={styles.menuButton} onClick={() => navigate('/mypage/edit')}>

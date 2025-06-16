@@ -21,14 +21,15 @@ export default function NoAlarmHeader () {
 
     return (
         <header className={styles.header}>
-           {/* 왼쪽: 뒤로가기 버튼 */}
+            {/* 왼쪽: 뒤로가기 버튼 */}
+            {location.pathname === '/sell/complete' ? <div></div> : (
             <button
                 onClick={() => navigate(-1)}
                 className={styles.backButton}
                 aria-label="뒤로가기"
             >
                 &lt;
-            </button>
+            </button>)}
 
             {/* 가운데: 페이지 제목 */}
             <h1 className={styles.title}>{title}</h1>

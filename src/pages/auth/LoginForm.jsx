@@ -9,7 +9,6 @@ import { useSetRecoilState } from 'recoil';
 import { userState } from '../../atoms/userState';
 import { useNavigate } from 'react-router-dom';
 import { getAuthStore, setAuthStore } from '../../api/axiosInstance';
-import KakaoLinkButton from '../../component/button/KakaoLinkButton';
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');
@@ -75,6 +74,15 @@ export default function LoginForm() {
           onBlur={() => setFocusedInput(null)}
           isFocused={focusedInput === 'password'}
         />
+
+        <div className={styles.findPassword}>
+          <span
+            onClick={() => navigate('/recovery-password')}
+            className={styles.link}
+          >
+            비밀번호를 잊으셨나요?
+          </span>
+        </div>
       </div>
       <div className={styles.buttonArea}>
         <HoverEventButton

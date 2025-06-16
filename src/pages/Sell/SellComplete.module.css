@@ -1,0 +1,83 @@
+.pageWrapper {
+    position: relative;
+    padding-bottom: 200px;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+.innerContent{
+    padding: 16px 20px;
+}
+
+/* 상단 영역 */
+.topRow {
+    position: relative;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0px;
+}
+
+.centerIcon {
+    width: 56px;
+    height: 56px;
+}
+
+.stepDescription {
+    margin-bottom: 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* 줄 간격 */
+}
+
+.titleText {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #222;
+}
+
+.subText {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #666;
+    line-height: 1.6;
+}
+
+.fixedButtonWrapper {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 100;
+}
+
+/* 버튼 영역 (가로 정렬) */
+.buttonGroup {
+    width: calc(100% - 40px);
+    max-width: 450px;
+    padding: 20px 0px;
+    margin: 0px 20px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    background-color: white;
+}
+
+@media (min-width: 1024px) {
+    .inner {
+        max-width: 375px;
+    }
+
+    .buttonGroup {
+        max-width: 335px;
+        margin: 0px 20px;
+    }
+}

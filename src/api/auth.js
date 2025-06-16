@@ -44,3 +44,9 @@ export const signup = async (data) => {
     return fallbackError;
   }
 };
+
+
+export const recoverPassword = async (email) => {
+  const res = await axios.post('/api/v1/auth/recovery/password', { email });
+  return res.data.response;
+};

@@ -17,7 +17,7 @@ export default function ProductInfoForm(){
 
     const [isModalOpen, setIsModalOpen] = useState(true);
     const [brand, setBrand] = useState('');
-    const [category, setCategory] = useState([]);
+    const [category, setCategory] = useState({categoryId: '', mainCategoryName: '', subCategoryName: ''});
     const [pictureList, setPictureList] = useState([]);
     const [hasSeenPictureNotice, setHasSeenPictureNotice] = useState(false); // 사진등록 안내 모달 최초 한번 열기위한 상태변수
 
@@ -48,12 +48,12 @@ export default function ProductInfoForm(){
         setFormData(prev => ({
             ...prev,
             product: {
-              brand,
-              category,
-              images: pictureList,
+                brand,
+                category,
+                images: pictureList,
             }
-          }));
-          navigate('/sell/address');
+            }));
+            navigate('/sell/address');
     }
 
     const handleOpenPictureNoticeModal = () => {

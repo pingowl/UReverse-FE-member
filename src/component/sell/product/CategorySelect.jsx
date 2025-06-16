@@ -53,7 +53,7 @@ export default function CategorySelect({onBack, setCategory, categoryList}) {
                             }`}
                         >
                             {expandedMainCategory === category.mainCategoryName &&
-                                category.subCategoryName.map((sub) => (
+                                category.subCategoryResponseDtoList.map((sub) => (
                                     <div
                                         key={sub.categoryId}
                                         className={styles.subCategory}

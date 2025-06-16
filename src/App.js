@@ -16,7 +16,12 @@ import { authState } from './atoms/authState';
 import { useEffect } from 'react';
 import { setAuthStore } from './api/axiosInstance';
 import MyPageHome from './pages/mypage/MyPageHome';
+import SellComplete from './pages/Sell/SellComplete';
 import EditInfo from './pages/mypage/EditInfo';
+import PointHistoryPage from './pages/mypage/PointHistoryPage';
+import RecoveryPasswordPage from './pages/auth/RecoveryPasswordPage';
+import SalesHistoryPage from './pages/mypage/SalesHistoryPage'
+import SalesCompletePage from './pages/mypage/SalesCompletePage'
 
 const router = createBrowserRouter([
   {
@@ -27,17 +32,21 @@ const router = createBrowserRouter([
       {
         element: <MainLayout />,
         children: [
-          { index: true, element: <Home />},
+          { index: true, element: <Home /> },
           { path: "/mypage", element: <MyPageHome /> },
-          { path: "/mypage/edit", element: <EditInfo /> } 
+          { path: "/mypage/edit", element: <EditInfo /> },
+          { path: "/mypage/points", element: <PointHistoryPage /> },
+          { path: "/mypage/sales", element: <SalesHistoryPage /> },
+          { path: "/mypage/sales/complete", element: <SalesCompletePage /> },
         ]
       },
       {
         element: <NoAlarmLayout />,
         children: [
-          { path: "/login", element: <LoginSelect />},
-          { path: "/login/form", element: <LoginForm />}
-          ,{ path: "/signup", element: <SignupForm /> }
+          { path: "/login", element: <LoginSelect /> },
+          { path: "/login/form", element: <LoginForm /> },
+          { path: "/signup", element: <SignupForm /> },
+          { path: "/recovery-password", element: <RecoveryPasswordPage /> }
         ]
       },
       {
@@ -46,7 +55,8 @@ const router = createBrowserRouter([
         children: [
           { path: "product", element: <ProductInfoForm />},
           { path: "address", element: <UserAddressForm />},
-          { path: "receipt", element: <ProductReceipt />}
+          { path: "receipt", element: <ProductReceipt /> },
+          { path: "complete", element: <SellComplete />}
         ]
       },
     ]
@@ -66,7 +76,7 @@ function App() {
   }, [auth]);
 
   return (
-      <RouterProvider router={router} />
+    <RouterProvider router={router} />
   );
 }
 
