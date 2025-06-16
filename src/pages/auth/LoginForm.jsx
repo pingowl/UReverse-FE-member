@@ -75,6 +75,12 @@ export default function LoginForm() {
                     isFocused={focusedInput === "password"}
                 />
 
+                <div className={styles.findPassword}>
+                    <span onClick={() => navigate("/recovery-password")} className={styles.link}>
+                        비밀번호를 잊으셨나요?
+                    </span>
+                </div>
+
             </div>
             <div className={styles.buttonArea}>
                 <HoverEventButton

@@ -10,3 +10,9 @@ export const login = async (email, password) => {
     );
     return response.data.response;    // { accessToken, role }
 };
+
+
+export const recoverPassword = async (email) => {
+  const res = await axios.post('/api/v1/auth/recovery/password', { email });
+  return res.data.response;
+};

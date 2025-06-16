@@ -19,6 +19,7 @@ import MyPageHome from './pages/mypage/MyPageHome';
 import SellComplete from './pages/Sell/SellComplete';
 import EditInfo from './pages/mypage/EditInfo';
 import PointHistoryPage from './pages/mypage/PointHistoryPage';
+import RecoveryPasswordPage from './pages/auth/RecoveryPasswordPage';
 
 const router = createBrowserRouter([
   {
@@ -39,8 +40,9 @@ const router = createBrowserRouter([
         element: <NoAlarmLayout />,
         children: [
           { path: "/login", element: <LoginSelect /> },
-          { path: "/login/form", element: <LoginForm /> }
-          , { path: "/signup", element: <SignupForm /> }
+          { path: "/login/form", element: <LoginForm /> },
+          { path: "/signup", element: <SignupForm /> },
+          { path: "/recovery-password", element: <RecoveryPasswordPage /> }
         ]
       },
       {
