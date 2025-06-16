@@ -37,7 +37,7 @@ api.interceptors.response.use(
     async (err) => {
         const originalRequest = err.config;
         // accessToken 만료, 인증 실패 && 요청이 재시도 된 적 없는 최초의 실패일 경우
-        if ((err.response?.status === 401 || err.response?.status === 403) && !originalRequest._retry) {
+        if (err.response?.status === 401 && !originalRequest._retry) {
             originalRequest._retry = true;
             try {
                 const res = await axios.get('/api/v1/auth/refresh', {
