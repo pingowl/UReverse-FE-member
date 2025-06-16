@@ -62,7 +62,7 @@ export default function MyPageHome() {
                 <button className={styles.menuButton} onClick={() => navigate('/mypage/sales')}>
                     판매 내역
                 </button>
-                <button className={styles.menuButton} onClick={() => navigate('/mypage/complete')}>
+                <button className={styles.menuButton} onClick={() => navigate('/mypage/sales/complete')}>
                     판매 완료 내역
                 </button>
                 <button className={styles.menuButton} onClick={() => navigate('/mypage/edit')}>

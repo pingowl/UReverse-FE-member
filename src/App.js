@@ -20,6 +20,7 @@ import SellComplete from './pages/Sell/SellComplete';
 import EditInfo from './pages/mypage/EditInfo';
 import PointHistoryPage from './pages/mypage/PointHistoryPage';
 import SalesHistoryPage from './pages/mypage/SalesHistoryPage'
+import SalesCompletePage from './pages/mypage/SalesCompletePage'
 
 const router = createBrowserRouter([
   {
@@ -34,7 +35,8 @@ const router = createBrowserRouter([
           { path: "/mypage", element: <MyPageHome /> },
           { path: "/mypage/edit", element: <EditInfo /> },
           { path: "/mypage/points", element: <PointHistoryPage /> },
-          { path: "/mypage/sales", element: <SalesHistoryPage /> }
+          { path: "/mypage/sales", element: <SalesHistoryPage /> },
+          { path: "/mypage/sales/complete", element: <SalesCompletePage /> },
         ]
       },
       {
