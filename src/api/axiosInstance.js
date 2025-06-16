@@ -18,9 +18,9 @@ export const getAuthStore = () => store;
 const api = axios.create({
     baseURL: process.env.REACT_APP_BASE_URL,
     withCredentials: true, // 쿠키 포함 (Spring Security + HTTPS 인증 시 필요)
-    headers: {
-        'Content-Type': 'application/json',
-    },
+    // headers: {
+    //     'Content-Type': 'application/json',
+    // },
 });
 
 // 요청 인터셉터
@@ -29,6 +29,13 @@ api.interceptors.request.use((config) => {
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
     }
+
+    // FormData가 아닌 경우에만 Content-Type 설정
+    const isFormData = config.data instanceof FormData;
+    if (!isFormData) {
+        config.headers['Content-Type'] = 'application/json';
+    }
+
     return config;
 });
 
