@@ -6,9 +6,8 @@ import BrandAndCategorySelect from './BrandAndCategorySelect';
 import BrandSelect from './BrandSelect';
 import CategorySelect from './CategorySelect';
 
-import brandData from "../../../dummy/brand.json";
-import categoryData from "../../../dummy/category.json";
 import { getBrandList } from '../../../api/brand';
+import { getCategoryList } from '../../../api/category';
 
 export default function ProductInfo({ brand, setBrand, category, setCategory }){
     const isEmpty = !brand || Object.keys(brand).length === 0;
@@ -83,7 +82,7 @@ export default function ProductInfo({ brand, setBrand, category, setCategory }){
 
     useEffect(() => {
         if(tempBrand){
-            setCategoryList(categoryData);
+            getCategoryListHandler();
         } else {
             setCategoryList([]);
         }
@@ -100,6 +99,15 @@ export default function ProductInfo({ brand, setBrand, category, setCategory }){
             setBrandList(data);
         } catch (err) {
             alert('중대한 이슈!');
+        }
+    }
+
+    const getCategoryListHandler = async() => {
+        try{
+            const data = await getCategoryList(tempBrand.brandId);
+            setCategoryList(data);
+        } catch(err) {
+            alert("에러 발생");
         }
     }
 

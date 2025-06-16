@@ -7,7 +7,7 @@ import api from './axiosInstance';
  * @returns {Promise<{ accessToken: string, role: string }>}
  */
 export async function getBrandList() {
-    const response = await api.get('/api/v1/members/allBrands');
+    const response = await api.get('/api/v1/common/allBrands');
 
     const brandList = response.data.response;
     return brandList;
