@@ -4,6 +4,7 @@ import { authState } from '../../atoms/authState';
 import { userState } from '../../atoms/userState';
 import { useNavigate } from 'react-router-dom';
 import styles from './MyPageHome.module.css';
+import { getMyInfo } from '../../api/member';
 
 export default function MyPageHome() {
     const auth = useRecoilValue(authState);
@@ -21,9 +22,27 @@ export default function MyPageHome() {
     ];
 
     useEffect(() => {
-        if (!auth.accessToken) {
-            navigate('/login/form');
-        }
+        const fetchUserInfo = async () => {
+            if (!auth.accessToken) {
+                navigate('/login/form');
+                return;
+            }
+
+            try {
+                const data = await getMyInfo();
+                setUser({
+                    ...data,
+                    accessToken: auth.accessToken,
+                    isLoggedIn: true,
+                });
+            } catch (e) {
+                console.error('유저 정보 조회 실패:', e);
+                setUser({ isLoggedIn: false });
+                navigate('/login/form');
+            }
+        };
+
+        fetchUserInfo();
     }, [auth.accessToken, navigate, setUser]);
 
     return (
