@@ -17,7 +17,7 @@
 
      /* ✅ 아래 추가 */
     height: 100vh;
-    /* overflow-y: hidden; */
+    overflow-y: hidden;
     overflow-x: hidden; /* 가로 스크롤까지 제거하려면 */
 }
   

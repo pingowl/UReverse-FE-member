@@ -22,29 +22,29 @@ export default function MyPageHome() {
         '배송 완료',
     ];
 
-    useEffect(() => {
-        const fetchUserInfo = async () => {
-            if (!auth.accessToken) {
-                navigate('/login');
-                return;
-            }
+  useEffect(() => {
+  const fetchUserInfo = async () => {
+    if (!auth.accessToken) {
+      navigate('/login');
+      return;
+    }
 
-            try {
-                const data = await getMyInfo();
-                setUser({
-                    ...data,
-                    accessToken: auth.accessToken,
-                    isLoggedIn: true,
-                });
-            } catch (e) {
-                console.error('유저 정보 조회 실패:', e);
-                setUser({ isLoggedIn: false });
-                navigate('/login');
-            }
-        };
+    try {
+      const data = await getMyInfo();
+      setUser({
+        ...data,
+        isLoggedIn: true,
+        accessToken: auth.accessToken,
+      });
+    } catch (e) {
+      console.error('유저 정보 조회 실패:', e);
+      setUser({ isLoggedIn: false });
+      navigate('/login');
+    }
+  };
 
-        fetchUserInfo();
-    }, [auth.accessToken, navigate, setUser]);
+  fetchUserInfo();
+}, [auth.accessToken, navigate, setUser]);
 
     return (
         <div className={styles.wrapper}>

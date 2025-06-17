@@ -4,7 +4,7 @@ import LoginInput from '../../component/input/LoginInput';
 import HoverEventButton from '../../component/button/HoverEventButton';
 
 import { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { login } from '../../api/auth';
 import { getAuthStore } from '../../api/axiosInstance';
@@ -15,15 +15,12 @@ export default function LoginForm() {
   const [focusedInput, setFocusedInput] = useState(null);
 
     const navigate = useNavigate();
-    const location = useLocation();
 
     const handleLogin = async () => {
         try {
             const { accessToken, role } = await login(email, password);
             getAuthStore().setAuth({ accessToken, role });
-
-            const redirectTo = location.state?.from || '/home';
-            navigate(redirectTo);
+            navigate('/home');
         } catch (error) {
             alert('이메일 또는 비밀번호가 올바르지 않습니다.');
         }

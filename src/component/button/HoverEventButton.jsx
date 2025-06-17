@@ -18,13 +18,13 @@ export default function HoverEventButton({
   text,
   onClick,
   link,
-  color = 'black',
-  className = '', // 선택: 외부에서 스타일 추가하고 싶을 경우
-  disabled
+  className = '',
+  disabled = false,
 }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
+    if (disabled) return;
     if (link) {
       navigate(link);
     } else if (onClick) {
@@ -32,12 +32,11 @@ export default function HoverEventButton({
     }
   };
 
-  const finalColor = disabled ? 'blocked' : color;
-
   return (
     <button
-      onClick={color === 'blocked' || disabled === true ? undefined : handleClick}
-      className={`${styles.button} ${styles[finalColor]} ${className}`}
+      onClick={handleClick}
+      disabled={disabled}
+      className={`${styles.button} ${disabled ? styles.disabled : ''} ${className}`}
     >
       {text}
     </button>

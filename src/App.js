@@ -37,12 +37,12 @@ const router = createBrowserRouter([
       {
         element: <MainLayout />,
         children: [
-          { index: true, element: <Home /> },
+          { index: true, path: "/home", element: <Home /> },
           { path: "/mypage", element: <MyPageHome /> },
           { path: "/mypage/edit", element: <EditInfo /> },
-          { path: "/mypage/points", element: <PointHistoryPage /> },
-          { path: "/mypage/sales", element: <SalesHistoryPage /> },
-          { path: "/mypage/sales/complete", element: <SalesCompletePage /> },
+          { path: "/my-page/points", element: <PointHistoryPage /> },
+          { path: "/my-page/sales/tracking", element: <SalesHistoryPage /> },
+          { path: "/my-page/sales", element: <SalesCompletePage /> },
           { path: "/notifications", element: <NotificationPage /> },
         ]
       },
@@ -73,14 +73,13 @@ function App() {
   const [auth, setAuth] = useRecoilState(authState);
 
   useEffect(() => {
-    // Axios 인스턴스가 사용할 인증 상태 관리 함수 등록
     setAuthStore({
       getAccessToken: () => auth.accessToken,
       setAuth: ({ accessToken, role }) => setAuth({ accessToken, role }),
       resetAuth: () => setAuth({ accessToken: null, role: null }),
     });
-  }, [auth]);
-
+  }, []); 
+  
   return <RouterProvider router={router} />;
 }
 

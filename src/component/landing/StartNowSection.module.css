@@ -38,6 +38,5 @@
 }
 
 .button:hover {
-  background-color: #64C378;
-  color: #121212;
+  background-color: rgba(100, 195, 120, 0.1);
 }
