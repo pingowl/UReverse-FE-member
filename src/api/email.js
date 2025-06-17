@@ -4,7 +4,7 @@ export const checkEmailDuplicate = async (email) => {
   const res = await axios.get(`/api/v1/auth/check-email`, {
     params: { email },
   });
-  return res.data;
+  return res.data.response.available;
 };
 
 export const sendVerificationEmail = async (email, redirectUrl) => {

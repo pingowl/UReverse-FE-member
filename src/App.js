@@ -24,6 +24,7 @@ import SalesHistoryPage from './pages/mypage/SalesHistoryPage';
 import SalesCompletePage from './pages/mypage/SalesCompletePage';
 import NotificationPage from './pages/notification/NotificationPage';
 import KakaoLinkCallback from './pages/mypage/KakaoLinkCallback';
+import VerifyEmailPage from './pages/auth/VerifyEmailPage';
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,7 @@ const router = createBrowserRouter([
           { path: '/signup', element: <SignupForm /> },
           { path: '/recovery-password', element: <RecoveryPasswordPage /> },
           { path: '/kakao/callback', element: <KakaoLinkCallback /> },
+          { path: '/signup/email-verified', element: <VerifyEmailPage /> },
         ],
       },
       {
