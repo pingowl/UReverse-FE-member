@@ -68,7 +68,7 @@ const RecoveryPasswordPage = () => {
                     message={modal.message}
                     onClose={() => {
                         setModal({ open: false, message: '' });
-                        navigate('/login/form');
+                        navigate('/login');
                     }}
                 />
             )}

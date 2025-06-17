@@ -24,7 +24,7 @@ export default function MyPageHome() {
     useEffect(() => {
         const fetchUserInfo = async () => {
             if (!auth.accessToken) {
-                navigate('/login/form');
+                navigate('/login');
                 return;
             }
 
@@ -38,7 +38,7 @@ export default function MyPageHome() {
             } catch (e) {
                 console.error('유저 정보 조회 실패:', e);
                 setUser({ isLoggedIn: false });
-                navigate('/login/form');
+                navigate('/login');
             }
         };
 

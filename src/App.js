@@ -5,7 +5,6 @@ import Home from './pages/Home';
 import MainLayout from './layout/MainLayout';
 import NoAlarmLayout from './layout/NoAlarmLayout';
 import CommonLayout from './layout/CommonLayout';
-import LoginSelect from './pages/auth/LoginSelect';
 import LoginForm from './pages/auth/LoginForm';
 import SignupForm from './pages/auth/SignupForm';
 import ProductInfoForm from './pages/Sell/ProductInfoForm';
@@ -32,6 +31,7 @@ const router = createBrowserRouter([
     errorElement: <></>,
     children: [
       { path: "/landing", element: <LandingPage /> },
+      { path: "/login", element: <LoginForm /> },
       {
         element: <MainLayout />,
         children: [
@@ -42,13 +42,11 @@ const router = createBrowserRouter([
           { path: "/mypage/sales", element: <SalesHistoryPage /> },
           { path: "/mypage/sales/complete", element: <SalesCompletePage /> },
           { path: "/notifications", element: <NotificationPage /> },
-        ] 
+        ]
       },
       {
         element: <NoAlarmLayout />,
         children: [
-          { path: "/login", element: <LoginSelect /> },
-          { path: "/login/form", element: <LoginForm /> },
           { path: "/signup", element: <SignupForm /> },
           { path: "/recovery-password", element: <RecoveryPasswordPage /> }
         ]
@@ -57,10 +55,10 @@ const router = createBrowserRouter([
         path: "/sell",
         element: <CommonLayout />,
         children: [
-          { path: "product", element: <ProductInfoForm />},
-          { path: "address", element: <UserAddressForm />},
+          { path: "product", element: <ProductInfoForm /> },
+          { path: "address", element: <UserAddressForm /> },
           { path: "receipt", element: <ProductReceipt /> },
-          { path: "complete", element: <SellComplete />}
+          { path: "complete", element: <SellComplete /> }
         ]
       },
     ]

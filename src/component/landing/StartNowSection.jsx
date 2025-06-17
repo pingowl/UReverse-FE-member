@@ -5,7 +5,7 @@ const StartNowSection = () => {
   const navigate = useNavigate();
 
   const handleSellClick = () => {
-    navigate('/login/form', { state: { from: '/sell/product' } });
+    navigate('/login', { state: { from: '/sell/product' } });
   };
 
   return (
