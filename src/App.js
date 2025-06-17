@@ -23,6 +23,7 @@ import RecoveryPasswordPage from './pages/auth/RecoveryPasswordPage';
 import SalesHistoryPage from './pages/mypage/SalesHistoryPage'
 import SalesCompletePage from './pages/mypage/SalesCompletePage'
 import NotificationPage from './pages/notification/NotificationPage';
+import LandingPage from './pages/LandingPage';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
     element: <Root />,
     errorElement: <></>,
     children: [
+      { path: "/landing", element: <LandingPage /> },
       {
         element: <MainLayout />,
         children: [

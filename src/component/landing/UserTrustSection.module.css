@@ -1,0 +1,30 @@
+.trustSection {
+  background-color: #f5f5f5;
+  color: #222;
+  text-align: center;
+  padding: 64px 20px;
+}
+
+.trustTitle {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.trustDesc {
+  font-size: 14px;
+  color: #555;
+}
+
+.statLabel {
+  font-size: 1rem;
+  color: #666; /* 중간 회색 */
+  margin-right: 4px;
+}
+
+.count {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #64C378; /* 그린 포인트 */
+}
+
