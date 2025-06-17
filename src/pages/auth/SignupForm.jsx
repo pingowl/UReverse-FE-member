@@ -24,6 +24,7 @@ export default function SignupForm() {
     params.get('verified') === 'true'
   );
 
+  const [signupSuccessModalOpen, setSignupSuccessModal] = useState(false);
   // const [showKakaoInfoModal, setShowKakaoInfoModal] = useState(false);
   const navigate = useNavigate();
 
@@ -45,7 +46,8 @@ export default function SignupForm() {
     const res = await signup({ name, email, password, phone });
 
     if (res.success) {
-      // setShowKakaoInfoModal(true);
+      const res = await signup({ name, email, password, phone });
+      setSignupSuccessModal(true);
     } else {
       const { status, message } = res.error;
       handleError(status, message);
@@ -116,6 +118,7 @@ export default function SignupForm() {
           onBlur={() => setFocusedInput(null)}
           isFocused={focusedInput === 'email'}
         />
+
         {/* 이메일 관련 버튼 */}
         <div className={styles.emailButtonGroup}>
           <button
@@ -178,18 +181,16 @@ export default function SignupForm() {
         />
       )}
 
-      {/* {showKakaoInfoModal && (
+      {signupSuccessModalOpen && (
         <InfoModal
-          title="카카오 계정 연동 안내"
-          message={`마이페이지에서 카카오 계정을 연동하시면\n카카오톡으로 알림을 받을 수 있어요!`}
-          onClose={() => setShowKakaoInfoModal(false)}
-          buttonText="확인"
-          onButtonClick={() => {
-            setShowKakaoInfoModal(false);
+          title="회원가입 성공"
+          message={'로그인 화면으로 이동합니다'}
+          onClose={() => {
+            setSignupSuccessModal(false);
             navigate('/login/form');
           }}
         />
-      )} */}
+      )}
     </div>
   );
 }
