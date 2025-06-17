@@ -1,8 +1,9 @@
 import styles from "./MainHeader.module.css"
 import UREVERSE from "../../assets/UREVERSE.png" 
-import notificationIcon from "../../assets/icon-notification-bell.png"
+// import notificationIcon from "../../assets/icon-notification-bell.png"
 import userIcon from "../../assets/icon-user.png"
 import { useNavigate } from 'react-router-dom';
+import NotificationIcon from "../icon/NotificationIcon";
 
 export default function MainHeader () {
     const navigate = useNavigate();
@@ -14,9 +15,7 @@ export default function MainHeader () {
 
             {/* 오른쪽: 아이콘 영역 */}
             <div className={styles.iconGroup}>
-                <button className={styles.iconButton} aria-label="알림" onClick={() => navigate('/notifications')}>
-                    <img src={notificationIcon} alt="alarm" className={styles.icon} />
-                </button>
+                <NotificationIcon/>
                 <button className={styles.iconButton} aria-label="마이페이지" onClick={() => navigate('/mypage')}>
                     <img src={userIcon} alt="myPage" className={styles.icon} />
                 </button>

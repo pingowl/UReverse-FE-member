@@ -60,7 +60,9 @@ export default function ProductReceipt(){
                 addressDetail: formData.address.addressDetail,
                 zipCode: formData.address.zipCode,
                 brandId: String(formData.product.brand.brandId),
+                brandName: formData.product.brand.name,
                 categoryId: String(formData.product.category.categoryId),
+                category: `${formData.product.category.mainCategoryName} / ${formData.product.category.subCategoryName}`,
                 productsImageUrl: uploadedUrls
             };
 
