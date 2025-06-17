@@ -3,17 +3,7 @@ import styles from './SellConfirmNotice.module.css';
 import blackFilledIcon from '../../assets/icon-warning-black-fill.png';
 import HoverEventButton from '../button/HoverEventButton';
 
-export default function SellCompleteModal({ onClose, setMoveToNext }) {
-
-    const handleRecheckSelection = () => {
-        setMoveToNext(false); // 다시 확인하기 클릭 시 현재페이지 남기
-        onClose();
-    }
-
-    const handleFinishSelection = () => {
-        setMoveToNext(true); // 다음 페이지 이동을 위함
-        onClose();
-    }
+export default function SellCompleteModal({ onClose, onConfirm }) {
 
     return (
         <MiddleModal onClose={onClose}>
@@ -39,14 +29,14 @@ export default function SellCompleteModal({ onClose, setMoveToNext }) {
                     width="w-full"
                     height="h-full"
                     color="white"
-                    onClick={handleRecheckSelection}
+                    onClick={onClose}
                 />
                 <HoverEventButton
                     text = "판매하기"
                     width="w-full"
                     height="h-full"
                     color="black"
-                    onClick={handleFinishSelection}
+                    onClick={onConfirm}
                 />
             </div>
         </MiddleModal>

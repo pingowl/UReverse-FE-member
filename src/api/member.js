@@ -21,3 +21,11 @@ export const deleteMember = async (password) => {
     });
     return response.data;
 };
+
+export const changePassword = async ({ currentPassword, newPassword }) => {
+    const response = await api.patch('/api/v1/members/password', {
+        currentPassword,
+        newPassword,
+    });
+    return response.data;
+};

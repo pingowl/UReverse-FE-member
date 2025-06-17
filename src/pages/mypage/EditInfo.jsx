@@ -11,6 +11,7 @@ import {
     logout,
     deleteMember,
     getMyInfo,
+    changePassword
 } from '../../api/member';
 
 export default function EditInfo() {
@@ -30,6 +31,11 @@ export default function EditInfo() {
     const [showErrorModal, setShowErrorModal] = useState(false);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [modalMessage, setModalMessage] = useState('');
+
+    const [showChangePwForm, setShowChangePwForm] = useState(false);
+    const [currentPassword, setCurrentPassword] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [newPasswordCheck, setNewPasswordCheck] = useState('');
 
     useEffect(() => {
         setEmailChanged(email !== user.email);
@@ -110,6 +116,30 @@ export default function EditInfo() {
         }
     };
 
+    const handleChangePassword = async () => {
+        if (newPassword !== newPasswordCheck) {
+            setModalMessage('새 비밀번호가 일치하지 않습니다.');
+            setShowErrorModal(true);
+            return;
+        }
+
+        try {
+            await changePassword({ currentPassword, newPassword });
+            setModalMessage('비밀번호가 변경되었습니다.');
+            setShowSuccessModal(true);
+            setShowChangePwForm(false);
+            setCurrentPassword('');
+            setNewPassword('');
+            setNewPasswordCheck('');
+        } catch (err) {
+            setModalMessage(
+                err.response?.data?.errorMessage || '비밀번호 변경에 실패했습니다.'
+            );
+            setShowErrorModal(true);
+        }
+    };
+
+
     return (
         <div className={styles.wrapper}>
             <h2 className={styles.pageTitle}>마이페이지</h2>
@@ -167,6 +197,46 @@ export default function EditInfo() {
                     onClick={handleLogout}
                     color="#B7F56F"
                 />
+
+                {!showChangePwForm && (
+                    <HoverEventButton
+                        text="비밀번호 변경하기"
+                        onClick={() => setShowChangePwForm(true)}
+                        color="#eeeeee"
+                    />
+                )}
+
+                {showChangePwForm && (
+                    <div className={styles.inputGroup}>
+                        <CommonInput
+                            label="현재 비밀번호"
+                            type="password"
+                            value={currentPassword}
+                            onChange={(e) => setCurrentPassword(e.target.value)}
+                            placeholder="현재 비밀번호를 입력하세요"
+                        />
+                        <CommonInput
+                            label="새 비밀번호"
+                            type="password"
+                            value={newPassword}
+                            onChange={(e) => setNewPassword(e.target.value)}
+                            placeholder="새 비밀번호를 입력하세요"
+                        />
+                        <CommonInput
+                            label="새 비밀번호 확인"
+                            type="password"
+                            value={newPasswordCheck}
+                            onChange={(e) => setNewPasswordCheck(e.target.value)}
+                            placeholder="새 비밀번호를 다시 입력하세요"
+                        />
+                        <HoverEventButton
+                            text="비밀번호 변경 완료"
+                            onClick={handleChangePassword}
+                            color="black"
+                        />
+                    </div>
+                )}
+
                 <HoverEventButton
                     text="회원탈퇴"
                     onClick={handleDelete}
@@ -191,7 +261,7 @@ export default function EditInfo() {
                 onClose={() => setShowErrorModal(false)}
                 onConfirm={() => setShowErrorModal(false)}
                 password=""
-                setPassword={() => {}}
+                setPassword={() => { }}
                 isErrorOnly={true}
                 message={modalMessage}
             />
@@ -208,7 +278,7 @@ export default function EditInfo() {
                     navigate('/mypage');
                 }}
                 password=""
-                setPassword={() => {}}
+                setPassword={() => { }}
                 isErrorOnly={true}
                 message={modalMessage}
             />

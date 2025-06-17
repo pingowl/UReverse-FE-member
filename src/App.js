@@ -22,6 +22,7 @@ import PointHistoryPage from './pages/mypage/PointHistoryPage';
 import RecoveryPasswordPage from './pages/auth/RecoveryPasswordPage';
 import SalesHistoryPage from './pages/mypage/SalesHistoryPage';
 import SalesCompletePage from './pages/mypage/SalesCompletePage';
+import NotificationPage from './pages/notification/NotificationPage';
 import KakaoLinkCallback from './pages/mypage/KakaoLinkCallback';
 
 const router = createBrowserRouter([
@@ -39,6 +40,7 @@ const router = createBrowserRouter([
           { path: '/mypage/points', element: <PointHistoryPage /> },
           { path: '/mypage/sales', element: <SalesHistoryPage /> },
           { path: '/mypage/sales/complete', element: <SalesCompletePage /> },
+          { path: '/notifications', element: <NotificationPage /> },
         ],
       },
       {
