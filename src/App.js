@@ -24,6 +24,7 @@ import SalesHistoryPage from './pages/mypage/SalesHistoryPage';
 import SalesCompletePage from './pages/mypage/SalesCompletePage';
 import NotificationPage from './pages/notification/NotificationPage';
 import KakaoLinkCallback from './pages/mypage/KakaoLinkCallback';
+import NotificationTestPage from './pages/NotificationTestPage';
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,7 @@ const router = createBrowserRouter([
           { path: '/mypage/sales', element: <SalesHistoryPage /> },
           { path: '/mypage/sales/complete', element: <SalesCompletePage /> },
           { path: '/notifications', element: <NotificationPage /> },
+          { path: '/test', element: <NotificationTestPage />}
         ],
       },
       {
