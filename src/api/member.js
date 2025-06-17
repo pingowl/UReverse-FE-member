@@ -29,3 +29,23 @@ export const changePassword = async ({ currentPassword, newPassword }) => {
     });
     return response.data;
 };
+
+export const getNotifications = async () => {
+    try {
+        const response = await api.get('/api/v1/members/notifications');
+        return response.data.response;
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}
+
+export const updateNotifications = async (notificationIdList) => {
+    try {
+        const response = await api.put('/api/v1/members/readNotification', notificationIdList);
+        return response;
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}
