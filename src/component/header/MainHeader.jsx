@@ -4,7 +4,7 @@ import { userState } from '../../atoms/userState';
 import { authState } from '../../atoms/authState';
 import { logout } from '../../api/member'
 
-import notificationIcon from "../../assets/icon-notification-bell.png"
+import NotificationIcon from "../icon/NotificationIcon";
 import settingsIcon from "../../assets/icon-settings.png"
 import logoutIcon from "../../assets/icon-logout.png"
 
@@ -34,9 +34,7 @@ export default function MainHeader() {
       </div>
 
       <div className={styles.iconGroup}>
-        <button className={styles.iconButton} onClick={() => navigate('/notifications')}>
-          <img src={notificationIcon} alt="알림" />
-        </button>
+        <NotificationIcon/>
         <button className={styles.iconButton} onClick={() => navigate('/mypage/edit')}>
           <img src={settingsIcon} alt="마이페이지" />
         </button>
