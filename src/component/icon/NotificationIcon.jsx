@@ -32,7 +32,14 @@ export default function NotificationIcon() {
         const setupSSE = async () => {
             try {
                 const userId = JSON.parse(atob(accessToken.split('.')[1])).sub;
-                eventSource = connectSSE(accessToken, userId, fetchUnreadCount);
+                eventSource = connectSSE(
+                    accessToken,
+                    userId,
+                    fetchUnreadCount,
+                    (readIds) => {
+                        // 읽음된 알림 수만큼 뱃지 줄이기 (주의: 음수 방지)
+                        setUnreadCount((prev) => Math.max(0, prev - readIds.length));
+                    });
 
                 eventSource.onerror = async () => {
                     eventSource.close();
