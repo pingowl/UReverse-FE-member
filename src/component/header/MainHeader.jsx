@@ -16,9 +16,6 @@ export default function MainHeader () {
             {/* 오른쪽: 아이콘 영역 */}
             <div className={styles.iconGroup}>
                 <NotificationIcon/>
-                {/* <button className={styles.iconButton} aria-label="알림" onClick={() => navigate('/notifications')}>
-                    <img src={notificationIcon} alt="alarm" className={styles.icon} />
-                </button> */}
                 <button className={styles.iconButton} aria-label="마이페이지" onClick={() => navigate('/mypage')}>
                     <img src={userIcon} alt="myPage" className={styles.icon} />
                 </button>
