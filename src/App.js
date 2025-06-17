@@ -1,5 +1,5 @@
 import './App.css';
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Root from './Root';
 import Home from './pages/Home';
 import MainLayout from './layout/MainLayout';
@@ -19,14 +19,16 @@ import SellComplete from './pages/Sell/SellComplete';
 import EditInfo from './pages/mypage/EditInfo';
 import PointHistoryPage from './pages/mypage/PointHistoryPage';
 import RecoveryPasswordPage from './pages/auth/RecoveryPasswordPage';
-import SalesHistoryPage from './pages/mypage/SalesHistoryPage'
-import SalesCompletePage from './pages/mypage/SalesCompletePage'
+import SalesHistoryPage from './pages/mypage/SalesHistoryPage';
+import SalesCompletePage from './pages/mypage/SalesCompletePage';
 import NotificationPage from './pages/notification/NotificationPage';
 import LandingPage from './pages/LandingPage';
+import KakaoLinkCallback from './pages/mypage/KakaoLinkCallback';
+import VerifyEmailPage from './pages/auth/VerifyEmailPage';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <Root />,
     errorElement: <></>,
     children: [
@@ -47,23 +49,25 @@ const router = createBrowserRouter([
       {
         element: <NoAlarmLayout />,
         children: [
-          { path: "/signup", element: <SignupForm /> },
-          { path: "/recovery-password", element: <RecoveryPasswordPage /> }
-        ]
+          { path: '/signup', element: <SignupForm /> },
+          { path: '/recovery-password', element: <RecoveryPasswordPage /> },
+          { path: '/kakao/callback', element: <KakaoLinkCallback /> },
+          { path: '/signup/email-verified', element: <VerifyEmailPage /> },
+        ],
       },
       {
-        path: "/sell",
+        path: '/sell',
         element: <CommonLayout />,
         children: [
-          { path: "product", element: <ProductInfoForm /> },
-          { path: "address", element: <UserAddressForm /> },
-          { path: "receipt", element: <ProductReceipt /> },
-          { path: "complete", element: <SellComplete /> }
-        ]
+          { path: 'product', element: <ProductInfoForm /> },
+          { path: 'address', element: <UserAddressForm /> },
+          { path: 'receipt', element: <ProductReceipt /> },
+          { path: 'complete', element: <SellComplete /> },
+        ],
       },
-    ]
-  }
-])
+    ],
+  },
+]);
 
 function App() {
   const [auth, setAuth] = useRecoilState(authState);
@@ -77,9 +81,7 @@ function App() {
     });
   }, [auth]);
 
-  return (
-    <RouterProvider router={router} />
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

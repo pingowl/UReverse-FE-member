@@ -5,6 +5,7 @@ import { userState } from '../../atoms/userState';
 import { useNavigate } from 'react-router-dom';
 import styles from './MyPageHome.module.css';
 import { getMyInfo } from '../../api/member';
+import KakaoLinkButton from '../../component/button/KakaoLinkButton';
 
 export default function MyPageHome() {
     const auth = useRecoilValue(authState);
@@ -76,30 +77,54 @@ export default function MyPageHome() {
                         </React.Fragment>
                     ))}
                 </div>
-
             </div>
 
             <div className={styles.sellButtonArea}>
-                <button className={styles.sellButton} onClick={() => navigate('/sell/product')}>
+                <button
+                    className={styles.sellButton}
+                    onClick={() => navigate('/sell/product')}
+                >
                     판매 신청하러 가기
                 </button>
             </div>
 
+            {/*  카카오 연동 버튼 영역 */}
+            <div className={styles.kakaoLinkArea}>
+                {user.kakaoLinked ? (
+                    <button className={styles.kakaoLinkedButton} disabled>
+                        <span className={styles.kakaoLabel}>카카오 계정 연동 완료</span>
+                    </button>
+                ) : (
+                    <KakaoLinkButton />
+                )}
+            </div>
+
             <div className={styles.menuSection}>
-                <button className={styles.menuButton} onClick={() => navigate('/mypage/points')}>
+                <button
+                    className={styles.menuButton}
+                    onClick={() => navigate('/mypage/points')}
+                >
                     포인트 내역
                 </button>
-                <button className={styles.menuButton} onClick={() => navigate('/mypage/sales')}>
+                <button
+                    className={styles.menuButton}
+                    onClick={() => navigate('/mypage/sales')}
+                >
                     판매 내역
                 </button>
-                <button className={styles.menuButton} onClick={() => navigate('/mypage/sales/complete')}>
+                <button
+                    className={styles.menuButton}
+                    onClick={() => navigate('/mypage/sales/complete')}
+                >
                     판매 완료 내역
                 </button>
-                <button className={styles.menuButton} onClick={() => navigate('/mypage/edit')}>
+                <button
+                    className={styles.menuButton}
+                    onClick={() => navigate('/mypage/edit')}
+                >
                     내 정보
                 </button>
             </div>
-
         </div>
     );
 }

@@ -1,17 +1,18 @@
-import styles from "./LoginForm.module.css";
+
+import styles from './LoginForm.module.css';
+import LoginInput from '../../component/input/LoginInput';
+import HoverEventButton from '../../component/button/HoverEventButton';
+
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import { login } from '../../api/auth';
 import { getAuthStore } from '../../api/axiosInstance';
 
-import LoginInput from '../../component/input/LoginInput';
-import HoverEventButton from '../../component/button/HoverEventButton';
-
 export default function LoginForm() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [focusedInput, setFocusedInput] = useState(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [focusedInput, setFocusedInput] = useState(null);
 
     const navigate = useNavigate();
     const location = useLocation();
