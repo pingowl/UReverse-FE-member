@@ -1,98 +1,80 @@
+
 import styles from './LoginForm.module.css';
-import logo from '../../assets/Logo.png';
 import LoginInput from '../../component/input/LoginInput';
-import { useState } from 'react';
 import HoverEventButton from '../../component/button/HoverEventButton';
+
+import { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+
 import { login } from '../../api/auth';
-import { getMyInfo } from '../../api/member';
-import { useSetRecoilState } from 'recoil';
-import { userState } from '../../atoms/userState';
-import { useNavigate } from 'react-router-dom';
-import { getAuthStore, setAuthStore } from '../../api/axiosInstance';
+import { getAuthStore } from '../../api/axiosInstance';
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [focusedInput, setFocusedInput] = useState(null);
 
-  const setUser = useSetRecoilState(userState);
-  const navigate = useNavigate();
+    const navigate = useNavigate();
+    const location = useLocation();
 
-  const handleLogin = async () => {
-    try {
-      const { accessToken, role } = await login(email, password);
+    const handleLogin = async () => {
+        try {
+            const { accessToken, role } = await login(email, password);
+            getAuthStore().setAuth({ accessToken, role });
 
-      // App.js 에서 등록한 setAuth 호출
-      getAuthStore().setAuth({ accessToken, role });
-      // const { accessToken } = await login(email, password);
-      // localStorage.setItem('accessToken', accessToken);
+            const redirectTo = location.state?.from || '/home';
+            navigate(redirectTo);
+        } catch (error) {
+            alert('이메일 또는 비밀번호가 올바르지 않습니다.');
+        }
+    };
 
-      // 사용자 정보 다시 요청은 홈 페이지 이동 후 처리
-      // const userInfo = await getMyInfo();
-      // setUser({
-      //     ...userInfo,
-      //     isLoggedIn: true,
-      // });
+    return (
+        <div className={styles.wrapper}>
+            <div className={styles.loginBox}>
+                <h1 className={styles.brand}>U:REVERSE</h1>
+                <p className={styles.sub}>당신의 옷, 다시 가치 있게</p>
 
-      navigate('/');
-    } catch (error) {
-      alert('이메일 또는 비밀번호가 올바르지 않습니다.');
-      console.error('로그인 실패:', error);
-    }
-  };
+                <div className={styles.form}>
+                    <LoginInput
+                        type="email"
+                        id="email"
+                        label="이메일"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        onFocus={() => setFocusedInput("email")}
+                        onBlur={() => setFocusedInput(null)}
+                        isFocused={focusedInput === "email"}
+                    />
+                    <LoginInput
+                        type="password"
+                        id="password"
+                        label="비밀번호"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        onFocus={() => setFocusedInput("password")}
+                        onBlur={() => setFocusedInput(null)}
+                        isFocused={focusedInput === "password"}
+                    />
 
-  return (
-    <div className={styles.container}>
-      <div className={styles.content}>
-        <h1 className={styles.title}>U:Reverse</h1>
-        <img src={logo} alt="hpoint" className={styles.image} />
-      </div>
-      {/* 입력 영역 */}
-      <div className={styles.inputGroup}>
-        {/* 이메일 */}
-        <LoginInput
-          type="email"
-          id="email"
-          name="email"
-          label="이메일"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          onFocus={() => setFocusedInput('email')}
-          onBlur={() => setFocusedInput(null)}
-          isFocused={focusedInput === 'email'}
-        />
+                    <div className={styles.forgot}>
+                        <span onClick={() => navigate('/recovery-password')}>
+                            비밀번호를 잊으셨나요?
+                        </span>
+                    </div>
 
-        {/* 비밀번호 */}
-        <LoginInput
-          type="password"
-          id="password"
-          name="password"
-          label="비밀번호"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          onFocus={() => setFocusedInput('password')}
-          onBlur={() => setFocusedInput(null)}
-          isFocused={focusedInput === 'password'}
-        />
+                    <HoverEventButton
+                        text="로그인"
+                        onClick={handleLogin}
+                        color="green"
+                    />
 
-        <div className={styles.findPassword}>
-          <span
-            onClick={() => navigate('/recovery-password')}
-            className={styles.link}
-          >
-            비밀번호를 잊으셨나요?
-          </span>
+                    <div className={styles.signupLink}>
+                        아직 회원이 아니신가요?&nbsp;
+                        <span onClick={() => navigate('/signup')}>회원가입</span>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div className={styles.buttonArea}>
-        <HoverEventButton
-          text="로그인"
-          onClick={handleLogin}
-          width="w-full"
-          height="h-12"
-          color="black"
-        />
-      </div>
-    </div>
-  );
+    );
 }

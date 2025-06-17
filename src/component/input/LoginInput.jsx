@@ -19,7 +19,7 @@ export default function LoginInput({ type, id, name, value, onChange, label, onF
     return (
         <div className={styles.inputWrapper}>
             <label htmlFor={id}
-                className={`${styles.floatingLabel} ${isFocused ? styles.labelFocused : styles.labelUnfocused}`}>
+                className={`${styles.floatingLabel} ${isFocused ? styles.labelFocused : ''}`}>
                 {label}
             </label>
             <input
@@ -30,8 +30,8 @@ export default function LoginInput({ type, id, name, value, onChange, label, onF
                 onChange={onChange}
                 onFocus={onFocus}
                 onBlur={onBlur}
-                className={`${styles.inputField} ${isFocused ? styles.focused : styles.unfocused}`}
+                className={`${styles.inputField} ${isFocused ? styles.focused : ''}`}
             />
         </div>
-    )
+    );
 }

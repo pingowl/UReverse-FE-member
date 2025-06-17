@@ -5,7 +5,6 @@ import Home from './pages/Home';
 import MainLayout from './layout/MainLayout';
 import NoAlarmLayout from './layout/NoAlarmLayout';
 import CommonLayout from './layout/CommonLayout';
-import LoginSelect from './pages/auth/LoginSelect';
 import LoginForm from './pages/auth/LoginForm';
 import SignupForm from './pages/auth/SignupForm';
 import ProductInfoForm from './pages/Sell/ProductInfoForm';
@@ -23,6 +22,7 @@ import RecoveryPasswordPage from './pages/auth/RecoveryPasswordPage';
 import SalesHistoryPage from './pages/mypage/SalesHistoryPage';
 import SalesCompletePage from './pages/mypage/SalesCompletePage';
 import NotificationPage from './pages/notification/NotificationPage';
+import LandingPage from './pages/LandingPage';
 import KakaoLinkCallback from './pages/mypage/KakaoLinkCallback';
 import VerifyEmailPage from './pages/auth/VerifyEmailPage';
 
@@ -32,23 +32,23 @@ const router = createBrowserRouter([
     element: <Root />,
     errorElement: <></>,
     children: [
+      { path: "/landing", element: <LandingPage /> },
+      { path: "/login", element: <LoginForm /> },
       {
         element: <MainLayout />,
         children: [
           { index: true, element: <Home /> },
-          { path: '/mypage', element: <MyPageHome /> },
-          { path: '/mypage/edit', element: <EditInfo /> },
-          { path: '/mypage/points', element: <PointHistoryPage /> },
-          { path: '/mypage/sales', element: <SalesHistoryPage /> },
-          { path: '/mypage/sales/complete', element: <SalesCompletePage /> },
-          { path: '/notifications', element: <NotificationPage /> },
-        ],
+          { path: "/mypage", element: <MyPageHome /> },
+          { path: "/mypage/edit", element: <EditInfo /> },
+          { path: "/mypage/points", element: <PointHistoryPage /> },
+          { path: "/mypage/sales", element: <SalesHistoryPage /> },
+          { path: "/mypage/sales/complete", element: <SalesCompletePage /> },
+          { path: "/notifications", element: <NotificationPage /> },
+        ]
       },
       {
         element: <NoAlarmLayout />,
         children: [
-          { path: '/login', element: <LoginSelect /> },
-          { path: '/login/form', element: <LoginForm /> },
           { path: '/signup', element: <SignupForm /> },
           { path: '/recovery-password', element: <RecoveryPasswordPage /> },
           { path: '/kakao/callback', element: <KakaoLinkCallback /> },
