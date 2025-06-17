@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./CategorySelect.module.css";
 import arrowIcon from "../../../assets/icon-arrow-down.png";
 
@@ -62,6 +62,7 @@ export default function CategorySelect({onBack, setCategory, categoryList}) {
                                                 categoryId: sub.categoryId,
                                                 mainCategoryName: category.mainCategoryName,
                                                 subCategoryName: sub.name,
+                                                point: sub.point
                                             })
                                         }
                                     >

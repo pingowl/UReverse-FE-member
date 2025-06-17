@@ -5,6 +5,9 @@ import { sellFormState } from '../../atoms/sellFormState';
 import { useEffect, useState } from 'react';
 import HoverEventButton from '../../component/button/HoverEventButton';
 import SellCompleteModal from '../../component/sellNotice/SellCompleteModal';
+import { formatNumberWithComma } from '../../util/FormatNumberWithComma';
+import { uploadProduct } from '../../api/product';
+import api from '../../api/axiosInstance';
 
 export default function ProductReceipt(){
     const navigate = useNavigate();
@@ -14,19 +17,68 @@ export default function ProductReceipt(){
     const [agree2, setAgree2] = useState(false);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [moveToNext, setMoveToNext] = useState(false);
 
-    // 상품등록 모달 닫기
-    const handleFianlNoticeSelection = () => {
-        setIsModalOpen(false); // 모달 닫기
+    const handleFianlNoticeSelection = async () => {
+        setIsModalOpen(false);
+        try {
+            await postProductHandler(formData); // 업로드 완료
+            navigate('/sell/complete');        // 성공 시 이동
+        } catch (err) {
+            alert("상품 등록 실패");
+        }
     };
 
-    useEffect(() => {
-        if (moveToNext) {
-            navigate('/sell/complete');
+    const postProductHandler = async() => {
+        try{
+            // S3 이미지 업로드
+            const uploadedUrls = [];
+
+            for (const image of formData.product.images) {
+                const file = image.file;
+                const { name: fileName, type: contentType } = file;
+                
+                // 1-1. presigned URL 요청
+                const presignRes = await api.get('/api/v1/s3/presigned-url', {
+                    params: { fileName, contentType },
+                });
+                const { presignedUrl, accessUrl } = presignRes.data;
+
+                // 1-2. S3 업로드 (Authorization 제거 필요)
+                await fetch(presignedUrl, {
+                    method: "PUT",
+                    headers: { 'Content-Type': contentType },
+                    body: file,
+                });
+                uploadedUrls.push(accessUrl);
+            }
+
+            // 2. formData에 imageUrls 포함
+            const productData = {
+                name: formData.address.name,
+                phone: formData.address.phone,
+                address: formData.address.address,
+                addressDetail: formData.address.addressDetail,
+                zipCode: formData.address.zipCode,
+                brandId: String(formData.product.brand.brandId),
+                categoryId: String(formData.product.category.categoryId),
+                productsImageUrl: uploadedUrls
+            };
+
+            // 3. 상품 정보 저장 요청
+            await uploadProduct(productData);
+
+        } catch (err) {
+            if (err.response) {
+                console.error("응답 상태:", err.response.status);
+                console.error("서버 메시지:", err.response.data);
+            } else if (err.request) {
+                console.error("요청은 전송됐지만 응답 없음", err.request);
+            } else {
+                console.error("Axios 구성 에러", err.message);
+            }
         }
-    }, [moveToNext])
-    
+    }
+
     return (
         <div className={styles.pageWrapper}>
             <div className={styles.content}>
@@ -76,7 +128,7 @@ export default function ProductReceipt(){
                             </div>
                             <div className={styles.pointBox}>
                                 <div>지급 예상 H.Point</div>
-                                <div style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>{/*formData.point?.toLocaleString()*/}25,000P</div>
+                                <div style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>{formatNumberWithComma(formData.product.category.point)}P</div>
                             </div>
                         </div>
 
@@ -120,7 +172,7 @@ export default function ProductReceipt(){
                 </div>
             </div>
 
-            {isModalOpen && <SellCompleteModal onClose={handleFianlNoticeSelection} setMoveToNext={setMoveToNext} />}
+            {isModalOpen && <SellCompleteModal onClose={() => setIsModalOpen(false)} onConfirm={handleFianlNoticeSelection} />}
         </div>
     )
 }
