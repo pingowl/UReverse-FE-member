@@ -16,7 +16,8 @@ export default function SignupForm() {
 
   const [errorModalOpen, setErrorModalOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const [showKakaoInfoModal, setShowKakaoInfoModal] = useState(false);
+  const [signupSuccessModalOpen, setSignupSuccessModal] = useState(false);
+  // const [showKakaoInfoModal, setShowKakaoInfoModal] = useState(false);
   const navigate = useNavigate();
 
   // 공통 에러 메시지 처리 함수
@@ -33,7 +34,8 @@ export default function SignupForm() {
     const res = await signup({ name, email, password, phone });
 
     if (res.success) {
-      setShowKakaoInfoModal(true);
+      setSignupSuccessModal(true);
+      // setShowKakaoInfoModal(true);
     } else {
       const { status, message } = res.error;
       handleError(status, message);
@@ -108,7 +110,18 @@ export default function SignupForm() {
         />
       )}
 
-      {showKakaoInfoModal && (
+      {signupSuccessModalOpen && (
+        <InfoModal
+          title="회원가입 성공"
+          message={'로그인 화면으로 이동합니다'}
+          onClose={() => {
+            setSignupSuccessModal(false);
+            navigate('/login/form');
+          }}
+        />
+      )}
+
+      {/* {showKakaoInfoModal && (
         <InfoModal
           title="카카오 계정 연동 안내"
           message={`마이페이지에서 카카오 계정을 연동하시면\n카카오톡으로 알림을 받을 수 있어요!`}
@@ -119,7 +132,7 @@ export default function SignupForm() {
             navigate('/login/form');
           }}
         />
-      )}
+      )} */}
     </div>
   );
 }

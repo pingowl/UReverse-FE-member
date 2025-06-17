@@ -1,5 +1,5 @@
 import './App.css';
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Root from './Root';
 import Home from './pages/Home';
 import MainLayout from './layout/MainLayout';
@@ -20,12 +20,13 @@ import SellComplete from './pages/Sell/SellComplete';
 import EditInfo from './pages/mypage/EditInfo';
 import PointHistoryPage from './pages/mypage/PointHistoryPage';
 import RecoveryPasswordPage from './pages/auth/RecoveryPasswordPage';
-import SalesHistoryPage from './pages/mypage/SalesHistoryPage'
-import SalesCompletePage from './pages/mypage/SalesCompletePage'
+import SalesHistoryPage from './pages/mypage/SalesHistoryPage';
+import SalesCompletePage from './pages/mypage/SalesCompletePage';
+import KakaoLinkCallback from './pages/mypage/KakaoLinkCallback';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <Root />,
     errorElement: <></>,
     children: [
@@ -33,35 +34,36 @@ const router = createBrowserRouter([
         element: <MainLayout />,
         children: [
           { index: true, element: <Home /> },
-          { path: "/mypage", element: <MyPageHome /> },
-          { path: "/mypage/edit", element: <EditInfo /> },
-          { path: "/mypage/points", element: <PointHistoryPage /> },
-          { path: "/mypage/sales", element: <SalesHistoryPage /> },
-          { path: "/mypage/sales/complete", element: <SalesCompletePage /> },
-        ]
+          { path: '/mypage', element: <MyPageHome /> },
+          { path: '/mypage/edit', element: <EditInfo /> },
+          { path: '/mypage/points', element: <PointHistoryPage /> },
+          { path: '/mypage/sales', element: <SalesHistoryPage /> },
+          { path: '/mypage/sales/complete', element: <SalesCompletePage /> },
+        ],
       },
       {
         element: <NoAlarmLayout />,
         children: [
-          { path: "/login", element: <LoginSelect /> },
-          { path: "/login/form", element: <LoginForm /> },
-          { path: "/signup", element: <SignupForm /> },
-          { path: "/recovery-password", element: <RecoveryPasswordPage /> }
-        ]
+          { path: '/login', element: <LoginSelect /> },
+          { path: '/login/form', element: <LoginForm /> },
+          { path: '/signup', element: <SignupForm /> },
+          { path: '/recovery-password', element: <RecoveryPasswordPage /> },
+          { path: '/kakao/callback', element: <KakaoLinkCallback /> },
+        ],
       },
       {
-        path: "/sell",
+        path: '/sell',
         element: <CommonLayout />,
         children: [
-          { path: "product", element: <ProductInfoForm />},
-          { path: "address", element: <UserAddressForm />},
-          { path: "receipt", element: <ProductReceipt /> },
-          { path: "complete", element: <SellComplete />}
-        ]
+          { path: 'product', element: <ProductInfoForm /> },
+          { path: 'address', element: <UserAddressForm /> },
+          { path: 'receipt', element: <ProductReceipt /> },
+          { path: 'complete', element: <SellComplete /> },
+        ],
       },
-    ]
-  }
-])
+    ],
+  },
+]);
 
 function App() {
   const [auth, setAuth] = useRecoilState(authState);
@@ -75,9 +77,7 @@ function App() {
     });
   }, [auth]);
 
-  return (
-    <RouterProvider router={router} />
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
