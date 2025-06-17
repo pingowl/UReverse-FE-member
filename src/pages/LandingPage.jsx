@@ -1,8 +1,4 @@
-import { useRef } from 'react';
-import { useRecoilValue } from 'recoil';
-import { authState } from '../atoms/authState';
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useRef, useCallback } from 'react';
 import styles from './LandingPage.module.css';
 
 import MainVisualSection from '../component/landing/MainVisualSection';
@@ -13,26 +9,25 @@ import StartNowSection from '../component/landing/StartNowSection';
 
 
 const LandingPage = () => {
-  const auth = useRecoilValue(authState);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (auth.accessToken) {
-      navigate('/home');
-    }
-  }, [auth, navigate]);
-
   const stepRef = useRef(null);
+
+  const scrollToSteps = useCallback(() => {
+    if (stepRef.current) {
+      stepRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
 
   return (
     <div className={styles.pageWrapper}>
-      <MainVisualSection onScrollToSteps={() => stepRef.current?.scrollIntoView({ behavior: 'smooth' })} />
-      <UserTrustSection />
-      <div ref={stepRef}>
-        <HowItWorksSection />
+      <div className={styles.scrollContainer}>
+        <MainVisualSection onScrollToSteps={scrollToSteps} />
+        <UserTrustSection />
+        <div ref={stepRef}>
+          <HowItWorksSection />
+        </div>
+        <TrustedProcessSection />
+        <StartNowSection />
       </div>
-      <TrustedProcessSection />
-      <StartNowSection />
     </div>
   );
 };

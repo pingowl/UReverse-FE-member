@@ -1,11 +1,18 @@
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { userState } from '../../atoms/userState';
 import styles from './MainVisualSection.module.css';
 
 const MainVisualSection = ({ onScrollToSteps }) => {
   const navigate = useNavigate();
-  
+  const user = useRecoilValue(userState);
+
   const handleSellClick = () => {
-    navigate('/login', { state: { from: '/sell/product' } });
+    if (user.isLoggedIn) {
+      navigate('/sell/product');
+    } else {
+      navigate('/login');
+    }
   };
 
   return (

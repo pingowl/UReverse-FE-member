@@ -1,55 +1,28 @@
+:root {
+  --green: #64C378;
+  --gray: #ccc;
+}
+
 .button {
-  width: 100%;
-  height: 3rem;
-  text-align: center;
-  border: none;
-  border-radius: 0.75rem;
+  width: 100%; 
+  background-color: transparent;
+  color: var(--green);
+  border: 1px solid var(--green);
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-
-  /* transition: box-shadow 0.2s ease; */
-  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  transition: background-color 0.3s ease;
 }
 
-/* black 스타일 */
-.black {
-  background-color: black;
-  color: white;
-}
-.black:hover {
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-  background-color: white;
-  color: black
+.button:hover {
+  background-color: rgba(100, 195, 120, 0.1);
 }
 
-/* white 스타일 */
-.white {
-  background-color: white;
-  color: #555;
-}
-.white:hover {
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-  color: black;
-  background-color: #fafafa;
-}
-
-.green {
-  background-color: #64C378;
-  color: #ffffff;
-  font-weight: 600;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(100, 195, 120, 0.25);
-  transition: background-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.green:hover {
-  background-color: #56AD68; 
-  color: #ffffff;
-  box-shadow: 0 4px 12px rgba(100, 195, 120, 0.4);
-}
-
-.blocked {
-  background-color: #ccc;
-  color: white;
-  cursor: auto;
+.disabled {
+  background-color: var(--gray);
+  color: #666;
+  border: none;
+  cursor: not-allowed;
 }
