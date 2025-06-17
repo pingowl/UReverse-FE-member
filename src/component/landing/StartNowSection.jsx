@@ -1,6 +1,13 @@
+import { useNavigate } from 'react-router-dom';
 import styles from './StartNowSection.module.css';
 
 const StartNowSection = () => {
+  const navigate = useNavigate();
+
+  const handleSellClick = () => {
+    navigate('/login/form', { state: { from: '/sell/product' } });
+  };
+
   return (
     <section className={styles.section}>
       <div className={styles.content}>
@@ -12,7 +19,7 @@ const StartNowSection = () => {
           환경을 지키는 가장 똑똑한 방법, <br />
           지금 바로 실천해보세요.
         </p>
-        <button className={styles.button}>판매 시작하기</button>
+        <button className={styles.button} onClick={handleSellClick}>판매 시작하기</button>
       </div>
     </section>
   );

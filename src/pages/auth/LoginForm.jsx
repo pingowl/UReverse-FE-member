@@ -7,7 +7,7 @@ import { login } from '../../api/auth';
 import { getMyInfo } from '../../api/member';
 import { useSetRecoilState } from 'recoil';
 import { userState } from '../../atoms/userState';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { getAuthStore, setAuthStore } from '../../api/axiosInstance';
 
 export default function LoginForm() {
@@ -17,6 +17,7 @@ export default function LoginForm() {
 
     const setUser = useSetRecoilState(userState);
     const navigate = useNavigate();
+    const location = useLocation(); 
 
     const handleLogin = async () => {
         try {
@@ -33,8 +34,8 @@ export default function LoginForm() {
             //     ...userInfo,
             //     isLoggedIn: true,
             // });
-
-            navigate('/');
+            const redirectTo = location.state?.from || '/home';
+            navigate(redirectTo);
         } catch (error) {
             alert('이메일 또는 비밀번호가 올바르지 않습니다.');
             console.error('로그인 실패:', error);
