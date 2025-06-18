@@ -101,6 +101,7 @@ export default function ProductReceipt(){
                 console.error("Axios 구성 에러", err.message);
             }
         }
+    }
 
   return (
     <div className={styles.pageWrapper}>
