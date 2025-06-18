@@ -98,7 +98,7 @@ export default function ProductInfo({ brand, setBrand, category, setCategory }){
             const data = await getBrandList();
             setBrandList(data);
         } catch (err) {
-            alert('중대한 이슈!');
+            console.log(err);
         }
     }
 
@@ -107,7 +107,7 @@ export default function ProductInfo({ brand, setBrand, category, setCategory }){
             const data = await getCategoryList(tempBrand.brandId);
             setCategoryList(data);
         } catch(err) {
-            alert("에러 발생");
+            console.log(err);
         }
     }
 
