@@ -91,7 +91,8 @@ const router = createBrowserRouter([
         path: '/sell',
         element: (
           <PrivateRoute>
-            <CommonLayout />
+            {/* <CommonLayout /> */}
+            <MainLayout />
           </PrivateRoute>
         ),
         children: [
