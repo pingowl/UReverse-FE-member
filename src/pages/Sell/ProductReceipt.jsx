@@ -60,7 +60,7 @@ export default function ProductReceipt(){
                 const { name: fileName, type: contentType } = file;
                 
                 // 1-1. presigned URL 요청
-                const presignRes = await api.get('/api/v1/s3/presigned-url', {
+                const presignRes = await api.get('/s3/presigned-url', {
                     params: { fileName, contentType },
                 });
                 const { presignedUrl, accessUrl } = presignRes.data;
