@@ -32,8 +32,10 @@ const router = createBrowserRouter([
     element: <Root />,
     errorElement: <></>,
     children: [
-      { path: "/landing", element: <LandingPage /> },
+      { path: "/", element: <LandingPage /> },
       { path: "/login", element: <LoginForm /> },
+      { path: '/sign-up', element: <SignupForm /> },
+      { path: '/recovery-password', element: <RecoveryPasswordPage /> },
       {
         element: <MainLayout />,
         children: [
@@ -49,8 +51,6 @@ const router = createBrowserRouter([
       {
         element: <NoAlarmLayout />,
         children: [
-          { path: '/signup', element: <SignupForm /> },
-          { path: '/recovery-password', element: <RecoveryPasswordPage /> },
           { path: '/kakao/callback', element: <KakaoLinkCallback /> },
           { path: '/signup/email-verified', element: <VerifyEmailPage /> },
         ],
@@ -78,8 +78,8 @@ function App() {
       setAuth: ({ accessToken, role }) => setAuth({ accessToken, role }),
       resetAuth: () => setAuth({ accessToken: null, role: null }),
     });
-  }, []); 
-  
+  }, []);
+
   return <RouterProvider router={router} />;
 }
 

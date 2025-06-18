@@ -1,8 +1,6 @@
 import styles from './SignupForm.module.css';
-import logo from '../../assets/Logo.png';
 import LoginInput from '../../component/input/LoginInput';
 import { useState, useEffect } from 'react';
-import HoverEventButton from '../../component/button/HoverEventButton';
 import { signup } from '../../api/auth';
 import { useNavigate } from 'react-router-dom';
 import InfoModal from '../../component/modal/InfoModal';
@@ -132,110 +130,95 @@ export default function SignupForm() {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.content}>
-        <h1 className={styles.title}>U:Reverse</h1>
-        <img src={logo} alt="hpoint" className={styles.image} />
-      </div>
+    <div className={styles.wrapper}>
+      <div className={styles.loginBox}>
+        <h1 className={styles.brand}>U:REVERSE</h1>
+        <p className={styles.sub}>당신의 옷, 다시 가치 있게</p>
 
-      <div className={styles.inputGroup}>
-        <LoginInput
-          type="name"
-          id="name"
-          label="이름"
-          value={form.name}
-          onChange={(e) =>
-            setForm((prev) => ({ ...prev, name: e.target.value }))
-          }
-          onFocus={() => setFocusedInput('name')}
-          onBlur={() => setFocusedInput(null)}
-          isFocused={focusedInput === 'name'}
-        />
-        <LoginInput
-          type="email"
-          id="email"
-          label="이메일"
-          value={form.email}
-          onChange={handleEmailChange}
-          onFocus={() => setFocusedInput('email')}
-          onBlur={() => setFocusedInput(null)}
-          isFocused={focusedInput === 'email'}
-        />
+        <div className={styles.form}>
+          <LoginInput
+            type="name"
+            id="name"
+            label="이름"
+            value={form.name}
+            onChange={(e) => setForm((prev) => ({ ...prev, name: e.target.value }))}
+            onFocus={() => setFocusedInput('name')}
+            onBlur={() => setFocusedInput(null)}
+            isFocused={focusedInput === 'name'}
+          />
 
-        <div className={styles.emailButtonGroup}>
-          <HoverEventButton
-            text="이메일 중복확인"
-            onClick={handleEmailDuplicateCheck}
-            color="black"
-            className={styles.emailCheckBtn}
-            disabled={isEmailAvailable}
+          <LoginInput
+            type="email"
+            id="email"
+            label="이메일"
+            value={form.email}
+            onChange={handleEmailChange}
+            onFocus={() => setFocusedInput('email')}
+            onBlur={() => setFocusedInput(null)}
+            isFocused={focusedInput === 'email'}
           />
-          <HoverEventButton
-            text="인증 메일 전송"
-            onClick={handleSendVerificationEmail}
-            disabled={!isEmailAvailable}
-            color="black"
-            className={styles.emailVerifyBtn}
+
+          <div className={styles.emailButtonGroup}>
+            <button
+              className={styles.cta}
+              onClick={handleEmailDuplicateCheck}
+              disabled={isEmailAvailable}
+            >
+              중복확인
+            </button>
+            <button
+              className={styles.secondary}
+              onClick={handleSendVerificationEmail}
+              disabled={!isEmailAvailable}
+            >
+              인증 메일 전송
+            </button>
+          </div>
+
+          <LoginInput
+            type="password"
+            id="password"
+            label="비밀번호"
+            value={form.password}
+            onChange={(e) => setForm((prev) => ({ ...prev, password: e.target.value }))}
+            onFocus={() => setFocusedInput('password')}
+            onBlur={() => setFocusedInput(null)}
+            isFocused={focusedInput === 'password'}
           />
+
+          <LoginInput
+            type="phone"
+            id="phone"
+            label="전화번호"
+            value={form.phone}
+            onChange={(e) => setForm((prev) => ({ ...prev, phone: e.target.value }))}
+            onFocus={() => setFocusedInput('phone')}
+            onBlur={() => setFocusedInput(null)}
+            isFocused={focusedInput === 'phone'}
+          />
+
+          <button
+            className={styles.secondary}
+            onClick={handleSignup}
+            disabled={!isEmailVerified}
+          >
+            가입하기
+          </button>
+
+          <div className={styles.signupLink}>
+            이미 계정이 있으신가요?&nbsp;
+            <span onClick={() => navigate('/login')}>로그인</span>
+          </div>
         </div>
-
-        <LoginInput
-          type="password"
-          id="password"
-          label="비밀번호"
-          value={form.password}
-          onChange={(e) =>
-            setForm((prev) => ({ ...prev, password: e.target.value }))
-          }
-          onFocus={() => setFocusedInput('password')}
-          onBlur={() => setFocusedInput(null)}
-          isFocused={focusedInput === 'password'}
-        />
-        <LoginInput
-          type="phone"
-          id="phone"
-          label="전화번호"
-          value={form.phone}
-          onChange={(e) =>
-            setForm((prev) => ({ ...prev, phone: e.target.value }))
-          }
-          onFocus={() => setFocusedInput('phone')}
-          onBlur={() => setFocusedInput(null)}
-          isFocused={focusedInput === 'phone'}
-        />
       </div>
 
-      <div className={styles.buttonArea}>
-        <HoverEventButton
-          text="가입하기"
-          onClick={handleSignup}
-          width="w-full"
-          height="h-12"
-          color="black"
-          disabled={!isEmailVerified}
-        />
-      </div>
-
-      {modalInfo.show && (
-        <InfoModal
-          title={modalInfo.title}
-          message={modalInfo.message}
-          onClose={handleCloseModal}
-        />
-      )}
-
-      {errorModalOpen && (
-        <InfoModal
-          title="회원가입 실패"
-          message={errorMessage}
-          onClose={() => setErrorModalOpen(false)}
-        />
-      )}
-
+      {/* 모달 */}
+      {modalInfo.show && <InfoModal title={modalInfo.title} message={modalInfo.message} onClose={() => setModalInfo({ show: false, title: '', message: '' })} />}
+      {errorModalOpen && <InfoModal title="회원가입 실패" message={errorMessage} onClose={() => setErrorModalOpen(false)} />}
       {signupSuccessModalOpen && (
         <InfoModal
           title="회원가입 성공"
-          message={'로그인 화면으로 이동합니다'}
+          message="로그인 화면으로 이동합니다."
           onClose={() => {
             setSignupSuccessModal(false);
             setForm({ name: '', email: '', password: '', phone: '' });

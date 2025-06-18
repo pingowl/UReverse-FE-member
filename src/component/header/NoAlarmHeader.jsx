@@ -7,7 +7,7 @@ export default function NoAlarmHeader () {
     // 경로에 따른 페이지 이름 매핑
     const titleMap = {
         '/login': '로그인',
-        '/signup': '회원가입',
+        '/sign-up': '회원가입',
         '/recovery-password': '비밀번호 재발급'
     };
 

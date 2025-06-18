@@ -21,7 +21,7 @@ export default function MainHeader() {
       localStorage.removeItem('accessToken');
       setUser({ isLoggedIn: false });
       setAuth({ accessToken: null, role: null });
-      navigate('/landing');
+      navigate('/');
     } catch (e) {
       console.error('로그아웃 실패:', e);
     }
@@ -29,7 +29,7 @@ export default function MainHeader() {
 
   return (
     <header className={styles.header}>
-      <div className={styles.logoText} onClick={() => navigate('/landing')}>
+      <div className={styles.logoText} onClick={() => navigate('/')}>
         U:REVERSE
       </div>
 
