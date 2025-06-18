@@ -28,6 +28,28 @@ export default function ProductReceipt(){
         }
     };
 
+    useEffect(() => {
+        const brand = formData?.product?.brand;
+        const category = formData?.product?.category;
+        const images = formData?.product?.images;
+        const address = formData?.address;
+
+        const isBrandEmpty = !brand || Object.keys(brand).length === 0;
+        const isCategoryEmpty = !category || Object.keys(category).length === 0;
+        const isImageCountInvalid = !images || images.length < 2;
+
+        const isAddressInvalid =
+            !address?.name ||
+            !address?.phone ||
+            !address?.address ||
+            !address?.addressDetail ||
+            !address?.zipCode;
+
+        if (isBrandEmpty || isCategoryEmpty || isImageCountInvalid || isAddressInvalid) {
+        navigate('/sell/product');
+        }
+    }, [formData, navigate])
+
     const postProductHandler = async() => {
         try{
             // S3 이미지 업로드
