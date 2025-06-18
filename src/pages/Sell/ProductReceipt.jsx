@@ -9,76 +9,99 @@ import { formatNumberWithComma } from '../../util/FormatNumberWithComma';
 import { uploadProduct } from '../../api/product';
 import api from '../../api/axiosInstance';
 
-export default function ProductReceipt() {
-  const navigate = useNavigate();
-  const [formData, setFormData] = useRecoilState(sellFormState);
+export default function ProductReceipt(){
+    const navigate = useNavigate();
+    const [formData, setFormData] = useRecoilState(sellFormState);
 
-  const [agree1, setAgree1] = useState(false);
-  const [agree2, setAgree2] = useState(false);
+    const [agree1, setAgree1] = useState(false);
+    const [agree2, setAgree2] = useState(false);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleFianlNoticeSelection = async () => {
-    setIsModalOpen(false);
-    try {
-      await postProductHandler(formData); // 업로드 완료
-      navigate('/sell/complete'); // 성공 시 이동
-    } catch (err) {
-      alert('상품 등록 실패');
+    const handleFianlNoticeSelection = async () => {
+        setIsModalOpen(false);
+        try {
+            await postProductHandler(formData); // 업로드 완료
+            navigate('/sell/complete');        // 성공 시 이동
+        } catch (err) {
+            alert("상품 등록 실패");
+        }
+    };
+
+    useEffect(() => {
+        const brand = formData?.product?.brand;
+        const category = formData?.product?.category;
+        const images = formData?.product?.images;
+        const address = formData?.address;
+
+        const isBrandEmpty = !brand || Object.keys(brand).length === 0;
+        const isCategoryEmpty = !category || Object.keys(category).length === 0;
+        const isImageCountInvalid = !images || images.length < 2;
+
+        const isAddressInvalid =
+            !address?.name ||
+            !address?.phone ||
+            !address?.address ||
+            !address?.addressDetail ||
+            !address?.zipCode;
+
+        if (isBrandEmpty || isCategoryEmpty || isImageCountInvalid || isAddressInvalid) {
+        navigate('/sell/product');
+        }
+    }, [formData, navigate])
+
+    const postProductHandler = async() => {
+        try{
+            // S3 이미지 업로드
+            const uploadedUrls = [];
+
+            for (const image of formData.product.images) {
+                const file = image.file;
+                const { name: fileName, type: contentType } = file;
+                
+                // 1-1. presigned URL 요청
+                const presignRes = await api.get('/s3/presigned-url', {
+                    params: { fileName, contentType },
+                });
+                const { presignedUrl, accessUrl } = presignRes.data;
+
+                // 1-2. S3 업로드 (Authorization 제거 필요)
+                await fetch(presignedUrl, {
+                    method: "PUT",
+                    headers: { 'Content-Type': contentType },
+                    body: file,
+                });
+                uploadedUrls.push(accessUrl);
+            }
+
+            // 2. formData에 imageUrls 포함
+            const productData = {
+                name: formData.address.name,
+                phone: formData.address.phone,
+                address: formData.address.address,
+                addressDetail: formData.address.addressDetail,
+                zipCode: formData.address.zipCode,
+                brandId: String(formData.product.brand.brandId),
+                brandName: formData.product.brand.name,
+                categoryId: String(formData.product.category.categoryId),
+                category: `${formData.product.category.mainCategoryName} / ${formData.product.category.subCategoryName}`,
+                productsImageUrl: uploadedUrls
+            };
+
+            // 3. 상품 정보 저장 요청
+            await uploadProduct(productData);
+
+        } catch (err) {
+            if (err.response) {
+                console.error("응답 상태:", err.response.status);
+                console.error("서버 메시지:", err.response.data);
+            } else if (err.request) {
+                console.error("요청은 전송됐지만 응답 없음", err.request);
+            } else {
+                console.error("Axios 구성 에러", err.message);
+            }
+        }
     }
-  };
-
-  const postProductHandler = async () => {
-    try {
-      // S3 이미지 업로드
-      const uploadedUrls = [];
-
-      for (const image of formData.product.images) {
-        const file = image.file;
-        const { name: fileName, type: contentType } = file;
-
-        // 1-1. presigned URL 요청
-        const presignRes = await api.get('/s3/presigned-url', {
-          params: { fileName, contentType },
-        });
-        const { presignedUrl, accessUrl } = presignRes.data;
-
-        // 1-2. S3 업로드 (Authorization 제거 필요)
-        await fetch(presignedUrl, {
-          method: 'PUT',
-          headers: { 'Content-Type': contentType },
-          body: file,
-        });
-        uploadedUrls.push(accessUrl);
-      }
-
-      // 2. formData에 imageUrls 포함
-      const productData = {
-        name: formData.address.name,
-        phone: formData.address.phone,
-        address: formData.address.address,
-        addressDetail: formData.address.addressDetail,
-        zipCode: formData.address.zipCode,
-        brandId: String(formData.product.brand.brandId),
-        brandName: formData.product.brand.name,
-        categoryId: String(formData.product.category.categoryId),
-        category: `${formData.product.category.mainCategoryName} / ${formData.product.category.subCategoryName}`,
-        productsImageUrl: uploadedUrls,
-      };
-
-      // 3. 상품 정보 저장 요청
-      await uploadProduct(productData);
-    } catch (err) {
-      if (err.response) {
-        console.error('응답 상태:', err.response.status);
-        console.error('서버 메시지:', err.response.data);
-      } else if (err.request) {
-        console.error('요청은 전송됐지만 응답 없음', err.request);
-      } else {
-        console.error('Axios 구성 에러', err.message);
-      }
-    }
-  };
 
   return (
     <div className={styles.pageWrapper}>

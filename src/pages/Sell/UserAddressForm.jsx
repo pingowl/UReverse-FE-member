@@ -43,6 +43,20 @@ export default function UserAddressForm(){
         navigate('/sell/receipt');
     }
 
+    useEffect(() => {
+        const brand = formData?.product?.brand;
+        const category = formData?.product?.category;
+        const images = formData?.product?.images;
+
+        const isBrandEmpty = !brand || Object.keys(brand).length === 0;
+        const isCategoryEmpty = !category || Object.keys(category).length === 0;
+        const isImageCountInvalid = !images || images.length < 2;
+
+        if (isBrandEmpty || isCategoryEmpty || isImageCountInvalid) {
+        navigate('/sell/product');
+        }
+    }, [formData, navigate])
+
     return (
         <div className={styles.pageWrapper}>
             <div className={styles.content}>
