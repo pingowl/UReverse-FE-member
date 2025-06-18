@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: flex-start;
   background-color: #121212;
-  height: 1000px;
+  height: 1200px;
   padding: 30px 40px;
   box-sizing: border-box;
  overflow-y: auto; 
@@ -82,3 +82,12 @@
   margin-top: -20px; /* 이메일 인풋과의 간격 줄이기 */
   margin-bottom: 20px;
 }
+
+.pageTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #64C378;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+

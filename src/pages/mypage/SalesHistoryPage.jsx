@@ -47,15 +47,17 @@ const SalesHistoryPage = () => {
 
     return (
         <div className={styles.container}>
-            <h2 className={styles.title}>판매 내역</h2>
-            {salesList.length === 0 && !loading ? (
-                <p className={styles.empty}>판매 내역이 없습니다.</p>
-            ) : (
-                <>
-                    <SalesHistoryList salesList={salesList} />
-                    <div ref={observerRef} className={styles.observer}></div>
-                </>
-            )}
+            <div className={styles.innerBox}>
+                <h2 className={styles.title}>판매 내역</h2>
+                {salesList.length === 0 && !loading ? (
+                    <p className={styles.empty}>판매 내역이 없습니다.</p>
+                ) : (
+                    <>
+                        <SalesHistoryList salesList={salesList} />
+                        <div ref={observerRef} className={styles.observer}></div>
+                    </>
+                )}
+            </div>
         </div>
     );
 };

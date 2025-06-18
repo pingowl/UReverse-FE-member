@@ -12,6 +12,7 @@ import {
     getMyInfo,
     changePassword
 } from '../../api/member';
+import KakaoLinkButton from '../../component/button/KakaoLinkButton';
 
 export default function EditInfo() {
     const user = useRecoilValue(userState);
@@ -176,166 +177,179 @@ export default function EditInfo() {
     };
 
     return (
-    <div className={styles.wrapper}>
-      <div className={styles.formBox}>
-        <div className={styles.form}>
-          <LoginInput
-            type="email"
-            id="email"
-            label="이메일"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            onFocus={() => setFocusedInput('email')}
-            onBlur={() => setFocusedInput(null)}
-            isFocused={focusedInput === 'email'}
-          />
+        <div className={styles.wrapper}>
+            <div className={styles.formBox}>
+                <div className={styles.pageTitle}>내 정보 확인하기</div>
 
-          {emailChanged && !showPasswordCheck && (
-  <HoverEventButton
-    className={`${styles.actionButton} ${styles.passwordCheckButton}`}
-    text="비밀번호 확인하기"
-    onClick={() => setShowPasswordCheck(true)}
-    color="black"
-  />
-)}
+                <div className={styles.form}>
+                    <LoginInput
+                        type="email"
+                        id="email"
+                        label="이메일"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        onFocus={() => setFocusedInput('email')}
+                        onBlur={() => setFocusedInput(null)}
+                        isFocused={focusedInput === 'email'}
+                    />
 
-          {emailChanged && showPasswordCheck && (
-            <LoginInput
-              type="password"
-              id="password"
-              label="비밀번호 확인"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              onFocus={() => setFocusedInput('password')}
-              onBlur={() => setFocusedInput(null)}
-              isFocused={focusedInput === 'password'}
+                    {emailChanged && !showPasswordCheck && (
+                        <HoverEventButton
+                            className={`${styles.actionButton} ${styles.passwordCheckButton}`}
+                            text="비밀번호 확인하기"
+                            onClick={() => setShowPasswordCheck(true)}
+                            color="black"
+                        />
+                    )}
+
+                    {emailChanged && showPasswordCheck && (
+                        <LoginInput
+                            type="password"
+                            id="password"
+                            label="비밀번호 확인"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            onFocus={() => setFocusedInput('password')}
+                            onBlur={() => setFocusedInput(null)}
+                            isFocused={focusedInput === 'password'}
+                        />
+                    )}
+
+                    <LoginInput
+                        type="text"
+                        id="name"
+                        label="이름"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        onFocus={() => setFocusedInput('name')}
+                        onBlur={() => setFocusedInput(null)}
+                        isFocused={focusedInput === 'name'}
+                    />
+                    <LoginInput
+                        type="text"
+                        id="phone"
+                        label="휴대폰 번호"
+                        value={phone}
+                        onChange={(e) => setPhone(formatPhoneNumber(e.target.value))}
+                        onFocus={() => setFocusedInput('phone')}
+                        onBlur={() => setFocusedInput(null)}
+                        isFocused={focusedInput === 'phone'}
+                    />
+
+                    {showChangePwForm && (
+                        <>
+                            <LoginInput
+                                type="password"
+                                label="현재 비밀번호"
+                                value={currentPassword}
+                                onChange={(e) => setCurrentPassword(e.target.value)}
+                                onFocus={() => setFocusedInput('curPw')}
+                                onBlur={() => setFocusedInput(null)}
+                                isFocused={focusedInput === 'curPw'}
+                            />
+                            <LoginInput
+                                type="password"
+                                label="새 비밀번호"
+                                value={newPassword}
+                                onChange={(e) => setNewPassword(e.target.value)}
+                                onFocus={() => setFocusedInput('newPw')}
+                                onBlur={() => setFocusedInput(null)}
+                                isFocused={focusedInput === 'newPw'}
+                            />
+                            <LoginInput
+                                type="password"
+                                label="새 비밀번호 확인"
+                                value={newPasswordCheck}
+                                onChange={(e) => setNewPasswordCheck(e.target.value)}
+                                onFocus={() => setFocusedInput('newPwCheck')}
+                                onBlur={() => setFocusedInput(null)}
+                                isFocused={focusedInput === 'newPwCheck'}
+                            />
+                        </>
+                    )}
+                </div>
+
+
+                <div className={styles.kakaoLinkArea}>
+                    {user.kakaoLinked ? (
+                        <button className={styles.kakaoLinkedButton} disabled>
+                            <span className={styles.kakaoLabel}>카카오 계정 연동 완료</span>
+                        </button>
+                    ) : (
+                        <KakaoLinkButton />
+                    )}
+                </div>
+
+                <div className={styles.buttonArea}>
+                    <HoverEventButton
+                        className={styles.actionButton}
+                        text="수정"
+                        onClick={handleUpdate}
+                        color="black"
+                    />
+                    {!showChangePwForm && (
+                        <HoverEventButton
+                            className={styles.actionButton}
+                            text="비밀번호 변경하기"
+                            onClick={() => setShowChangePwForm(true)}
+                            color="#eeeeee"
+                        />
+                    )}
+                    {showChangePwForm && (
+                        <HoverEventButton
+                            className={styles.actionButton}
+                            text="비밀번호 변경 완료"
+                            onClick={handleChangePassword}
+                            color="black"
+                        />
+                    )}
+                    <HoverEventButton
+                        className={styles.actionButton}
+                        text="회원탈퇴"
+                        onClick={handleDelete}
+                        color="#eeeeee"
+                    />
+                </div>
+            </div>
+
+            {/* 탈퇴 확인 모달 */}
+            <ConfirmModal
+                visible={showModal}
+                message={'정말 탈퇴하시겠습니까?'}
+                onClose={() => setShowModal(false)}
+                onConfirm={handleConfirmDelete}
+                password={confirmPassword}
+                setPassword={setConfirmPassword}
+                showPasswordInput={true}
             />
-          )}
 
-          <LoginInput
-            type="text"
-            id="name"
-            label="이름"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            onFocus={() => setFocusedInput('name')}
-            onBlur={() => setFocusedInput(null)}
-            isFocused={focusedInput === 'name'}
-          />
-          <LoginInput
-            type="text"
-            id="phone"
-            label="휴대폰 번호"
-            value={phone}
-            onChange={(e) => setPhone(formatPhoneNumber(e.target.value))}
-            onFocus={() => setFocusedInput('phone')}
-            onBlur={() => setFocusedInput(null)}
-            isFocused={focusedInput === 'phone'}
-          />
+            {/* 실패 모달 */}
+            <ConfirmModal
+                visible={showErrorModal}
+                onClose={() => setShowErrorModal(false)}
+                onConfirm={() => setShowErrorModal(false)}
+                password=""
+                setPassword={() => { }}
+                isErrorOnly={true}
+                message={modalMessage}
+            />
 
-          {showChangePwForm && (
-            <>
-              <LoginInput
-                type="password"
-                label="현재 비밀번호"
-                value={currentPassword}
-                onChange={(e) => setCurrentPassword(e.target.value)}
-                onFocus={() => setFocusedInput('curPw')}
-                onBlur={() => setFocusedInput(null)}
-                isFocused={focusedInput === 'curPw'}
-              />
-              <LoginInput
-                type="password"
-                label="새 비밀번호"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-                onFocus={() => setFocusedInput('newPw')}
-                onBlur={() => setFocusedInput(null)}
-                isFocused={focusedInput === 'newPw'}
-              />
-              <LoginInput
-                type="password"
-                label="새 비밀번호 확인"
-                value={newPasswordCheck}
-                onChange={(e) => setNewPasswordCheck(e.target.value)}
-                onFocus={() => setFocusedInput('newPwCheck')}
-                onBlur={() => setFocusedInput(null)}
-                isFocused={focusedInput === 'newPwCheck'}
-              />
-            </>
-          )}
+            {/* 성공 모달 */}
+            <ConfirmModal
+                visible={showSuccessModal}
+                onClose={() => {
+                    setShowSuccessModal(false);
+                    navigate('/home');
+                }}
+                onConfirm={() => {
+                    setShowSuccessModal(false);
+                    navigate('/home');
+                }}
+                password=""
+                setPassword={() => { }}
+                isErrorOnly={true}
+                message={modalMessage}
+            />
         </div>
-
-        <div className={styles.buttonArea}>
-          <HoverEventButton
-            className={styles.actionButton}
-            text="수정"
-            onClick={handleUpdate}
-            color="black"
-          />
-          {!showChangePwForm && (
-            <HoverEventButton
-              className={styles.actionButton}
-              text="비밀번호 변경하기"
-              onClick={() => setShowChangePwForm(true)}
-              color="#eeeeee"
-            />
-          )}
-          {showChangePwForm && (
-            <HoverEventButton
-              className={styles.actionButton}
-              text="비밀번호 변경 완료"
-              onClick={handleChangePassword}
-              color="black"
-            />
-          )}
-          <HoverEventButton
-            className={styles.actionButton}
-            text="회원탈퇴"
-            onClick={handleDelete}
-            color="#eeeeee"
-          />
-        </div>
-      </div>
-
-      {/* 탈퇴 확인 모달 */}
-      <ConfirmModal
-        visible={showModal}
-        message={'정말 탈퇴하시겠습니까?'}
-        onClose={() => setShowModal(false)}
-        onConfirm={handleConfirmDelete}
-        password={confirmPassword}
-        setPassword={setConfirmPassword}
-        showPasswordInput={true}
-      />
-
-      {/* 실패 모달 */}
-      <ConfirmModal
-        visible={showErrorModal}
-        onClose={() => setShowErrorModal(false)}
-        onConfirm={() => setShowErrorModal(false)}
-        password=""
-        setPassword={() => {}}
-        isErrorOnly={true}
-        message={modalMessage}
-      />
-
-      {/* 성공 모달 */}
-      <ConfirmModal
-        visible={showSuccessModal}
-        onClose={() => {
-          setShowSuccessModal(false);
-          navigate('/home');
-        }}
-        onConfirm={() => {
-          setShowSuccessModal(false);
-          navigate('/home');
-        }}
-        password=""
-        setPassword={() => {}}
-        isErrorOnly={true}
-        message={modalMessage}
-      />
-    </div>
-  );
+    );
 }
