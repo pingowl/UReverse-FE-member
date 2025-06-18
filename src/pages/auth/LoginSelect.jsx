@@ -26,7 +26,7 @@ export default function LoginSelect() {
         />
         <HoverEventButton
           text="회원가입"
-          link="/sign-up"
+          link="/signup"
           width="w-full"
           height="h-12"
           color="white"
