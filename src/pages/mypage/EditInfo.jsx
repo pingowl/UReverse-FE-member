@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useNavigate } from 'react-router-dom';
 import { userState } from '../../atoms/userState';
-import CommonInput from '../../component/input/CommonInput';
+import LoginInput from '../../component/input/LoginInput';
 import HoverEventButton from '../../component/button/HoverEventButton';
 import ConfirmModal from '../../component/modal/MessageModal';
 import styles from './EditInfo.module.css';
 import {
     updateMemberInfo,
-    logout,
     deleteMember,
     getMyInfo,
     changePassword
@@ -31,11 +30,50 @@ export default function EditInfo() {
     const [showErrorModal, setShowErrorModal] = useState(false);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [modalMessage, setModalMessage] = useState('');
+    const [focusedInput, setFocusedInput] = useState(null);
 
     const [showChangePwForm, setShowChangePwForm] = useState(false);
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [newPasswordCheck, setNewPasswordCheck] = useState('');
+
+    useEffect(() => {
+        const fetchUserInfo = async () => {
+            try {
+                const res = await getMyInfo();
+                const {
+                    userId,
+                    email,
+                    name,
+                    phone,
+                    role,
+                    productStatus,
+                } = res;
+
+                setUser({
+                    userId,
+                    email,
+                    name,
+                    phone,
+                    role,
+                    isLoggedIn: true,
+                    productStatus,
+                });
+
+                setEmail(email);
+                setName(name);
+                setPhone(phone);
+            } catch (err) {
+                console.error("회원 정보 조회 실패", err);
+            }
+        };
+
+        // user.email이 비어 있을 때만 fetch
+        if (!user.email) {
+            fetchUserInfo();
+        }
+    }, []);
+
 
     useEffect(() => {
         setEmailChanged(email !== user.email);
@@ -87,17 +125,6 @@ export default function EditInfo() {
         }
     };
 
-    const handleLogout = async () => {
-        try {
-            await logout();
-            localStorage.removeItem('accessToken');
-            navigate('/login');
-        } catch (err) {
-            setModalMessage('로그아웃 실패');
-            setShowErrorModal(true);
-        }
-    };
-
     const handleDelete = () => {
         setConfirmPassword('');
         setShowModal(true);
@@ -139,149 +166,176 @@ export default function EditInfo() {
         }
     };
 
+    const formatPhoneNumber = (value) => {
+        return value
+            .replace(/[^\d]/g, '')
+            .replace(/(\d{3})(\d{1,4})(\d{0,4})/, (_, a, b, c) => {
+                return b ? (c ? `${a}-${b}-${c}` : `${a}-${b}`) : a;
+            })
+            .slice(0, 13);
+    };
 
     return (
-        <div className={styles.wrapper}>
-            <h2 className={styles.pageTitle}>마이페이지</h2>
+    <div className={styles.wrapper}>
+      <div className={styles.formBox}>
+        <div className={styles.form}>
+          <LoginInput
+            type="email"
+            id="email"
+            label="이메일"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            onFocus={() => setFocusedInput('email')}
+            onBlur={() => setFocusedInput(null)}
+            isFocused={focusedInput === 'email'}
+          />
 
-            <div className={styles.infoBox}>
-                <h3 className={styles.infoTitle}>내 정보</h3>
+          {emailChanged && !showPasswordCheck && (
+  <HoverEventButton
+    className={`${styles.actionButton} ${styles.passwordCheckButton}`}
+    text="비밀번호 확인하기"
+    onClick={() => setShowPasswordCheck(true)}
+    color="black"
+  />
+)}
 
-                <div className={styles.inputGroup}>
-                    <CommonInput
-                        label="아이디(이메일)"
-                        value={email}
-                        onChange={(e) => {
-                            setEmail(e.target.value);
-                            setEmailChanged(e.target.value !== user.email);
-                        }}
-                    />
-
-                    {emailChanged && !showPasswordCheck && (
-                        <HoverEventButton
-                            text="비밀번호 확인하기"
-                            onClick={() => setShowPasswordCheck(true)}
-                            color="black"
-                        />
-                    )}
-
-                    {emailChanged && showPasswordCheck && (
-                        <CommonInput
-                            label="비밀번호 확인"
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                    )}
-
-                    <CommonInput
-                        label="이름"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                    />
-                    <CommonInput
-                        label="전화번호"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                    />
-                </div>
-
-                <div className={styles.updateButton}>
-                    <HoverEventButton text="수정" onClick={handleUpdate} color="black" />
-                </div>
-            </div>
-
-            <div className={styles.actionButtons}>
-                <HoverEventButton
-                    text="로그아웃"
-                    onClick={handleLogout}
-                    color="#B7F56F"
-                />
-
-                {!showChangePwForm && (
-                    <HoverEventButton
-                        text="비밀번호 변경하기"
-                        onClick={() => setShowChangePwForm(true)}
-                        color="#eeeeee"
-                    />
-                )}
-
-                {showChangePwForm && (
-                    <div className={styles.inputGroup}>
-                        <CommonInput
-                            label="현재 비밀번호"
-                            type="password"
-                            value={currentPassword}
-                            onChange={(e) => setCurrentPassword(e.target.value)}
-                            placeholder="현재 비밀번호를 입력하세요"
-                        />
-                        <CommonInput
-                            label="새 비밀번호"
-                            type="password"
-                            value={newPassword}
-                            onChange={(e) => setNewPassword(e.target.value)}
-                            placeholder="새 비밀번호를 입력하세요"
-                        />
-                        <CommonInput
-                            label="새 비밀번호 확인"
-                            type="password"
-                            value={newPasswordCheck}
-                            onChange={(e) => setNewPasswordCheck(e.target.value)}
-                            placeholder="새 비밀번호를 다시 입력하세요"
-                        />
-                        <HoverEventButton
-                            text="비밀번호 변경 완료"
-                            onClick={handleChangePassword}
-                            color="black"
-                        />
-                    </div>
-                )}
-
-                <HoverEventButton
-                    text="회원탈퇴"
-                    onClick={handleDelete}
-                    color="#eeeeee"
-                />
-            </div>
-
-            {/* 탈퇴 확인 모달 */}
-            <ConfirmModal
-                visible={showModal}
-                message={"정말 탈퇴하시겠습니까?"}
-                onClose={() => setShowModal(false)}
-                onConfirm={handleConfirmDelete}
-                password={confirmPassword}
-                setPassword={setConfirmPassword}
-                showPasswordInput={true}
+          {emailChanged && showPasswordCheck && (
+            <LoginInput
+              type="password"
+              id="password"
+              label="비밀번호 확인"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              onFocus={() => setFocusedInput('password')}
+              onBlur={() => setFocusedInput(null)}
+              isFocused={focusedInput === 'password'}
             />
+          )}
 
-            {/* 실패 알림 모달 */}
-            <ConfirmModal
-                visible={showErrorModal}
-                onClose={() => setShowErrorModal(false)}
-                onConfirm={() => setShowErrorModal(false)}
-                password=""
-                setPassword={() => { }}
-                isErrorOnly={true}
-                message={modalMessage}
-            />
+          <LoginInput
+            type="text"
+            id="name"
+            label="이름"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            onFocus={() => setFocusedInput('name')}
+            onBlur={() => setFocusedInput(null)}
+            isFocused={focusedInput === 'name'}
+          />
+          <LoginInput
+            type="text"
+            id="phone"
+            label="휴대폰 번호"
+            value={phone}
+            onChange={(e) => setPhone(formatPhoneNumber(e.target.value))}
+            onFocus={() => setFocusedInput('phone')}
+            onBlur={() => setFocusedInput(null)}
+            isFocused={focusedInput === 'phone'}
+          />
 
-            {/* 성공 알림 모달 */}
-            <ConfirmModal
-                visible={showSuccessModal}
-                onClose={() => {
-                    setShowSuccessModal(false);
-                    navigate('/mypage');
-                }}
-                onConfirm={() => {
-                    setShowSuccessModal(false);
-                    navigate('/mypage');
-                }}
-                password=""
-                setPassword={() => { }}
-                isErrorOnly={true}
-                message={modalMessage}
-            />
+          {showChangePwForm && (
+            <>
+              <LoginInput
+                type="password"
+                label="현재 비밀번호"
+                value={currentPassword}
+                onChange={(e) => setCurrentPassword(e.target.value)}
+                onFocus={() => setFocusedInput('curPw')}
+                onBlur={() => setFocusedInput(null)}
+                isFocused={focusedInput === 'curPw'}
+              />
+              <LoginInput
+                type="password"
+                label="새 비밀번호"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                onFocus={() => setFocusedInput('newPw')}
+                onBlur={() => setFocusedInput(null)}
+                isFocused={focusedInput === 'newPw'}
+              />
+              <LoginInput
+                type="password"
+                label="새 비밀번호 확인"
+                value={newPasswordCheck}
+                onChange={(e) => setNewPasswordCheck(e.target.value)}
+                onFocus={() => setFocusedInput('newPwCheck')}
+                onBlur={() => setFocusedInput(null)}
+                isFocused={focusedInput === 'newPwCheck'}
+              />
+            </>
+          )}
         </div>
-    );
+
+        <div className={styles.buttonArea}>
+          <HoverEventButton
+            className={styles.actionButton}
+            text="수정"
+            onClick={handleUpdate}
+            color="black"
+          />
+          {!showChangePwForm && (
+            <HoverEventButton
+              className={styles.actionButton}
+              text="비밀번호 변경하기"
+              onClick={() => setShowChangePwForm(true)}
+              color="#eeeeee"
+            />
+          )}
+          {showChangePwForm && (
+            <HoverEventButton
+              className={styles.actionButton}
+              text="비밀번호 변경 완료"
+              onClick={handleChangePassword}
+              color="black"
+            />
+          )}
+          <HoverEventButton
+            className={styles.actionButton}
+            text="회원탈퇴"
+            onClick={handleDelete}
+            color="#eeeeee"
+          />
+        </div>
+      </div>
+
+      {/* 탈퇴 확인 모달 */}
+      <ConfirmModal
+        visible={showModal}
+        message={'정말 탈퇴하시겠습니까?'}
+        onClose={() => setShowModal(false)}
+        onConfirm={handleConfirmDelete}
+        password={confirmPassword}
+        setPassword={setConfirmPassword}
+        showPasswordInput={true}
+      />
+
+      {/* 실패 모달 */}
+      <ConfirmModal
+        visible={showErrorModal}
+        onClose={() => setShowErrorModal(false)}
+        onConfirm={() => setShowErrorModal(false)}
+        password=""
+        setPassword={() => {}}
+        isErrorOnly={true}
+        message={modalMessage}
+      />
+
+      {/* 성공 모달 */}
+      <ConfirmModal
+        visible={showSuccessModal}
+        onClose={() => {
+          setShowSuccessModal(false);
+          navigate('/home');
+        }}
+        onConfirm={() => {
+          setShowSuccessModal(false);
+          navigate('/home');
+        }}
+        password=""
+        setPassword={() => {}}
+        isErrorOnly={true}
+        message={modalMessage}
+      />
+    </div>
+  );
 }

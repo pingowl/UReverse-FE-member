@@ -3,6 +3,7 @@
   min-height: 100vh;
   padding: 40px;
   color: white;
+    justify-content: center;
 }
 
 .heading {
