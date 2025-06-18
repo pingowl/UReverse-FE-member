@@ -25,6 +25,8 @@ import NotificationPage from './pages/notification/NotificationPage';
 import LandingPage from './pages/LandingPage';
 import KakaoLinkCallback from './pages/mypage/KakaoLinkCallback';
 import VerifyEmailPage from './pages/auth/VerifyEmailPage';
+import PrivateRoute from './component/routes/PrivateRoute';
+import PublicRoute from './component/routes/PublicRoute';
 
 const router = createBrowserRouter([
   {
@@ -32,12 +34,42 @@ const router = createBrowserRouter([
     element: <Root />,
     errorElement: <></>,
     children: [
-      { path: "/", element: <LandingPage /> },
-      { path: "/login", element: <LoginForm /> },
-      { path: '/signup', element: <SignupForm /> },
-      { path: '/recovery-password', element: <RecoveryPasswordPage /> },
       {
-        element: <MainLayout />,
+        path: '/',
+        element: (
+            <LandingPage />
+        ),
+      },
+      {
+        path: '/login',
+        element: (
+          <PublicRoute>
+            <LoginForm />
+          </PublicRoute>
+        ),
+      },
+      {
+        path: '/signup',
+        element: (
+          <PublicRoute>
+            <SignupForm />
+          </PublicRoute>
+        ),
+      },
+      {
+        path: '/recovery-password',
+        element: (
+          <PublicRoute>
+            <RecoveryPasswordPage />
+          </PublicRoute>
+        ),
+      },
+      {
+        element: (
+          <PrivateRoute>
+            <MainLayout />
+          </PrivateRoute>
+        ),
         children: [
           { index: true, path: "/home", element: <Home /> },
           { path: "/mypage", element: <MyPageHome /> },
@@ -57,7 +89,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/sell',
-        element: <CommonLayout />,
+        element: (
+          <PrivateRoute>
+            <CommonLayout />
+          </PrivateRoute>
+        ),
         children: [
           { path: 'product', element: <ProductInfoForm /> },
           { path: 'address', element: <UserAddressForm /> },
