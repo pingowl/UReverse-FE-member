@@ -2,7 +2,7 @@ import api from './axiosInstance';
 
 export const login = async (email, password) => {
   const response = await api.post(
-    'http://localhost:8080/api/v1/auth/login',
+    '/auth/login',
     { email, password },
     {
       withCredentials: true, // 쿠키에 refreshToken 저장 위해 필요
@@ -13,10 +13,7 @@ export const login = async (email, password) => {
 
 export const signup = async (data) => {
   try {
-    const response = await api.post(
-      'http://localhost:8080/api/v1/auth/sign-up',
-      data
-    );
+    const response = await api.post('/auth/sign-up', data);
     return response.data; // success: true일 때 전체 응답 반환
   } catch (error) {
     // 백엔드에서 내려주는 구조를 추출
@@ -46,6 +43,6 @@ export const signup = async (data) => {
 };
 
 export const recoverPassword = async (email) => {
-  const res = await api.post('/api/v1/auth/recovery/password', { email });
+  const res = await api.post('/auth/recovery/password', { email });
   return res.data.response;
 };
