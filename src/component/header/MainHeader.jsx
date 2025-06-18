@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { userState } from '../../atoms/userState';
 import { authState } from '../../atoms/authState';
 import { logout } from '../../api/member'
@@ -14,6 +14,7 @@ export default function MainHeader() {
   const navigate = useNavigate();
   const setUser = useSetRecoilState(userState);
   const setAuth = useSetRecoilState(authState);
+  const auth = useRecoilValue(authState);
 
   const handleLogout = async () => {
     try {
@@ -27,14 +28,22 @@ export default function MainHeader() {
     }
   };
 
+  const handleLogoClick = () => {
+    if (auth?.accessToken) {
+      navigate('/home'); // 로그인 유저 → /home
+    } else {
+      navigate('/');     // 비로그인 유저 → /
+    }
+  };
+
   return (
     <header className={styles.header}>
-      <div className={styles.logoText} onClick={() => navigate('/')}>
+      <div className={styles.logoText} onClick={handleLogoClick}>
         U:REVERSE
       </div>
 
       <div className={styles.iconGroup}>
-        <NotificationIcon/>
+        <NotificationIcon />
         <button className={styles.iconButton} onClick={() => navigate('/mypage/edit')}>
           <img src={settingsIcon} alt="마이페이지" />
         </button>
