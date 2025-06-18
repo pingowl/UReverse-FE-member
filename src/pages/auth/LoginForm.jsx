@@ -68,7 +68,7 @@ export default function LoginForm() {
 
                     <div className={styles.signupLink}>
                         아직 회원이 아니신가요?&nbsp;
-                        <span onClick={() => navigate('/signup')}>회원가입</span>
+                        <span onClick={() => navigate('/sign-up')}>회원가입</span>
                     </div>
                 </div>
             </div>

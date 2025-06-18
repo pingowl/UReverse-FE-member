@@ -18,11 +18,13 @@ export default function InfoModal({
 
   return (
     <AutoSizeModal onClose={onClose}>
-      <div className={styles.modalTitle}>{title}</div>
-      <div className={styles.modalMessage}>{message}</div>
-      <button onClick={handleClick} className={styles.modalButton}>
-        {buttonText}
-      </button>
+      <div className={styles.modalWrapper}>
+        <div className={styles.modalTitle}>{title}</div>
+        <div className={styles.modalMessage}>{message}</div>
+        <button onClick={handleClick} className={styles.modalButton}>
+          {buttonText}
+        </button>
+      </div>
     </AutoSizeModal>
   );
 }

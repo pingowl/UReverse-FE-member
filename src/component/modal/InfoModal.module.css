@@ -1,31 +1,45 @@
-.modalTitle {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
+.modalWrapper {
+  background-color: #FAFAFA;
+  border-radius: 12px;
+  padding: 28px 24px;
+  width: 200px;                
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
   text-align: center;
+}
+
+.modalTitle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #121212;
 }
 
 .modalMessage {
-  font-size: 1rem;
-  line-height: 1.5;
-  text-align: center;
-  margin-bottom: 1.5rem;
-  white-space: pre-line;
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.45;
+  margin-bottom: 24px;
+  white-space: normal;         
+  word-break: keep-all;        
 }
 
 .modalButton {
-  display: block;
-  margin: 0 auto;
-  padding: 10px 20px;
-  font-size: 1rem;
-  background-color: #333;
-  color: white;
-  border: none;
+  display: inline-block;
+  padding: 10px 24px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  background-color: transparent;
+  color: #64C378;
+  border: 1px solid #64C378;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s ease-in-out;
+
+  white-space: nowrap;
+  min-width: 96px;
 }
 
 .modalButton:hover {
-  background-color: #555;
+  background-color: #64C378;
+  color: #121212;          
 }

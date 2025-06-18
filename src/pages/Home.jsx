@@ -19,14 +19,14 @@ export default function Home() {
     const auth = useRecoilValue(authState);
     const navigate = useNavigate();
 
-   useEffect(() => {
-  const shouldRedirect =
-    !auth.accessToken && user.isLoggedIn !== true;
+    useEffect(() => {
+        const shouldRedirect =
+            !auth.accessToken && user.isLoggedIn !== true;
 
-  if (shouldRedirect) {
-    navigate('/landing');
-  }
-}, [auth.accessToken, user.isLoggedIn, navigate]);
+        if (shouldRedirect) {
+            navigate('/');
+        }
+    }, [auth.accessToken, user.isLoggedIn, navigate]);
 
 
 

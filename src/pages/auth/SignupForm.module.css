@@ -1,55 +1,94 @@
-.container {
+.wrapper {
   display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-}
-
-.content {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  padding: 0 1.5rem;
+  align-items: center;
+  background-color: #121212;
+  min-height: 100vh;
+  padding: 0 40px;
+  box-sizing: border-box;
+}
+
+.loginBox {
+  width: 100%;
+  max-width: 400px;
+}
+
+.brand {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #64C378;
   text-align: center;
+  margin-bottom: 0.5rem;
 }
 
-.title {
-  font-size: 1.875rem;
-  font-weight: bold;
-  margin: 1rem 0;
+.sub {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #999;
+  margin-bottom: 32px;
 }
 
-.buttonArea {
-  position: absolute;
-  bottom: 60px;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  padding: 0 20px;
-  max-width: 500px;
-  min-width: 100px;
-  z-index: 100;
+.form {
+  padding-top: 20px;
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-/* 입력 창 css */
-.inputGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 0 20px;
-  min-width: 150px;
-  margin-top: 1.5rem;
-}
-
 .emailButtonGroup {
   display: flex;
-  justify-content: space-between;
   gap: 10px;
+  margin-bottom: 20px;
+  margin-top: -20px;
+}
+
+.cta {
+  background-color: #64C378;
+  color: #121212;
+  font-weight: 600;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
   width: 100%;
-  margin-top: 0; /* 위는 LoginInput과 gap 맞추기 위해 0 */
-  margin-bottom: 10px; /* 아래도 다른 입력창과 동일한 간격 */
+}
+
+.cta:hover {
+  background-color: #4CAF6E;
+}
+
+.secondary {
+  background-color: transparent;
+  color: #64C378;
+  border: 1px solid #64C378;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.secondary:hover {
+  background-color: rgba(100, 195, 120, 0.1);
+}
+
+.signupLink {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #888;
+  margin-top: 24px;
+}
+
+.signupLink span {
+  color: #64C378;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.signupLink span:hover {
+  text-decoration: underline;
 }
