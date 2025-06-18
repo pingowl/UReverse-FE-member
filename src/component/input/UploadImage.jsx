@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState } from 'react';
+import api from '../../api/axiosInstance';
 
 function UploadImage() {
   const [file, setFile] = useState(null);
-  const [uploadedUrl, setUploadedUrl] = useState("");
+  const [uploadedUrl, setUploadedUrl] = useState('');
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -17,7 +17,7 @@ function UploadImage() {
 
     try {
       // 1. Presigned URL 요청
-      const { data } = await axios.get(`/api/v1/s3/presigned-url`, {
+      const { data } = await api.get(`/s3/presigned-url`, {
         params: {
           fileName,
           contentType: fileType,
@@ -27,15 +27,15 @@ function UploadImage() {
       const { presignedUrl, accessUrl } = data;
 
       // 2. S3에 업로드
-      await axios.put(presignedUrl, file, {
-        headers: { "Content-Type": fileType },
+      await api.put(presignedUrl, file, {
+        headers: { 'Content-Type': fileType },
       });
 
       // 3. 업로드된 이미지 URL 저장
       setUploadedUrl(accessUrl);
     } catch (err) {
-      console.error("Upload failed:", err);
-      alert("Upload failed. Check console for details.");
+      console.error('Upload failed:', err);
+      alert('Upload failed. Check console for details.');
     }
   };
 
@@ -51,7 +51,7 @@ function UploadImage() {
             {uploadedUrl}
           </a>
           <br />
-          <img src={uploadedUrl} alt="uploaded" style={{ maxWidth: "300px" }} />
+          <img src={uploadedUrl} alt="uploaded" style={{ maxWidth: '300px' }} />
         </div>
       )}
     </div>

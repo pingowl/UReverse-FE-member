@@ -112,9 +112,8 @@ export default function SignupForm() {
   };
 
   const handleSendVerificationEmail = async () => {
-    const redirectUrl = `${window.location.origin}/verify-email`;
     try {
-      await sendVerificationEmail(form.email, redirectUrl);
+      await sendVerificationEmail(form.email);
       setModalInfo({
         show: true,
         title: '인증 메일 발송',
@@ -141,7 +140,9 @@ export default function SignupForm() {
             id="name"
             label="이름"
             value={form.name}
-            onChange={(e) => setForm((prev) => ({ ...prev, name: e.target.value }))}
+            onChange={(e) =>
+              setForm((prev) => ({ ...prev, name: e.target.value }))
+            }
             onFocus={() => setFocusedInput('name')}
             onBlur={() => setFocusedInput(null)}
             isFocused={focusedInput === 'name'}
@@ -180,7 +181,9 @@ export default function SignupForm() {
             id="password"
             label="비밀번호"
             value={form.password}
-            onChange={(e) => setForm((prev) => ({ ...prev, password: e.target.value }))}
+            onChange={(e) =>
+              setForm((prev) => ({ ...prev, password: e.target.value }))
+            }
             onFocus={() => setFocusedInput('password')}
             onBlur={() => setFocusedInput(null)}
             isFocused={focusedInput === 'password'}
@@ -191,7 +194,9 @@ export default function SignupForm() {
             id="phone"
             label="전화번호"
             value={form.phone}
-            onChange={(e) => setForm((prev) => ({ ...prev, phone: e.target.value }))}
+            onChange={(e) =>
+              setForm((prev) => ({ ...prev, phone: e.target.value }))
+            }
             onFocus={() => setFocusedInput('phone')}
             onBlur={() => setFocusedInput(null)}
             isFocused={focusedInput === 'phone'}
@@ -213,8 +218,20 @@ export default function SignupForm() {
       </div>
 
       {/* 모달 */}
-      {modalInfo.show && <InfoModal title={modalInfo.title} message={modalInfo.message} onClose={() => setModalInfo({ show: false, title: '', message: '' })} />}
-      {errorModalOpen && <InfoModal title="회원가입 실패" message={errorMessage} onClose={() => setErrorModalOpen(false)} />}
+      {modalInfo.show && (
+        <InfoModal
+          title={modalInfo.title}
+          message={modalInfo.message}
+          onClose={() => setModalInfo({ show: false, title: '', message: '' })}
+        />
+      )}
+      {errorModalOpen && (
+        <InfoModal
+          title="회원가입 실패"
+          message={errorMessage}
+          onClose={() => setErrorModalOpen(false)}
+        />
+      )}
       {signupSuccessModalOpen && (
         <InfoModal
           title="회원가입 성공"
