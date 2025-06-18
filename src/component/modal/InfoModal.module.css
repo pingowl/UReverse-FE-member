@@ -1,9 +1,7 @@
 .modalWrapper {
-  background-color: #FAFAFA;
   border-radius: 12px;
   padding: 28px 24px;
   width: 200px;                
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
   text-align: center;
 }
 

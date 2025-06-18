@@ -1,38 +1,76 @@
 .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.4);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
 }
 
 .modal {
-    background: #fff;
-    border-radius: 12px;
-    padding: 24px 20px;
-    width: 300px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  background-color: #FAFAFA;     
+  border-radius: 12px;
+  padding: 28px 24px;
+  width: 300px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.modalTitle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #121212;              
+}
+
+.modalMessage {
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.45;
+  margin-bottom: 24px;
+  white-space: normal;
+  word-break: keep-all;
 }
 
 .input {
-    width: 100%;
-    margin: 12px 0;
-    padding: 12px;
-    border-radius: 0.75rem;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    font-size: 14px;
+  width: 100%;
+  margin: 12px 0;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-size: 14px;
+  color: #121212;
+  background-color: #fff;
 }
 
 .buttonGroup {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    /* 버튼 사이 간격 */
-    margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.modalButton {
+  display: inline-block;
+  padding: 10px 24px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  background-color: transparent;
+  color: #64C378;
+  border: 1px solid #64C378;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  white-space: nowrap;
+  min-width: 96px;
+}
+
+.modalButton:hover {
+  background-color: #64C378;
+  color: #121212;
 }
