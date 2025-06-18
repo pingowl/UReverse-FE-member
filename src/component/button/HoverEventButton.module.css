@@ -15,10 +15,23 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
 
-  /* ✅ 추가 */
   display: flex;
   align-items: center;
   justify-content: center;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.white {
+  color: #888;
+  border: none;
+  
+}
+.white:hover{
+  transition: background-color 0.3s ease, color 0.3s ease;
+  color: #64C378;
 }
 
 .button:hover {
