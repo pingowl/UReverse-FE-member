@@ -5,7 +5,6 @@ import Home from './pages/Home';
 import MainLayout from './layout/MainLayout';
 import NoAlarmLayout from './layout/NoAlarmLayout';
 import CommonLayout from './layout/CommonLayout';
-import LoginSelect from './pages/auth/LoginSelect';
 import LoginForm from './pages/auth/LoginForm';
 import SignupForm from './pages/auth/SignupForm';
 import ProductInfoForm from './pages/Sell/ProductInfoForm';
@@ -23,8 +22,11 @@ import RecoveryPasswordPage from './pages/auth/RecoveryPasswordPage';
 import SalesHistoryPage from './pages/mypage/SalesHistoryPage';
 import SalesCompletePage from './pages/mypage/SalesCompletePage';
 import NotificationPage from './pages/notification/NotificationPage';
+import LandingPage from './pages/LandingPage';
 import KakaoLinkCallback from './pages/mypage/KakaoLinkCallback';
 import VerifyEmailPage from './pages/auth/VerifyEmailPage';
+import PrivateRoute from './component/routes/PrivateRoute';
+import PublicRoute from './component/routes/PublicRoute';
 
 const router = createBrowserRouter([
   {
@@ -33,31 +35,66 @@ const router = createBrowserRouter([
     errorElement: <></>,
     children: [
       {
-        element: <MainLayout />,
+        path: '/',
+        element: (
+            <LandingPage />
+        ),
+      },
+      {
+        path: '/login',
+        element: (
+          <PublicRoute>
+            <LoginForm />
+          </PublicRoute>
+        ),
+      },
+      {
+        path: '/signup',
+        element: (
+          <PublicRoute>
+            <SignupForm />
+          </PublicRoute>
+        ),
+      },
+      {
+        path: '/recovery-password',
+        element: (
+          <PublicRoute>
+            <RecoveryPasswordPage />
+          </PublicRoute>
+        ),
+      },
+      {
+        element: (
+          <PrivateRoute>
+            <MainLayout />
+          </PrivateRoute>
+        ),
         children: [
-          { index: true, element: <Home /> },
-          { path: '/mypage', element: <MyPageHome /> },
-          { path: '/mypage/edit', element: <EditInfo /> },
-          { path: '/mypage/points', element: <PointHistoryPage /> },
-          { path: '/mypage/sales', element: <SalesHistoryPage /> },
-          { path: '/mypage/sales/complete', element: <SalesCompletePage /> },
-          { path: '/notifications', element: <NotificationPage /> },
-        ],
+          { index: true, path: "/home", element: <Home /> },
+          { path: "/mypage", element: <MyPageHome /> },
+          { path: "/mypage/edit", element: <EditInfo /> },
+          { path: "/my-page/points", element: <PointHistoryPage /> },
+          { path: "/my-page/sales/tracking", element: <SalesHistoryPage /> },
+          { path: "/my-page/sales", element: <SalesCompletePage /> },
+          { path: "/notifications", element: <NotificationPage /> },
+        ]
       },
       {
         element: <NoAlarmLayout />,
         children: [
-          { path: '/login', element: <LoginSelect /> },
-          { path: '/login/form', element: <LoginForm /> },
-          { path: '/signup', element: <SignupForm /> },
-          { path: '/recovery-password', element: <RecoveryPasswordPage /> },
           { path: '/kakao/callback', element: <KakaoLinkCallback /> },
           { path: '/signup/email-verified', element: <VerifyEmailPage /> },
         ],
       },
       {
         path: '/sell',
-        element: <CommonLayout />,
+        element: (
+          <PrivateRoute>
+            {/* <CommonLayout /> */}
+            <MainLayout />
+          </PrivateRoute>
+        ),
         children: [
           { path: 'product', element: <ProductInfoForm /> },
           { path: 'address', element: <UserAddressForm /> },
@@ -73,13 +110,12 @@ function App() {
   const [auth, setAuth] = useRecoilState(authState);
 
   useEffect(() => {
-    // Axios 인스턴스가 사용할 인증 상태 관리 함수 등록
     setAuthStore({
       getAccessToken: () => auth.accessToken,
       setAuth: ({ accessToken, role }) => setAuth({ accessToken, role }),
       resetAuth: () => setAuth({ accessToken: null, role: null }),
     });
-  }, [auth]);
+  }, []);
 
   return <RouterProvider router={router} />;
 }

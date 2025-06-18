@@ -6,9 +6,23 @@
 }
 
 .title {
+  position: relative;
   font-weight: bold;
   font-size: 15px;
   margin-bottom: 6px;
+  padding-left: 12px;
+}
+
+.unread::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  background-color: red;
+  border-radius: 50%;
 }
 
 .message {

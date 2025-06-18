@@ -20,7 +20,7 @@ function KakaoLinkButton() {
 
     const encodedState = btoa(JSON.stringify(stateObject));
 
-    const kakaoAuthUrl = `http://localhost:8080/api/v1/oauth/kakao?state=${encodedState}`;
+    const kakaoAuthUrl = `${process.env.REACT_APP_BASE_URL}/api/v1/oauth/kakao?state=${encodedState}`;
     window.location.href = kakaoAuthUrl;
   };
 

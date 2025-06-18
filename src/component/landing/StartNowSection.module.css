@@ -1,0 +1,42 @@
+.section {
+  background-color: #121212;
+  color: #F5F5F5;
+  padding: 48px 20px;
+  text-align: center;
+}
+
+.content {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.highlight {
+  color: #64C378; /* 환경 강조색 */
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: #AAAAAA;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+.button {
+  background-color: transparent;
+  color: #64C378;
+  border: 1px solid #64C378;
+  border-radius: 6px;
+  padding: 12px 24px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  background-color: rgba(100, 195, 120, 0.1);
+}

@@ -1,53 +1,46 @@
+:root {
+  --green: #64C378;
+  --gray: #ccc;
+}
+
 .button {
-  width: 100%;
-  height: 3rem;
-  text-align: center;
-  border: none;
-  border-radius: 0.75rem;
+  width: 100%; 
+  background-color: transparent;
+  color: var(--green);
+  border: 1px solid var(--green);
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 
-  /* transition: box-shadow 0.2s ease; */
-  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* black 스타일 */
-.black {
-  background-color: black;
-  color: white;
-}
-.black:hover {
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-  background-color: white;
-  color: black
-}
-
-/* white 스타일 */
 .white {
-  background-color: white;
-  color: #555;
+  color: #888;
+  border: none;
+  
 }
-.white:hover {
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-  color: black;
-  background-color: #fafafa;
-}
-
-/* green 스타일 */
-.green {
-  background-color: #bae54d;
-  color: #777;
-}
-.green:hover {
-  /* 사용자 정의: hover 스타일 설정 */
-  background-color: #bae54d;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-  color: black;
+.white:hover{
+  transition: background-color 0.3s ease, color 0.3s ease;
+  color: #64C378;
 }
 
-/* blocked 스타일 */
-.blocked {
-  background-color: #ccc;
-  color: white;
-  cursor: auto;
+.button:hover {
+  background-color: rgba(100, 195, 120, 0.1);
+}
+
+.disabled {
+  background-color: var(--gray);
+  color: #666;
+  border: none;
+  cursor: not-allowed;
 }

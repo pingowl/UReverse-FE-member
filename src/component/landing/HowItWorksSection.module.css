@@ -1,0 +1,88 @@
+.section {
+  background-color: #121212; /* 딥 블랙 */
+  color: #F5F5F5; /* 기본 텍스트 */
+  padding: 48px 20px;
+}
+
+.title {
+  font-size: 1.5rem;
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ✅ 등장 애니메이션용 */
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stepBox {
+  background-color: #1E1E1E;
+  border: 1px solid #2C2C2C;
+  padding: 24px;
+  border-radius: 12px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.6s ease forwards;
+}
+
+.stepBox:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.stepBox:nth-child(2) {
+  animation-delay: 0.3s;
+}
+.stepBox:nth-child(3) {
+  animation-delay: 0.5s;
+}
+.stepBox:nth-child(4) {
+  animation-delay: 0.7s;
+}
+
+.stepBox:hover {
+  transform: translateY(-4px);
+  border-color: #64C378; /* 환경 강조색 */
+}
+
+.stepNumber {
+  font-weight: bold;
+  font-size: 1rem;
+  color: #64C378;
+}
+
+.stepTitle {
+  font-size: 1.2rem;
+  margin-top: 8px;
+  margin-bottom: 4px;
+  color: #F5F5F5;
+}
+
+.stepDesc {
+  color: #AAAAAA;
+  font-size: 0.95rem;
+}
+
+.stepHint {
+  margin-top: 6px;
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.totalTime {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #64C378;
+}

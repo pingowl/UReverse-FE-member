@@ -1,0 +1,62 @@
+.statusBox {
+  background-color: white;
+  padding: 16px 20px;
+  border-radius: 0.75rem;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.statusTitle {
+  font-weight: bold;
+  margin-bottom: 25px;
+  font-size: 15px;
+  color: #555;
+}
+
+.statusRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 4px;
+  padding: 0 2px;
+}
+
+.statusItem {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+}
+
+.statusGrid {
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  /* 6개 항목 + 5개 화살표 */
+  grid-template-rows: auto auto;
+  gap: 4px;
+  text-align: center;
+  align-items: center;
+}
+
+.statusCount {
+  font-size: clamp(10px, 2.2vw, 14px);
+  font-weight: bold;
+  color: #64C378;
+  line-height: 1;
+}
+
+.statusLabel {
+  font-size: clamp(8px, 1.4vw, 10px);
+  color: #888;
+  white-space: normal;
+  word-break: keep-all;
+  line-height: 1.2;
+}
+
+.statusArrow {
+  font-size: clamp(10px, 1.5vw, 12px);
+  color: #aaa;
+  padding: 0 4px;
+}

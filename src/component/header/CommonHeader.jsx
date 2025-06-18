@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./CommonHeader.module.css";
 import notificationIcon from "../../assets/icon-notification-bell.png"
 import userIcon from "../../assets/icon-user.png"
+import NotificationIcon from '../icon/NotificationIcon';
 
 export default function NoAlarmHeader () {
     const location = useLocation();
@@ -36,9 +37,7 @@ export default function NoAlarmHeader () {
 
             {/* 오른쪽: 아이콘 영역 */}
             <div className={styles.iconGroup}>
-                <button className={styles.iconButton} aria-label="알림" onClick={() => navigate('/notifications')}>
-                    <img src={notificationIcon} alt="alarm" className={styles.image} />
-                </button>
+                <NotificationIcon/>
                 <button className={styles.iconButton} aria-label="마이페이지" onClick={() => navigate('/mypage')}>
                     <img src={userIcon} alt="myPage" className={styles.image} />
                 </button>

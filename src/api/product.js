@@ -1,11 +1,11 @@
 import api from './axiosInstance';
 
 /**
- * @param 
- * @returns 
+ * @param
+ * @returns
  */
 export async function uploadProduct(productData) {
-    const response = await api.post('/api/v1/members/product', productData);
+  const response = await api.post('/members/product', productData);
 
-    return response.data.response;
+  return response.data.response;
 }

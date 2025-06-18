@@ -1,48 +1,41 @@
 .inputWrapper {
-    position: relative;
-    width: 100%;
-    margin-bottom: 16px;
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  overflow: visible;
 }
 
 .floatingLabel {
-    position: absolute;
-    top: 50%;
-    left: 16px;
-    transform: translateY(-50%);
-    font-size: 1rem;
-    font-weight: 600;
-    pointer-events: none;
-    transition: color 0.2s ease;
+  position: absolute;
+  top: -20px;
+  left: 16px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  pointer-events: none;
+  color: rgba(255, 255, 255, 0.5);
+  transition: color 0.2s ease;
 }
 
-/* focus 상태일 때 라벨 색상 */
 .labelFocused {
-    color: #000;
-}
-
-/* 비활성 상태일 때 연한 색상 */
-.labelUnfocused {
-    color: #999;
+  color: #64C378;
 }
 
 .inputField {
-    width: 100%;
-    height: 3rem;
-    padding: 0 1rem;
-    padding-left: 5rem; /* 라벨 공간 확보 */
-    border-width: 1.5px;
-    border-style: solid;
-    border-radius: 9999px;
-    font-size: 1rem;
-    outline: none;
-    box-sizing: border-box;
-    transition: border-color 0.2s ease;
+  width: 100%;
+  height: 56px;
+  padding: 16px;
+  background-color: #1E1E1E;
+  color: #fff;
+  border: 1px solid #444;
+  border-radius: 12px;
+  font-size: 1rem;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .focused {
-    border-color: #000;
-}
-
-.unfocused {
-    border-color: #ccc;
+  border: 2px solid #64C378;
+  box-shadow: 0 0 0 2px rgba(100, 195, 120, 0.4);
 }
