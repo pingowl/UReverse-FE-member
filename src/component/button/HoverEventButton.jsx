@@ -19,6 +19,7 @@ export default function HoverEventButton({
   onClick,
   link,
   className = '',
+  color,
   disabled = false,
 }) {
   const navigate = useNavigate();
@@ -36,7 +37,11 @@ export default function HoverEventButton({
     <button
       onClick={handleClick}
       disabled={disabled}
-      className={`${styles.button} ${disabled ? styles.disabled : ''} ${className}`}
+      className={`
+        ${styles.button} 
+        ${color === 'white' ? styles.white : ''} 
+        ${disabled ? styles.disabled : ''} 
+        ${className}`}
     >
       {text}
     </button>

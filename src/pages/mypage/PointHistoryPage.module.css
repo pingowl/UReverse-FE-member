@@ -1,13 +1,15 @@
 .wrapper {
-    padding: 20px;
-    background-color: #f8f8f8;
+    padding: 30px 40px;
+    background-color: #121212;
     min-height: 100vh;
+    color: #fff;
 }
 
 .title {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 16px;
+       color: #64C378;
 }
 
 .totalCard {
@@ -27,7 +29,7 @@
 .total {
     font-size: 24px;
     font-weight: bold;
-    color: #C475A3;
+    color: #64C378;
 }
 
 .loadingWrapper {
@@ -46,4 +48,10 @@
 .observer {
   height: 1px;
   margin-bottom: 80px;
+}
+
+.innerBox {
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
 }

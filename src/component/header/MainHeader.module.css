@@ -2,6 +2,7 @@
  box-sizing: border-box;
   width: 100%;
   padding: 20px 30px;
+  height: 60px;
   background-color: #1e1e1e;                
   border-bottom: 2px solid #333;
   display: flex;
@@ -33,7 +34,7 @@
 
 .iconButton img {
   height: 20px;
-  filter: invert(1);            /* ✅ 흰색으로 반전 */
+  filter: invert(1);            /* 흰색으로 반전 */
   transition: opacity 0.2s ease;
 }
 

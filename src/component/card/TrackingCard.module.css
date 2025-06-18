@@ -1,53 +1,62 @@
-.card {
-  background-color: #f5f5f5;
+.statusBox {
+  background-color: white;
   padding: 16px 20px;
-  border-radius: 12px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-  margin-bottom: 20px;
+  border-radius: 0.75rem;
+  margin-bottom: 24px;
   text-align: center;
 }
 
-.title {
-  font-size: 15px;
+.statusTitle {
   font-weight: bold;
-  color: #333;
-  margin-bottom: 12px;
+  margin-bottom: 25px;
+  font-size: 15px;
+  color: #555;
 }
 
-.trackingRow {
+.statusRow {
   display: flex;
-  align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 8px;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 4px;
+  padding: 0 2px;
 }
 
-.trackingGroup {
+.statusItem {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 58px;
+  min-width: 0;
+}
+
+.statusGrid {
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  /* 6개 항목 + 5개 화살표 */
+  grid-template-rows: auto auto;
+  gap: 4px;
   text-align: center;
-  position: relative;
+  align-items: center;
 }
 
-.count {
+.statusCount {
+  font-size: clamp(10px, 2.2vw, 14px);
   font-weight: bold;
-  font-size: 14px;
   color: #64C378;
+  line-height: 1;
 }
 
-.label {
-  font-size: 11px;
+.statusLabel {
+  font-size: clamp(8px, 1.4vw, 10px);
   color: #888;
-  line-height: 1.2;
-  white-space: nowrap;
+  white-space: normal;
   word-break: keep-all;
+  line-height: 1.2;
 }
 
-.arrow {
-  font-size: 13px;
-  color: #bbb;
-  margin: 0 6px;
-  align-self: center;
+.statusArrow {
+  font-size: clamp(10px, 1.5vw, 12px);
+  color: #aaa;
+  padding: 0 4px;
 }

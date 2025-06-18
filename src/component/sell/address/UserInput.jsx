@@ -60,8 +60,27 @@ export default function UserInput({
                 <label className={styles.label}>휴대폰번호</label>
                 <CommonInput
                     value={number}
-                    onChange={(e) => setNumber(e.target.value)}
-                    placeholder="숫자만 입력"
+                    // onChange={(e) => setNumber(e.target.value)}
+                    onChange={(e) => {
+                        const raw = e.target.value.replace(/\D/g, ''); // 숫자만 추출
+                        let formatted = '';
+
+                        if (raw.length <= 3) {
+                        formatted = raw;
+                        } else if (raw.length <= 6) {
+                        // 예: 010-123
+                        formatted = `${raw.slice(0, 3)}-${raw.slice(3)}`;
+                        } else if (raw.length <= 10) {
+                        // 예: 010-123-4567 (가운데 3자리)
+                        formatted = `${raw.slice(0, 3)}-${raw.slice(3, 6)}-${raw.slice(6)}`;
+                        } else {
+                        // 예: 010-1234-5678 (가운데 4자리)
+                        formatted = `${raw.slice(0, 3)}-${raw.slice(3, 7)}-${raw.slice(7, 11)}`;
+                        }
+
+                        setNumber(formatted);
+                    }}
+                    placeholder="휴대폰 번호 입력 (예: 010-1234-5678)"
                 />
             </div>
 

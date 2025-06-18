@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from '../auth/LoginForm.module.css';
-import logo from '../../assets/Logo.png';
 import LoginInput from '../../component/input/LoginInput';
 import HoverEventButton from '../../component/button/HoverEventButton';
 import MessageModal from '../../component/modal/MessageModal';
