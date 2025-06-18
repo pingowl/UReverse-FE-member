@@ -222,7 +222,7 @@ export default function SignupForm() {
           onClose={() => {
             setSignupSuccessModal(false);
             setForm({ name: '', email: '', password: '', phone: '' });
-            navigate('/login/form');
+            navigate('/login');
           }}
         />
       )}
