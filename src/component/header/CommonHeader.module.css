@@ -16,7 +16,7 @@
 /* media 쿼리 fallback (PC 해상도일 때 폭 줄이기) */
 @media (min-width: 1024px) {
     .header {
-      max-width: 375px;
+      max-width: 430px;
     }
   }
 
