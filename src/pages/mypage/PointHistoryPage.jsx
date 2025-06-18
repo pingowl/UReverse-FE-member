@@ -59,16 +59,18 @@ const PointHistoryPage = () => {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.title}>포인트 내역</div>
+      <div className={styles.innerBox}>
+        <div className={styles.title}>포인트 내역</div>
 
-      <div className={styles.totalCard}>
-        <div className={styles.label}>총 포인트:</div>
-        <div className={styles.total}>{totalPoint.toLocaleString()}P</div>
-      </div>
+        <div className={styles.totalCard}>
+          <div className={styles.label}>총 포인트:</div>
+          <div className={styles.total}>{totalPoint.toLocaleString()}P</div>
+        </div>
 
-      <div className={styles.historyCard}>
-        <PointHistoryList history={history} />
-        <div ref={observerRef} className={styles.observer} />
+        <div className={styles.historyCard}>
+          <PointHistoryList history={history} />
+          <div ref={observerRef} className={styles.observer} />
+        </div>
       </div>
     </div>
   );
